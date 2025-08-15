@@ -145,9 +145,8 @@ export async function generateSEODescription(productTitle, variantTitle = "", ve
   const prompt = `You are an expert SEO copywriter specializing in industrial equipment. Create a compelling 150-character product description that:
 
 1. TARGETS HIGH-VOLUME KEYWORDS: ${searchAnalysis.bestKeywords.join(", ")}
-2. COMPETES WITH: ${searchAnalysis.competitors.join(", ")}
-3. HIGHLIGHTS UNIQUE SELLING POINTS: ${searchAnalysis.usp.join(", ")}
-4. OPTIMIZES FOR SEARCH VOLUME: ${searchAnalysis.volume} (${searchAnalysis.competition} competition)
+2. HIGHLIGHTS UNIQUE SELLING POINTS: ${searchAnalysis.usp.join(", ")}
+3. OPTIMIZES FOR SEARCH VOLUME: ${searchAnalysis.volume} (${searchAnalysis.competition} competition)
 
 Product: "${productTitle}"
 Variant: "${variantTitle}"
@@ -156,10 +155,11 @@ Brand: "${vendor}"
 Requirements:
 - Exactly 150 characters
 - Include 2-3 high-volume keywords naturally
-- Emphasize unique benefits vs competitors
+- Emphasize unique benefits vs competing solutions
 - Professional, technical tone
 - Action-oriented language
 - No brand repetition
+- Do not name any competitor brands explicitly; use generic phrasing only
 
 Format: "Technical feature + benefit + application"`;
 
@@ -189,10 +189,9 @@ export async function generateDetailedDescription(productTitle, variantTitle = "
   if (!OPENAI_API_KEY) {
     const keywords = searchAnalysis.bestKeywords.slice(0, 3);
     const usps = searchAnalysis.usp.slice(0, 2);
-    const competitors = searchAnalysis.competitors.slice(0, 2);
     
     let description = `The ${productTitle} delivers exceptional performance for ${keywords.join(" and ")} applications. `;
-    description += `Featuring ${usps.join(" and ")}, this industrial-grade solution outperforms competitors like ${competitors.join(" and ")}. `;
+    description += `Featuring ${usps.join(" and ")}, this industrial-grade solution outperforms competing solutions. `;
     description += `Ideal for demanding industrial environments requiring precise measurement and reliable operation.`;
     
     return description;
@@ -207,7 +206,7 @@ SEARCH ANALYSIS:
 - Target Keywords: ${searchAnalysis.bestKeywords.join(", ")}
 - Search Volume: ${searchAnalysis.volume}
 - Competition Level: ${searchAnalysis.competition}
-- Competitors: ${searchAnalysis.competitors.join(", ")}
+- Note: Competing solutions exist but must not be named explicitly
 - Unique Selling Points: ${searchAnalysis.usp.join(", ")}
 
 Product: "${productTitle}"
@@ -226,10 +225,11 @@ Requirements:
 - 500-800 characters
 - Include all target keywords naturally
 - Technical but accessible language
-- Emphasize competitive advantages
+- Emphasize competitive advantages without naming specific competitors
 - Industry-specific applications
 - Professional tone
 - No marketing fluff
+- Do not mention any competitor brand names; use generic phrasing only
 
 Focus on converting visitors by highlighting why this product is better than competitors.`;
 
@@ -272,7 +272,6 @@ export async function generateMetaDescription(productTitle, variantTitle = "", v
   const prompt = `Create a compelling meta description (155 characters) for an industrial equipment product page that:
 
 TARGETS: ${searchAnalysis.bestKeywords.join(", ")}
-COMPETES WITH: ${searchAnalysis.competitors.join(", ")}
 VOLUME: ${searchAnalysis.volume} (${searchAnalysis.competition} competition)
 
 Product: "${productTitle}"
@@ -286,6 +285,7 @@ Requirements:
 - Clear benefit statement
 - Call-to-action
 - No brand repetition
+ - Do not name any competitor brands explicitly; use generic phrasing only
 
 Format: "Primary keyword + benefit + action"`;
 
