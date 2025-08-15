@@ -16,7 +16,10 @@
     "scheduled:dry": "cross-env DRY_RUN=true node src/scheduledAI.js",
     "scheduled:live": "cross-env DRY_RUN=false node src/scheduledAI.js",
     "scheduler": "node src/scheduler.js",
-    "scheduler:start": "cross-env CHECK_INTERVAL_HOURS=24 node src/scheduler.js"
+    "scheduler:start": "cross-env CHECK_INTERVAL_HOURS=24 node src/scheduler.js",
+    "cleanup": "node src/cleanupCompetitors.js",
+    "cleanup:dry": "cross-env DRY_RUN=true node src/cleanupCompetitors.js",
+    "cleanup:live": "cross-env DRY_RUN=false node src/cleanupCompetitors.js"
   },
 
   "dependencies": {
