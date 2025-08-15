@@ -1,0 +1,43 @@
+{
+  "productId": 10265138626897,
+  "title": "MCC USB-501-TC Data Logger",
+  "metaDescription": "usb daq - MCC USB-501-TC Data Logger featuring USB connectivity. Professional industrial solution for demanding applications.",
+  "seoDescription": "MCC USB-501-TC Data Logger - usb daq, data acquisition - USB connectivity",
+  "searchAnalysis": {
+    "primary": [
+      "data acquisition",
+      "usb daq",
+      "signal conditioning"
+    ],
+    "secondary": [
+      "industrial sensor",
+      "measurement system"
+    ],
+    "longtail": [
+      "usb data acquisition",
+      "industrial daq system",
+      "signal conditioning module"
+    ],
+    "bestKeywords": [
+      "usb daq",
+      "data acquisition",
+      "industrial sensor",
+      "signal conditioning",
+      "measurement system"
+    ],
+    "competitors": [
+      "National Instruments",
+      "Keysight",
+      "Tektronix",
+      "Agilent"
+    ],
+    "usp": [
+      "USB connectivity",
+      "easy setup",
+      "cost effective",
+      "high accuracy"
+    ],
+    "volume": "medium",
+    "competition": "low"
+  }
+}

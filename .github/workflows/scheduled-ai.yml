@@ -1,0 +1,44 @@
+name: Scheduled AI Product Agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (true/false)"
+        required: true
+        default: "true"
+  schedule:
+    # Runs once per day at 03:00 UTC
+    - cron: "0 3 * * *"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    concurrency:
+      group: scheduled-ai
+      cancel-in-progress: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run scheduled AI agent
+        env:
+          SHOP_DOMAIN: ${{ secrets.SHOP_DOMAIN }}
+          SHOP_ACCESS_TOKEN: ${{ secrets.SHOP_ACCESS_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # Default to DRY on schedule; override via manual dispatch input
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'true' }}
+        run: node src/scheduledAI.js
+
+

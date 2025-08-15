@@ -1,0 +1,43 @@
+{
+  "productId": 10289472602449,
+  "title": "Telac APM 10”",
+  "metaDescription": "industrial touch screen - Telac APM 10” featuring rugged construction. Professional industrial solution for demanding applications.",
+  "seoDescription": "Telac APM 10” - industrial touch screen, rugged display - rugged construction",
+  "searchAnalysis": {
+    "primary": [
+      "industrial touch screen",
+      "hmi display",
+      "rugged display"
+    ],
+    "secondary": [
+      "industrial computer",
+      "factory automation"
+    ],
+    "longtail": [
+      "rugged industrial touch screen",
+      "hmi touch display",
+      "factory automation display"
+    ],
+    "bestKeywords": [
+      "industrial touch screen",
+      "rugged display",
+      "hmi display",
+      "industrial computer",
+      "factory automation"
+    ],
+    "competitors": [
+      "Advantech",
+      "Beckhoff",
+      "Siemens",
+      "Allen Bradley"
+    ],
+    "usp": [
+      "rugged construction",
+      "wide temperature range",
+      "IP65 protection",
+      "industrial reliability"
+    ],
+    "volume": "high",
+    "competition": "medium"
+  }
+}

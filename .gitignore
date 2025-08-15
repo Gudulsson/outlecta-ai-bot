@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets
+.env
+API nycklar.txt
+
+# Runtime state
+.product_snapshot.json
+.alt_resume.json
+.scheduled_ai_resume.json
+scheduler.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+
