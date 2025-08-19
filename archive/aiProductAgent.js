@@ -77,6 +77,10 @@ function analyzeSearchTerms(productTitle) {
       primary: ["industrial equipment"],
       secondary: ["professional grade"],
       longtail: ["industrial solution"],
+      // Se till att följande fält alltid finns för downstream-kod
+      bestKeywords: ["industrial equipment", "professional grade", "industrial solution"],
+      competitors: [],
+      usp: ["reliable performance", "industrial-grade build"],
       volume: "medium",
       competition: "medium"
     };
@@ -142,7 +146,7 @@ export async function generateSEODescription(productTitle, variantTitle = "", ve
   const { default: OpenAI } = await import("openai");
   const client = new OpenAI({ apiKey: OPENAI_API_KEY });
 
-  const prompt = `You are an expert SEO copywriter specializing in industrial equipment. Create a compelling 150-character product description that:
+  const prompt = `You are an expert SEO copywriter specializing in industrial equipment. All output must be in English only. Create a compelling 150-character product description that:
 
 1. TARGETS HIGH-VOLUME KEYWORDS: ${searchAnalysis.bestKeywords.join(", ")}
 2. HIGHLIGHTS UNIQUE SELLING POINTS: ${searchAnalysis.usp.join(", ")}
@@ -200,7 +204,7 @@ export async function generateDetailedDescription(productTitle, variantTitle = "
   const { default: OpenAI } = await import("openai");
   const client = new OpenAI({ apiKey: OPENAI_API_KEY });
 
-  const prompt = `You are a senior technical writer creating detailed product descriptions for industrial equipment. Write a comprehensive, SEO-optimized description that:
+  const prompt = `You are a senior technical writer creating detailed product descriptions for industrial equipment. All output must be in English only. Write a comprehensive, SEO-optimized description that:
 
 SEARCH ANALYSIS:
 - Target Keywords: ${searchAnalysis.bestKeywords.join(", ")}
@@ -269,7 +273,7 @@ export async function generateMetaDescription(productTitle, variantTitle = "", v
   const { default: OpenAI } = await import("openai");
   const client = new OpenAI({ apiKey: OPENAI_API_KEY });
 
-  const prompt = `Create a compelling meta description (155 characters) for an industrial equipment product page that:
+  const prompt = `Create a compelling meta description (155 characters) for an industrial equipment product page. All output must be in English only. Requirements:
 
 TARGETS: ${searchAnalysis.bestKeywords.join(", ")}
 VOLUME: ${searchAnalysis.volume} (${searchAnalysis.competition} competition)

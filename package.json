@@ -1,34 +1,39 @@
 {
-  "name": "shopify-alt-bot",
-  "version": "1.0.0",
+  "name": "outlecta-blog-generator",
+  "version": "2.0.0",
   "type": "module",
+  "description": "AI-powered human-like blog content generator for industrial technology websites",
   "scripts": {
-    "start": "node src/run.js",
-    "dry": "cross-env DRY_RUN=true node src/run.js",
-    "live": "cross-env DRY_RUN=false node src/run.js",
-    "descriptions": "node src/runDescriptions.js",
-    "descriptions:dry": "cross-env DRY_RUN=true node src/runDescriptions.js",
-    "descriptions:live": "cross-env DRY_RUN=false node src/runDescriptions.js",
-    "ai": "node src/runAdvancedAI.js",
-    "ai:dry": "cross-env DRY_RUN=true node src/runAdvancedAI.js",
-    "ai:live": "cross-env DRY_RUN=false node src/runAdvancedAI.js",
-    "scheduled": "node src/scheduledAI.js",
-    "scheduled:dry": "cross-env DRY_RUN=true node src/scheduledAI.js",
-    "scheduled:live": "cross-env DRY_RUN=false node src/scheduledAI.js",
-    "scheduler": "node src/scheduler.js",
-    "scheduler:start": "cross-env CHECK_INTERVAL_HOURS=24 node src/scheduler.js",
-    "cleanup": "node src/cleanupCompetitors.js",
-    "cleanup:dry": "cross-env DRY_RUN=true node src/cleanupCompetitors.js",
-    "cleanup:live": "cross-env DRY_RUN=false node src/cleanupCompetitors.js"
+    "blog:analyze": "node src/runBlogGenerator.js analysis",
+    "blog:generate": "node src/runBlogGenerator.js complete",
+    "blog:force": "node src/runBlogGenerator.js force",
+    "blog:stats": "node src/runBlogGenerator.js stats",
+    "blog:publish": "node src/runBlogGenerator.js publish",
+    "blog:weekly": "node src/runBlogGenerator.js weekly",
+    "start": "node src/runBlogGenerator.js complete"
   },
-
   "dependencies": {
-    "axios": "^1.7.7",
-    "dotenv": "^16.4.5",
-    "p-limit": "^5.0.0",
-    "openai": "^4.58.0"
+    "@google/generative-ai": "^0.21.0",
+    "axios": "^1.6.0",
+    "better-sqlite3": "^9.4.3",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "sharp": "^0.33.4",
+    "openai": "^4.20.1",
+    "p-limit": "^4.0.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"
-  }
+  },
+  "keywords": [
+    "ai",
+    "blog",
+    "content-generation",
+    "shopify",
+    "industrial",
+    "technology"
+  ],
+  "author": "Outlecta Team",
+  "license": "MIT"
 }

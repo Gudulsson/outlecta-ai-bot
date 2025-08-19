@@ -1,9 +1,11 @@
-import { generateAllContent } from "./aiProductAgent.js";
+import { generateAllContent } from "./webSearchAI.js";
 import dotenv from "dotenv";
 dotenv.config();
-import { listProducts, updateProductDescription } from "./shopify.js";
+import { listProducts, updateProductDescription, upsertProductMetafield, getDescriptionHash } from "./shopify.js";
 import pLimit from "p-limit";
 import fs from "fs";
+import { sanitizeDescriptionHtml } from "./textSanitizer.js";
+import crypto from "crypto";
 
 const {
   PAGE_SIZE = "100",
@@ -263,9 +265,9 @@ async function scheduledRun() {
         console.log(`🔄 Updating: ${product.title} (${analysis.reason})`);
         
         try {
+          const currentHash = await getDescriptionHash(product.id);
           const content = await generateAllContent(
             product.title, 
-            product.variants?.[0]?.title || "", 
             product.vendor
           );
           
@@ -277,7 +279,22 @@ async function scheduledRun() {
           }
           
           if (content.detailedDescription) {
-            await updateProductDescription(product.id, content.detailedDescription);
+            const safeHtml = sanitizeDescriptionHtml(content.detailedDescription);
+            const newHash = crypto.createHash("sha256").update(safeHtml).digest("hex");
+
+            // Skip if same hash already stored
+            if (currentHash === newHash) {
+              console.log(`[SKIP] ${product.title} (ID: ${product.id}) - Description not changed.`);
+              totalUpdated++;
+              return;
+            }
+
+            // Store new hash
+            try {
+              await upsertProductMetafield(product.id, "agent", "desc_hash", newHash, "single_line_text_field");
+            } catch { /* ignore upsert failure for hash */ }
+
+            await updateProductDescription(product.id, safeHtml);
             console.log(`[OK] Updated ${product.title}`);
             totalUpdated++;
           }
@@ -299,6 +316,28 @@ async function scheduledRun() {
               fs.mkdirSync('meta_descriptions');
             }
             fs.writeFileSync(metaFile, JSON.stringify(metaData, null, 2));
+
+            // Push meta description to Shopify metafield for SEO (if desired by theme)
+            try {
+              await upsertProductMetafield(
+                product.id,
+                "global",
+                "description_tag",
+                content.metaDescription,
+                "single_line_text_field"
+              );
+              // Also provide a concise SEO title tag variant (truncate ~60 chars)
+              const titleTag = `${product.title}`.slice(0, 60);
+              await upsertProductMetafield(
+                product.id,
+                "global",
+                "title_tag",
+                titleTag,
+                "single_line_text_field"
+              );
+            } catch (e) {
+              console.warn(`Metafield upsert failed for ${product.title}: ${e.message}`);
+            }
           }
           
           // Paus mellan uppdateringar

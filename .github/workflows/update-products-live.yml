@@ -1,0 +1,46 @@
+name: Update Products Live
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-live-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Restore product snapshot cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .product_snapshot.json
+            .scheduled_ai_resume.json
+          key: product-snapshot-${{ github.ref_name }}-v1-${{ github.run_number }}
+          restore-keys: |
+            product-snapshot-${{ github.ref_name }}-v1-
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run scheduled live update
+        run: npm run scheduled:live
+        env:
+          SHOP_DOMAIN: ${{ secrets.SHOP_DOMAIN }}
+          SHOP_ACCESS_TOKEN: ${{ secrets.SHOP_ACCESS_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Upload generated meta descriptions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: meta_descriptions
+          path: meta_descriptions/**
+          if-no-files-found: ignore
+
+
