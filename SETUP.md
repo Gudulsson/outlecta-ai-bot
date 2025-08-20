@@ -64,8 +64,8 @@ npm run blog:analyze
 
 ```env
 SHOP_DOMAIN=outlecta.myshopify.com
-SHOP_ACCESS_TOKEN=shpat_1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
-GOOGLE_AI_API_KEY=AIzaSyC1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+SHOP_ACCESS_TOKEN=your_access_token_here
+GOOGLE_AI_API_KEY=your_google_ai_api_key_here
 ```
 
 ## 🎯 Nästa steg
