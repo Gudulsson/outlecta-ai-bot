@@ -1,5 +1,6 @@
 import { generateThumbnail } from "./thumbnail.js";
 import LinkValidator from "./linkValidator.js";
+import ContentAnalyzer from "./contentAnalyzer.js";
 import fs from "fs";
 import path from "path";
 
@@ -14,6 +15,7 @@ class BlogGenerator {
       'automationworld.com', 'controleng.com', 'isa.org'
     ];
     this.linkValidator = new LinkValidator();
+    this.contentAnalyzer = new ContentAnalyzer();
   }
 
   // Generate a supreme SEO-optimized blog article
@@ -30,16 +32,19 @@ class BlogGenerator {
       // Step 3: Generate Supreme Content
       const article = await this.generateSupremeContent(blogIdea, contentStructure);
       
-      // Step 4: Validate and fix internal links
-      const linkValidatedArticle = await this.validateInternalLinks(article, seoStrategy.primaryKeywords);
+      // Step 4: Intelligent content analysis and rewriting
+      const analyzedArticle = await this.analyzeAndRewriteContent(article, blogIdea);
       
-      // Step 5: SEO Optimization
+      // Step 5: Validate and fix internal links
+      const linkValidatedArticle = await this.validateInternalLinks(analyzedArticle, seoStrategy.primaryKeywords);
+      
+      // Step 6: SEO Optimization
       const optimizedArticle = this.optimizeForSEO(linkValidatedArticle, seoStrategy);
       
       // Step 6: Generate Thumbnail
       const thumbnail = await generateThumbnail(blogIdea);
       
-      // Step 7: Calculate Quality Metrics
+      // Step 8: Calculate Quality Metrics
       const qualityMetrics = this.calculateQualityMetrics(optimizedArticle);
       
       return {
@@ -737,6 +742,49 @@ ${signals.map(signal => `<li>${signal}</li>`).join('\n')}
     } else {
       // Trim content
       return this.trimContent(content, targetWordCount);
+    }
+  }
+
+  // Intelligent content analysis and rewriting
+  async analyzeAndRewriteContent(article, blogIdea) {
+    console.log("🧠 Starting intelligent content analysis and rewriting...");
+    
+    try {
+      // Analyze content for repetitions and quality issues
+      const analysis = await this.contentAnalyzer.analyzeContent(article.content, blogIdea);
+      
+      if (analysis.needsRewrite) {
+        console.log("🔄 Content needs improvement - starting intelligent rewriting...");
+        console.log(`📋 Issues found: ${analysis.issues.join(', ')}`);
+        
+        // Rewrite content with multiple attempts
+        const rewrittenContent = await this.contentAnalyzer.rewriteContent(article.content, blogIdea);
+        
+        // Re-analyze after rewrite
+        const finalAnalysis = await this.contentAnalyzer.analyzeContent(rewrittenContent, blogIdea);
+        
+        console.log("📊 Final content analysis:");
+        console.log(`   - Repetitions: ${finalAnalysis.repetitions.length}`);
+        console.log(`   - Quality Issues: ${finalAnalysis.qualityIssues.length}`);
+        console.log(`   - Readability: ${finalAnalysis.readability}/100`);
+        console.log(`   - Uniqueness: ${(finalAnalysis.uniqueness * 100).toFixed(1)}%`);
+        
+        return {
+          ...article,
+          content: rewrittenContent,
+          contentAnalysis: finalAnalysis
+        };
+      } else {
+        console.log("✅ Content quality is excellent - no rewriting needed");
+        return {
+          ...article,
+          contentAnalysis: analysis
+        };
+      }
+      
+    } catch (error) {
+      console.warn("⚠️ Could not analyze/rewrite content:", error.message);
+      return article; // Return original content if analysis fails
     }
   }
 
