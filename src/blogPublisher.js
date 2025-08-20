@@ -605,11 +605,7 @@ class BlogPublisher {
     try {
       const blog = await this.getOrCreateBlog();
       
-      await requestWithRetry({
-        method: 'DELETE',
-        url: `${this.shopifyApi.baseUrl}/blogs/${blog.id}/articles/${articleId}.json`,
-        headers: this.shopifyApi.headers
-      });
+      await requestWithRetry('delete', `/blogs/${blog.id}/articles/${articleId}.json`);
       
       console.log(`🗑️ Deleted article: ${articleId}`);
       

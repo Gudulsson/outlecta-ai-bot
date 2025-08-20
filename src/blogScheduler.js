@@ -331,6 +331,9 @@ class BlogScheduler {
     console.log("🔧 Force generating blog article...");
     
     try {
+      // Reload blog history to get latest state
+      this.blogHistory = this.loadBlogHistory();
+      
       // Analyze all products
       const analysis = await this.analyzer.analyzeAllProducts();
       
@@ -338,13 +341,23 @@ class BlogScheduler {
       const bestIdea = this.analyzer.getBestBlogIdea(this.blogHistory);
       console.log(`💡 Selected blog idea: ${bestIdea.title}`);
       
+      // Add temporary marker to prevent re-selection
+      const tempHistoryEntry = {
+        title: bestIdea.title,
+        category: bestIdea.category,
+        unique: bestIdea.unique || `temp-${Date.now()}`,
+        keywords: bestIdea.keywords,
+        generatedAt: new Date().toISOString()
+      };
+      this.blogHistory.push(tempHistoryEntry);
+      
       // Generate blog article
       const article = await this.generator.generateBlogArticle(bestIdea);
       
       // Save article
       const savedArticle = await this.saveArticle(article);
       
-      // Update history
+      // Update history with final data
       this.updateBlogHistory(savedArticle);
       
       console.log("🎉 Force blog generation completed!");

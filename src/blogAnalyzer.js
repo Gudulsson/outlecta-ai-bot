@@ -191,98 +191,175 @@ class BlogAnalyzer {
     });
   }
 
-  // Generate blog ideas based on analysis
+  // Generate VASTLY diverse blog ideas based on products
   generateBlogIdeas() {
     const ideas = [];
-
-    // 1. How-to guides based on popular keywords (non-promotional)
-    const howToKeywords = this.trendingTopics.filter(keyword => 
-      keyword.includes('gauge') || keyword.includes('sensor') || keyword.includes('cell')
-    );
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const currentMonth = months[new Date().getMonth()];
+    const randomId = Date.now(); // Unique identifier
     
-    howToKeywords.slice(0, 3).forEach(keyword => {
+    // 1. CASE STUDY articles (real-world applications)
+    const caseStudyTopics = [
+      { industry: 'Automotive Manufacturing', challenge: 'Quality Control Optimization', solution: 'Advanced Measurement Systems' },
+      { industry: 'Aerospace Engineering', challenge: 'Precision Testing Standards', solution: 'High-Accuracy Load Cells' },
+      { industry: 'Renewable Energy', challenge: 'Structural Monitoring', solution: 'Strain Gauge Networks' },
+      { industry: 'Food Processing', challenge: 'Safety Compliance', solution: 'Industrial Automation' },
+      { industry: 'Oil & Gas', challenge: 'Pipeline Integrity', solution: 'Pressure Monitoring Systems' },
+      { industry: 'Construction', challenge: 'Structural Health Assessment', solution: 'Wireless Sensor Networks' },
+      { industry: 'Marine Engineering', challenge: 'Corrosion Monitoring', solution: 'Environmental Sensors' }
+    ];
+    
+    caseStudyTopics.slice(0, 3).forEach((topic, index) => {
       ideas.push({
-        type: "how-to",
-        title: `Complete Guide to ${keyword.charAt(0).toUpperCase() + keyword.slice(1)} Selection and Implementation in ${this.currentYear}`,
-        keywords: [keyword, 'selection', 'guide', 'industrial', 'implementation', this.currentYear.toString()],
-        category: "guide",
-        priority: "medium"
+        type: "case-study",
+        title: `Case Study: How ${topic.industry} Solved ${topic.challenge} with ${topic.solution}`,
+        keywords: [topic.industry.toLowerCase(), topic.challenge.toLowerCase(), topic.solution.toLowerCase(), 'case study', 'real world'],
+        category: `case-study-${index}`,
+        priority: "high",
+        unique: `case-${randomId}-${index}`
       });
     });
     
-    // 2. Industry trend articles (neutral, informative)
-    const industryKeywords = this.trendingTopics.filter(keyword =>
-      keyword.includes('industrial') || keyword.includes('automation') || keyword.includes('measurement')
-    );
+    // 2. COMPARISON articles (technology vs technology)
+    const comparisonPairs = [
+      { tech1: 'Digital Load Cells', tech2: 'Analog Load Cells', context: 'Modern Manufacturing' },
+      { tech1: 'Wireless Sensors', tech2: 'Wired Sensors', context: 'Industrial IoT' },
+      { tech1: 'Strain Gauges', tech2: 'LVDT Sensors', context: 'Precision Measurement' },
+      { tech1: 'Pneumatic Systems', tech2: 'Hydraulic Systems', context: 'Industrial Automation' },
+      { tech1: 'Fiber Optic Sensors', tech2: 'Traditional Sensors', context: 'Harsh Environments' }
+    ];
     
-    if (industryKeywords.length > 0) {
+    comparisonPairs.slice(0, 2).forEach((pair, index) => {
       ideas.push({
-        type: "trend",
-        title: `Industrial Automation Trends ${this.currentYear}: A Comprehensive Analysis of Emerging Technologies`,
-        keywords: [...industryKeywords.slice(0, 5), this.currentYear.toString(), 'trends', 'analysis'],
-        category: "industry",
-        priority: "high"
+        type: "comparison",
+        title: `${pair.tech1} vs ${pair.tech2}: Which is Better for ${pair.context}?`,
+        keywords: [pair.tech1.toLowerCase(), pair.tech2.toLowerCase(), 'comparison', 'vs', pair.context.toLowerCase()],
+        category: `comparison-${index}`,
+        priority: "high",
+        unique: `comp-${randomId}-${index}`
       });
-    }
+    });
     
-    // 3. Technical deep-dive articles (concepts, not products)
-    const technicalKeywords = this.trendingTopics.filter(keyword =>
-      keyword.includes('strain') || keyword.includes('load') || keyword.includes('data')
-    );
+    // 3. PROBLEM-SOLVING articles (specific challenges)
+    const problemSolutions = [
+      { problem: 'Vibration in Measurement Systems', solution: 'Isolation Techniques', industry: 'Manufacturing' },
+      { problem: 'Temperature Drift in Sensors', solution: 'Compensation Methods', industry: 'Aerospace' },
+      { problem: 'Signal Noise in Data Acquisition', solution: 'Filtering Strategies', industry: 'Research' },
+      { problem: 'Calibration Frequency Optimization', solution: 'Predictive Maintenance', industry: 'Quality Control' },
+      { problem: 'Data Security in IoT Sensors', solution: 'Encryption Protocols', industry: 'Smart Manufacturing' }
+    ];
     
-    technicalKeywords.slice(0, 2).forEach(keyword => {
+    problemSolutions.slice(0, 3).forEach((item, index) => {
       ideas.push({
-        type: "technical",
-        title: `Understanding ${keyword.charAt(0).toUpperCase() + keyword.slice(1)} Technology: Principles, Applications, and Best Practices for ${this.currentYear}`,
-        keywords: [keyword, 'technology', 'technical', 'industrial', 'principles', this.currentYear.toString()],
-        category: "technical",
-        priority: "medium"
+        type: "problem-solving",
+        title: `Solving ${item.problem}: ${item.solution} for ${item.industry}`,
+        keywords: [item.problem.toLowerCase(), item.solution.toLowerCase(), 'troubleshooting', 'solutions', item.industry.toLowerCase()],
+        category: `troubleshooting-${index}`,
+        priority: "medium",
+        unique: `prob-${randomId}-${index}`
       });
     });
-
-    // 4. Explainer articles (non-promotional education)
-    this.trendingTopics.slice(0, 5).forEach(keyword => {
+    
+    // 4. FUTURE-FOCUSED articles (emerging tech)
+    const futureTrends = [
+      { trend: 'AI-Powered Predictive Maintenance', impact: 'Industrial Equipment Longevity', timeframe: '2025-2030' },
+      { trend: 'Quantum Sensors', impact: 'Ultra-High Precision Measurements', timeframe: 'Next Decade' },
+      { trend: 'Digital Twin Technology', impact: 'Virtual Testing and Simulation', timeframe: `${this.currentYear}-2027` },
+      { trend: 'Edge Computing in Manufacturing', impact: 'Real-Time Data Processing', timeframe: 'Current Trends' },
+      { trend: 'Blockchain for Supply Chain Monitoring', impact: 'Traceability and Trust', timeframe: 'Emerging Now' }
+    ];
+    
+    futureTrends.slice(0, 2).forEach((trend, index) => {
       ideas.push({
-        type: "explainer",
-        title: `What is ${keyword.charAt(0).toUpperCase() + keyword.slice(1)}? A Complete Guide to Industrial Applications in ${this.currentYear}`,
-        keywords: [keyword, 'principles', 'applications', 'best practices', 'industrial', this.currentYear.toString()],
-        category: "explainer",
-        priority: "high"
+        type: "future-tech",
+        title: `The Future of ${trend.trend}: ${trend.impact} in ${trend.timeframe}`,
+        keywords: [trend.trend.toLowerCase(), 'future', 'emerging technology', trend.impact.toLowerCase(), this.currentYear.toString()],
+        category: `innovation-${index}`,
+        priority: "high",
+        unique: `future-${randomId}-${index}`
       });
     });
-
-    // 5. Beginner guides (entry-level, broad interest)
-    this.trendingTopics.slice(0, 3).forEach(keyword => {
+    
+    // 5. INDUSTRY-SPECIFIC deep dives
+    const industrySpecific = [
+      { industry: 'Medical Device Manufacturing', focus: 'FDA Compliance and Measurement Standards', challenge: 'Regulatory Requirements' },
+      { industry: 'Chemical Processing', focus: 'Process Control and Safety Systems', challenge: 'Hazardous Environments' },
+      { industry: 'Mining Operations', focus: 'Remote Monitoring Technologies', challenge: 'Extreme Conditions' },
+      { industry: 'Nuclear Power', focus: 'Radiation-Resistant Sensors', challenge: 'Safety Critical Applications' }
+    ];
+    
+    industrySpecific.slice(0, 2).forEach((item, index) => {
       ideas.push({
-        type: "beginner",
-        title: `Getting Started with ${keyword.charAt(0).toUpperCase() + keyword.slice(1)}: Fundamentals for Industrial Engineers in ${this.currentYear}`,
-        keywords: [keyword, 'beginner', 'guide', 'fundamentals', 'engineering', this.currentYear.toString()],
-        category: "beginner",
-        priority: "medium"
+        type: "industry-specific",
+        title: `${item.focus} in ${item.industry}: Overcoming ${item.challenge}`,
+        keywords: [item.industry.toLowerCase(), item.focus.toLowerCase(), item.challenge.toLowerCase(), 'industry standards'],
+        category: `industry-${index}`,
+        priority: "medium",
+        unique: `ind-${randomId}-${index}`
       });
     });
-
-    // 6. Current year specific articles
-    ideas.push({
-      type: "trend",
-      title: `Top Industrial Technology Innovations in ${this.currentYear}: What Engineers Need to Know`,
-      keywords: ['industrial', 'technology', 'innovations', this.currentYear.toString(), 'engineering'],
-      category: "innovation",
-      priority: "high"
+    
+    // 6. SEASONAL/TIMELY articles
+    const seasonalTopics = [
+      { season: currentMonth, topic: 'Equipment Maintenance Planning', reason: 'Seasonal Preparation' },
+      { season: 'End-of-Year', topic: 'Technology Investment Strategies', reason: 'Budget Planning' },
+      { season: 'Spring', topic: 'System Upgrades and Modernization', reason: 'Renewal Season' }
+    ];
+    
+    seasonalTopics.slice(0, 2).forEach((item, index) => {
+      ideas.push({
+        type: "seasonal",
+        title: `${item.season} ${this.currentYear}: ${item.topic} for ${item.reason}`,
+        keywords: [item.season.toLowerCase(), item.topic.toLowerCase(), this.currentYear.toString(), 'planning', 'seasonal'],
+        category: `seasonal-${index}`,
+        priority: "medium",
+        unique: `season-${randomId}-${index}`,
+        timeSensitive: true
+      });
     });
-
-    ideas.push({
-      type: "technical",
-      title: `Industrial Measurement Standards and Best Practices for ${this.currentYear}`,
-      keywords: ['measurement', 'standards', 'best practices', this.currentYear.toString(), 'industrial'],
-      category: "standards",
-      priority: "medium"
+    
+    // 7. COST-OPTIMIZATION articles (business focus)
+    const costTopics = [
+      { area: 'Measurement System ROI', metric: 'Cost per Test', benefit: 'Reduced Quality Costs' },
+      { area: 'Preventive Maintenance Strategies', metric: 'Downtime Reduction', benefit: 'Increased Productivity' },
+      { area: 'Energy-Efficient Sensor Networks', metric: 'Power Consumption', benefit: 'Lower Operating Costs' }
+    ];
+    
+    costTopics.slice(0, 2).forEach((topic, index) => {
+      ideas.push({
+        type: "cost-optimization",
+        title: `Maximizing ${topic.area}: How to Improve ${topic.metric} and Achieve ${topic.benefit}`,
+        keywords: [topic.area.toLowerCase(), 'cost reduction', topic.metric.toLowerCase(), 'ROI', 'efficiency'],
+        category: `business-${index}`,
+        priority: "high",
+        unique: `cost-${randomId}-${index}`
+      });
+    });
+    
+    // 8. EDUCATIONAL SERIES (multi-part potential)
+    const educationalSeries = [
+      { series: 'Measurement Fundamentals', part: 'Understanding Accuracy vs Precision', level: 'Beginner' },
+      { series: 'Signal Processing Essentials', part: 'Digital vs Analog Signal Conversion', level: 'Intermediate' },
+      { series: 'Advanced Calibration', part: 'Uncertainty Analysis and Traceability', level: 'Expert' },
+      { series: 'Industrial Standards Guide', part: 'ISO 9001 Compliance for Measurement Systems', level: 'Professional' }
+    ];
+    
+    educationalSeries.slice(0, 2).forEach((item, index) => {
+      ideas.push({
+        type: "educational",
+        title: `${item.series}: ${item.part} (${item.level} Guide)`,
+        keywords: [item.series.toLowerCase(), item.part.toLowerCase(), item.level.toLowerCase(), 'education', 'training'],
+        category: `education-${index}`,
+        priority: "medium",
+        unique: `edu-${randomId}-${index}`,
+        seriesTitle: item.series
+      });
     });
     
     this.blogIdeas = ideas;
     
-    console.log("💡 Generated blog ideas:");
-    ideas.slice(0, 5).forEach((idea, index) => {
+    console.log("💡 Generated DIVERSE blog ideas:");
+    ideas.slice(0, 8).forEach((idea, index) => {
       console.log(`   ${index + 1}. ${idea.title} (${idea.type})`);
     });
   }
@@ -294,34 +371,43 @@ class BlogAnalyzer {
 
   // Get best blog idea for this week
   getBestBlogIdea(blogHistory = []) {
-    // Prefer neutral, educational content types
-    const preferenceOrder = ["trend", "explainer", "technical", "how-to", "beginner"]; 
+    // Prefer diverse content types (prioritize variety)
+    const preferenceOrder = ["case-study", "comparison", "future-tech", "problem-solving", "cost-optimization", "industry-specific", "seasonal", "educational"]; 
     
     // Filter out ideas that have already been written about
     const availableIdeas = this.blogIdeas.filter(idea => {
       // Check if we've already written about this topic
       return !blogHistory.some(published => {
+        // Check if exact unique ID matches
+        if (idea.unique && published.unique && idea.unique === published.unique) {
+          return true;
+        }
+        
+        // Check if same category (stronger filter)
+        if (published.category === idea.category) {
+          return true;
+        }
+        
         // Check if keywords overlap significantly
         const keywordOverlap = idea.keywords.filter(keyword => 
           published.keywords && published.keywords.includes(keyword)
         ).length;
         
-        // Check if same category and similar title
-        const sameCategory = published.category === idea.category;
-        const similarTitle = published.title && (
-          published.title.includes(idea.title.split(' ')[0]) || 
-          idea.title.includes(published.title.split(' ')[0])
+        // Check if similar title
+        const similarTitle = published.title && idea.title && (
+          published.title.toLowerCase().includes(idea.keywords[0]?.toLowerCase() || '') || 
+          idea.title.toLowerCase().includes(published.keywords?.[0]?.toLowerCase() || '')
         );
         
-        // More strict duplicate detection
-        return keywordOverlap >= 2 || (sameCategory && similarTitle);
+        // Very strict duplicate detection for diverse content
+        return keywordOverlap >= 3 || similarTitle;
       });
     });
     
     if (availableIdeas.length === 0) {
-      // Generate fallback ideas if all are used
-      console.log("⚠️ All blog ideas have been used, generating fallback ideas...");
-      return this.generateFallbackIdea();
+      // Generate completely unique fallback ideas if all are used
+      console.log("⚠️ All diverse ideas have been used, generating unique fallback ideas...");
+      return this.generateUniqueFallbackIdea();
     }
     
     // Sort by preference order and priority
@@ -329,11 +415,11 @@ class BlogAnalyzer {
       const aPreference = preferenceOrder.indexOf(a.type);
       const bPreference = preferenceOrder.indexOf(b.type);
       
-      if (aPreference !== bPreference) {
+      if (aPreference !== bPreference && aPreference !== -1 && bPreference !== -1) {
         return aPreference - bPreference;
       }
       
-      // If same type, prefer higher priority
+      // If same type or not in preference order, prefer higher priority
       const priorityOrder = { "high": 3, "medium": 2, "low": 1 };
       return (priorityOrder[b.priority] || 1) - (priorityOrder[a.priority] || 1);
     });
@@ -341,41 +427,33 @@ class BlogAnalyzer {
     return sortedIdeas[0];
   }
 
-  // Generate fallback idea when all regular ideas are used
-  generateFallbackIdea() {
-    const fallbackIdeas = [
-      {
-        type: "trend",
-        title: `Latest Industrial Technology Developments: ${this.currentYear} Update`,
-        keywords: ["industrial", "technology", "developments", this.currentYear.toString(), "update"],
-        category: "update",
-        priority: "medium"
-      },
-      {
-        type: "explainer",
-        title: `Industrial Automation Solutions: Complete Overview for ${this.currentYear}`,
-        keywords: ["industrial", "automation", "solutions", "overview", this.currentYear.toString()],
-        category: "overview",
-        priority: "medium"
-      },
-      {
-        type: "technical",
-        title: `Advanced Measurement Techniques in Modern Industry: ${this.currentYear} Guide`,
-        keywords: ["measurement", "techniques", "industry", "advanced", this.currentYear.toString()],
-        category: "technical",
-        priority: "medium"
-      },
-      {
-        type: "how-to",
-        title: `Industrial System Integration: Best Practices for ${this.currentYear}`,
-        keywords: ["industrial", "system", "integration", "best practices", this.currentYear.toString()],
-        category: "integration",
-        priority: "medium"
-      }
+  // Generate completely unique fallback idea when all regular ideas are used
+  generateUniqueFallbackIdea() {
+    const timestamp = Date.now();
+    const randomTopics = [
+      'Emerging Sensor Technologies',
+      'Next-Generation Manufacturing',
+      'Smart Factory Implementation',
+      'Sustainable Industrial Practices',
+      'Digital Transformation Strategies',
+      'Industry 4.0 Applications',
+      'Advanced Materials Testing',
+      'Robotics Integration',
+      'Cybersecurity in Manufacturing',
+      'Green Technology Solutions'
     ];
     
-    // Return a random fallback idea
-    return fallbackIdeas[Math.floor(Math.random() * fallbackIdeas.length)];
+    const randomTopic = randomTopics[Math.floor(Math.random() * randomTopics.length)];
+    
+    return {
+      type: "unique-fallback",
+      title: `${randomTopic}: Latest Developments and Future Implications for ${this.currentYear}`,
+      keywords: [randomTopic.toLowerCase(), 'development', 'future', 'implications', this.currentYear.toString()],
+      category: `unique-${timestamp}`,
+      priority: "medium",
+      unique: `fallback-${timestamp}`,
+      generated: true
+    };
   }
 }
 

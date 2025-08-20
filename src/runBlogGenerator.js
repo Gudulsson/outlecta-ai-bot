@@ -2,6 +2,7 @@ import BlogAnalyzer from "./blogAnalyzer.js";
 import BlogGenerator from "./blogGenerator.js";
 import BlogScheduler from "./blogScheduler.js";
 import BlogPublisher from "./blogPublisher.js";
+import ArticleCleaner from "./articleCleaner.js";
 import BlogCacheDB from "./blogDb.js";
 import dotenv from "dotenv";
 
@@ -14,6 +15,7 @@ class BlogRunner {
     this.generator = new BlogGenerator();
     this.scheduler = new BlogScheduler();
     this.publisher = new BlogPublisher();
+    this.cleaner = new ArticleCleaner();
   }
 
   // Run complete blog generation and publishing
@@ -223,6 +225,22 @@ class BlogRunner {
     }
   }
 
+  // Clean duplicate articles
+  async cleanDuplicates() {
+    console.log("🧹 Cleaning duplicate articles...");
+    
+    try {
+      const result = await this.cleaner.cleanDuplicateArticles();
+      await this.cleaner.cleanLocalDuplicates();
+      
+      console.log("✅ Article cleanup completed successfully");
+      return result;
+    } catch (error) {
+      console.error("❌ Error cleaning articles:", error.message);
+      throw error;
+    }
+  }
+
   // Publish all unpublished articles
   async publishAllUnpublished() {
     console.log("📤 Publishing all unpublished articles...");
@@ -282,6 +300,10 @@ async function main() {
         await runner.publishAllUnpublished();
         break;
         
+      case 'cleanup':
+        await runner.cleanDuplicates();
+        break;
+        
       default:
         console.log("Usage: node runBlogGenerator.js [command]");
         console.log("Commands:");
@@ -292,6 +314,7 @@ async function main() {
         console.log("  force     - Force generate and publish");
         console.log("  stats     - Get blog statistics");
         console.log("  publish   - Publish all unpublished articles");
+        console.log("  cleanup   - Clean duplicate articles");
         break;
     }
     

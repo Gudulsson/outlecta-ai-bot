@@ -1,26 +1,89 @@
 [
   {
-    "title": "Industrial Automation Trends 2025: A Comprehensive Analysis of Emerging Technologies",
-    "filename": "2025-08-20_industrial-automation-trends-2025-a-comprehensive-.json",
+    "title": "Case Study: How Automotive Manufacturing Solved Quality Control Optimization with Advanced Measurement Systems",
+    "filename": "2025-08-20_case-study-how-automotive-manufacturing-solved-qua.json",
     "keywords": [
       "industrial automation solutions",
       "measurement systems",
       "HMI technology"
     ],
-    "category": "industry",
-    "type": "trend",
-    "wordCount": 2195
+    "category": "case-study-0",
+    "type": "case-study",
+    "wordCount": 1985
   },
   {
-    "title": "Top Industrial Technology Innovations in 2025: What Engineers Need to Know",
-    "filename": "2025-08-20_top-industrial-technology-innovations-in-2025-what.json",
+    "title": "Case Study: How Aerospace Engineering Solved Precision Testing Standards with High-Accuracy Load Cells",
+    "category": "case-study-1",
+    "unique": "case-1755695948148-1",
+    "keywords": [
+      "aerospace engineering",
+      "precision testing standards",
+      "high-accuracy load cells",
+      "case study",
+      "real world"
+    ],
+    "generatedAt": "2025-08-20T13:19:08.150Z"
+  },
+  {
+    "title": "Case Study: How Aerospace Engineering Solved Precision Testing Standards with High-Accuracy Load Cells",
+    "filename": "2025-08-20_case-study-how-aerospace-engineering-solved-precis.json",
     "keywords": [
       "industrial automation solutions",
       "measurement systems",
       "HMI technology"
     ],
-    "category": "innovation",
-    "type": "trend",
-    "wordCount": 2196
+    "category": "case-study-1",
+    "type": "case-study",
+    "wordCount": 1985
+  },
+  {
+    "title": "Case Study: How Renewable Energy Solved Structural Monitoring with Strain Gauge Networks",
+    "category": "case-study-2",
+    "unique": "case-1755695958592-2",
+    "keywords": [
+      "renewable energy",
+      "structural monitoring",
+      "strain gauge networks",
+      "case study",
+      "real world"
+    ],
+    "generatedAt": "2025-08-20T13:19:18.594Z"
+  },
+  {
+    "title": "Case Study: How Renewable Energy Solved Structural Monitoring with Strain Gauge Networks",
+    "filename": "2025-08-20_case-study-how-renewable-energy-solved-structural-.json",
+    "keywords": [
+      "industrial automation solutions",
+      "measurement systems",
+      "HMI technology"
+    ],
+    "category": "case-study-2",
+    "type": "case-study",
+    "wordCount": 1984
+  },
+  {
+    "title": "Digital Load Cells vs Analog Load Cells: Which is Better for Modern Manufacturing?",
+    "category": "comparison-0",
+    "unique": "comp-1755695969511-0",
+    "keywords": [
+      "digital load cells",
+      "analog load cells",
+      "comparison",
+      "vs",
+      "modern manufacturing"
+    ],
+    "generatedAt": "2025-08-20T13:19:29.513Z"
+  },
+  {
+    "title": "Digital Load Cells vs Analog Load Cells: Which is Better for Modern Manufacturing?",
+    "filename": "2025-08-20_digital-load-cells-vs-analog-load-cells-which-is-b.json",
+    "keywords": [
+      "industrial automation solutions",
+      "measurement systems",
+      "HMI technology"
+    ],
+    "category": "comparison-0",
+    "type": "comparison",
+    "wordCount": 1987
   }
 ]
