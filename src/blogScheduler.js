@@ -26,7 +26,57 @@ class BlogScheduler {
     // Load blog history
     this.blogHistory = this.loadBlogHistory();
     
+    // Initialize history from existing articles if empty
+    if (this.blogHistory.length === 0) {
+      this.initializeHistoryFromExistingArticles();
+    }
+    
     console.log("✅ Blog Scheduler initialized");
+  }
+
+  // Initialize blog history from existing generated articles
+  initializeHistoryFromExistingArticles() {
+    console.log("📚 Initializing blog history from existing articles...");
+    
+    if (!fs.existsSync(this.blogOutputDir)) {
+      return;
+    }
+    
+    const files = fs.readdirSync(this.blogOutputDir);
+    const jsonFiles = files.filter(file => file.endsWith('.json'));
+    
+    for (const file of jsonFiles) {
+      try {
+        const filepath = path.join(this.blogOutputDir, file);
+        const articleData = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+        
+        // Add to history if not already present
+        const exists = this.blogHistory.some(article => 
+          article.title === articleData.title || 
+          article.filename === articleData.filename
+        );
+        
+        if (!exists) {
+          this.blogHistory.push({
+            title: articleData.title,
+            filename: articleData.filename,
+            keywords: articleData.keywords || [],
+            category: articleData.category,
+            type: articleData.type,
+            publishDate: articleData.publishDate,
+            wordCount: articleData.wordCount
+          });
+        }
+      } catch (error) {
+        console.warn(`Could not load article from ${file}:`, error.message);
+      }
+    }
+    
+    // Save updated history
+    if (this.blogHistory.length > 0) {
+      fs.writeFileSync(this.blogHistoryFile, JSON.stringify(this.blogHistory, null, 2));
+      console.log(`📚 Loaded ${this.blogHistory.length} existing articles into blog history`);
+    }
   }
 
   // Main scheduling function - runs twice per week
@@ -45,7 +95,7 @@ class BlogScheduler {
       const analysis = await this.analyzer.analyzeAllProducts();
       
       // Get best blog idea
-      const bestIdea = this.analyzer.getBestBlogIdea();
+      const bestIdea = this.analyzer.getBestBlogIdea(this.blogHistory);
       console.log(`💡 Selected blog idea: ${bestIdea.title}`);
       
       // Check if we've already written about this topic
@@ -276,7 +326,7 @@ class BlogScheduler {
       const analysis = await this.analyzer.analyzeAllProducts();
       
       // Get best blog idea
-      const bestIdea = this.analyzer.getBestBlogIdea();
+      const bestIdea = this.analyzer.getBestBlogIdea(this.blogHistory);
       console.log(`💡 Selected blog idea: ${bestIdea.title}`);
       
       // Generate blog article

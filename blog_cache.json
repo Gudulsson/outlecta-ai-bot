@@ -1,0 +1,728 @@
+{
+  "products": {
+    "10211751362897": {
+      "id": "10211751362897",
+      "title": "EU Power Cable – 220V C13 Plug, 1.5m",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "1320257674",
+      "analyzed_at": "2025-08-20T12:44:18.892Z"
+    },
+    "10211818373457": {
+      "id": "10211818373457",
+      "title": "MCC DAQ USB-Quad08 – 8-Channel Encoder Input Board",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2528676622",
+      "analyzed_at": "2025-08-20T12:44:19.406Z"
+    },
+    "10211823583569": {
+      "id": "10211823583569",
+      "title": "POS Monitor Stand – VESA 100 Desk Mount",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "610288363",
+      "analyzed_at": "2025-08-20T12:44:19.917Z"
+    },
+    "10213452448081": {
+      "id": "10213452448081",
+      "title": "Monitran MTN/410 – Vibration Sensor with Built-in Amplifier",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "1993428806",
+      "analyzed_at": "2025-08-20T12:44:20.430Z"
+    },
+    "10213457166673": {
+      "id": "10213457166673",
+      "title": "BL Inox 40 – Stainless Steel Load Cell",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "4284721789",
+      "analyzed_at": "2025-08-20T12:44:20.941Z"
+    },
+    "10213464047953": {
+      "id": "10213464047953",
+      "title": "Kyowa KFG-5-120-D17 – 10mm 120Ω Strain Gauges (10 pcs)",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "760076678",
+      "analyzed_at": "2025-08-20T12:44:21.451Z"
+    },
+    "10213475778897": {
+      "id": "10213475778897",
+      "title": "Kyowa KFG-5-120-C1 – 5mm 120Ω Strain Gauges (10 pcs)",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3679146813",
+      "analyzed_at": "2025-08-20T12:44:21.960Z"
+    },
+    "10225269473617": {
+      "id": "10225269473617",
+      "title": "MCC USB-2527",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3570811249",
+      "analyzed_at": "2025-08-20T12:44:22.475Z"
+    },
+    "10259445547345": {
+      "id": "10259445547345",
+      "title": "Kyowa KFG-10-120-C1-16L5M2R",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "626191706",
+      "analyzed_at": "2025-08-20T12:44:22.988Z"
+    },
+    "10259454591313": {
+      "id": "10259454591313",
+      "title": "Kyowa KFG-5-120-D17-16L5M3S",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2025480782",
+      "analyzed_at": "2025-08-20T12:44:23.500Z"
+    },
+    "10259459801425": {
+      "id": "10259459801425",
+      "title": "Kyowa KFG-5-120-C1-27L5M3R",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2253063678",
+      "analyzed_at": "2025-08-20T12:44:24.010Z"
+    },
+    "10259479593297": {
+      "id": "10259479593297",
+      "title": "Kyowa PGM-100KH",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "4194470387",
+      "analyzed_at": "2025-08-20T12:44:24.519Z"
+    },
+    "10264905023825": {
+      "id": "10264905023825",
+      "title": "Kyowa LCN-A-5KN",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "4091574159",
+      "analyzed_at": "2025-08-20T12:44:25.034Z"
+    },
+    "10265000706385": {
+      "id": "10265000706385",
+      "title": "Kyowa KFRP-5-350-C1-1F3M3",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3097827832",
+      "analyzed_at": "2025-08-20T12:44:25.545Z"
+    },
+    "10265062834513": {
+      "id": "10265062834513",
+      "title": "Sensocar Weight-Tare Indicator LED",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3491794345",
+      "analyzed_at": "2025-08-20T12:44:26.058Z"
+    },
+    "10265097634129": {
+      "id": "10265097634129",
+      "title": "Kyowa KFG-5-120-C1-23L5M3R",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "4072402390",
+      "analyzed_at": "2025-08-20T12:44:26.571Z"
+    },
+    "10265138626897": {
+      "id": "10265138626897",
+      "title": "MCC USB-501-TC Data Logger",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "741124841",
+      "analyzed_at": "2025-08-20T12:44:27.086Z"
+    },
+    "10276146708817": {
+      "id": "10276146708817",
+      "title": "Kyowa KFRP-5-350-C1-6",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2112136733",
+      "analyzed_at": "2025-08-20T12:44:27.598Z"
+    },
+    "10276176953681": {
+      "id": "10276176953681",
+      "title": "Kyowa KFRP-5-350-C1-3",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2714370842",
+      "analyzed_at": "2025-08-20T12:44:28.108Z"
+    },
+    "10276190978385": {
+      "id": "10276190978385",
+      "title": "Kyowa KSP-2-120-E3",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3840752705",
+      "analyzed_at": "2025-08-20T12:44:28.618Z"
+    },
+    "10276210737489": {
+      "id": "10276210737489",
+      "title": "Kyowa KSPB-1-350-E4",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "1814949185",
+      "analyzed_at": "2025-08-20T12:44:29.132Z"
+    },
+    "10276218044753": {
+      "id": "10276218044753",
+      "title": "Kyowa KSN-2-120-F3-16",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "397131406",
+      "analyzed_at": "2025-08-20T12:44:29.641Z"
+    },
+    "10276229349713": {
+      "id": "10276229349713",
+      "title": "Kyowa KSN-2-120-E3-11",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "903108413",
+      "analyzed_at": "2025-08-20T12:44:30.155Z"
+    },
+    "10282915758417": {
+      "id": "10282915758417",
+      "title": "Kyowa T-F3B",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3194757225",
+      "analyzed_at": "2025-08-20T12:44:30.667Z"
+    },
+    "10282919756113": {
+      "id": "10282919756113",
+      "title": "Kyowa T-F25",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2072953025",
+      "analyzed_at": "2025-08-20T12:44:31.177Z"
+    },
+    "10282921787729": {
+      "id": "10282921787729",
+      "title": "Kyowa T-P6",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3327207358",
+      "analyzed_at": "2025-08-20T12:44:31.686Z"
+    },
+    "10282926047569": {
+      "id": "10282926047569",
+      "title": "Kyowa KVA-1A",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3477419209",
+      "analyzed_at": "2025-08-20T12:44:32.200Z"
+    },
+    "10282929094993": {
+      "id": "10282929094993",
+      "title": "Kyowa SKF-27804",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2810691979",
+      "analyzed_at": "2025-08-20T12:44:32.710Z"
+    },
+    "10282933256529": {
+      "id": "10282933256529",
+      "title": "Kyowa KFU-5-350-C1-23H1M3",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3831204081",
+      "analyzed_at": "2025-08-20T12:44:33.223Z"
+    },
+    "10282935746897": {
+      "id": "10282935746897",
+      "title": "Kyowa KFW-5-120-C1-11L1M3R",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2914732478",
+      "analyzed_at": "2025-08-20T12:44:33.736Z"
+    },
+    "10282944397649": {
+      "id": "10282944397649",
+      "title": "Kyowa KFW-5-120-D17-11L5M2S",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "791581163",
+      "analyzed_at": "2025-08-20T12:44:34.243Z"
+    },
+    "10282948198737": {
+      "id": "10282948198737",
+      "title": "Kyowa KFG-3-120-C20-11",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2549651934",
+      "analyzed_at": "2025-08-20T12:44:34.755Z"
+    },
+    "10282955571537": {
+      "id": "10282955571537",
+      "title": "Kyowa KC-70-120-A1-11L1M3R",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "4024755425",
+      "analyzed_at": "2025-08-20T12:44:35.267Z"
+    },
+    "10282960781649": {
+      "id": "10282960781649",
+      "title": "Kyowa KFWB-5-350-C1-11L3M3R",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3737914035",
+      "analyzed_at": "2025-08-20T12:44:35.778Z"
+    },
+    "10289460871505": {
+      "id": "10289460871505",
+      "title": "Telac TD2 21.5”",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "646883321",
+      "analyzed_at": "2025-08-20T12:44:36.288Z"
+    },
+    "10289472602449": {
+      "id": "10289472602449",
+      "title": "Telac APM 10”",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "798458177",
+      "analyzed_at": "2025-08-20T12:44:36.800Z"
+    },
+    "10289478500689": {
+      "id": "10289478500689",
+      "title": "Telac 15.6 HD",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "2768743129",
+      "analyzed_at": "2025-08-20T12:44:37.312Z"
+    },
+    "10289491247441": {
+      "id": "10289491247441",
+      "title": "Telac APM 12.1”",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "1318182113",
+      "analyzed_at": "2025-08-20T12:44:37.823Z"
+    },
+    "10289499603281": {
+      "id": "10289499603281",
+      "title": "Telac TD 15.6”",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3115143803",
+      "analyzed_at": "2025-08-20T12:44:38.334Z"
+    },
+    "10289582997841": {
+      "id": "10289582997841",
+      "title": "Telac PPC 15.6”",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "4195282363",
+      "analyzed_at": "2025-08-20T12:44:38.845Z"
+    },
+    "10289638179153": {
+      "id": "10289638179153",
+      "title": "Panel PC Android 21.5”",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "797945462",
+      "analyzed_at": "2025-08-20T12:44:39.358Z"
+    },
+    "10289642471761": {
+      "id": "10289642471761",
+      "title": "PCT Touch Demo 21.5”",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3833570529",
+      "analyzed_at": "2025-08-20T12:44:39.870Z"
+    },
+    "10289658954065": {
+      "id": "10289658954065",
+      "title": "Telac PPC 15.6”",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3878269465",
+      "analyzed_at": "2025-08-20T12:44:40.380Z"
+    },
+    "10293763047761": {
+      "id": "10293763047761",
+      "title": "Telac IEC-10",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3764087645",
+      "analyzed_at": "2025-08-20T12:44:40.897Z"
+    },
+    "10293766062417": {
+      "id": "10293766062417",
+      "title": "Telac Display 11.7” Engineering Sample",
+      "vendor": "Outlecta.com",
+      "product_type": "",
+      "last_hash": "3669919803",
+      "analyzed_at": "2025-08-20T12:44:41.410Z"
+    }
+  },
+  "analysis": {
+    "10211751362897": {
+      "product_id": "10211751362897",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"EU Power Cable – 220V C13 Plug, 1.5m - power cable for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"EU Power Cable – 220V C13 Plug, 1.5m is an industrial power cable designed for reliable electrical connections in demanding environments. This professional-grade cable features robust construction and safety certification for secure power delivery to industrial equipment. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"EU Power Cable – 220V C13 Plug, 1.5m - power cable with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"power cable\",\"electrical cable\",\"power cord\",\"industrial cable\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:18.893Z"
+    },
+    "10211818373457": {
+      "product_id": "10211818373457",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"MCC DAQ USB-Quad08 – 8-Channel Encoder Input Board - data acquisition for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"MCC DAQ USB-Quad08 – 8-Channel Encoder Input Board is an industrial-grade data acquisition module that offers superior signal processing and measurement accuracy. Designed for professional applications, it features multi-channel capability and real-time data logging for measurement systems. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"MCC DAQ USB-Quad08 – 8-Channel Encoder Input Board - data acquisition with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"data acquisition\",\"daq\",\"mcc\",\"usb\",\"data logger\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:19.407Z"
+    },
+    "10211823583569": {
+      "product_id": "10211823583569",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"POS Monitor Stand – VESA 100 Desk Mount - monitor stand for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"POS Monitor Stand – VESA 100 Desk Mount is a professional monitor stand that delivers flexible positioning and secure mounting. Designed for industrial displays, it features adjustable design and reliable construction for optimal viewing comfort. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"POS Monitor Stand – VESA 100 Desk Mount - monitor stand with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"monitor stand\",\"vesa mount\",\"desk mount\",\"display stand\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:19.918Z"
+    },
+    "10213452448081": {
+      "product_id": "10213452448081",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Monitran MTN/410 – Vibration Sensor with Built-in Amplifier - vibration sensor for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Monitran MTN/410 – Vibration Sensor with Built-in Amplifier is a professional vibration sensor that offers superior sensitivity and frequency response. Designed for industrial applications, it features robust construction and reliable performance for predictive maintenance and condition monitoring. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Monitran MTN/410 – Vibration Sensor with Built-in Amplifier - vibration sensor with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"vibration sensor\",\"monitran\",\"accelerometer\",\"condition monitoring\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:20.431Z"
+    },
+    "10213457166673": {
+      "product_id": "10213457166673",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"BL Inox 40 – Stainless Steel Load Cell - load cell for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The BL Inox 40 – Stainless Steel Load Cell load cell provides superior accuracy and stability for force measurement. With its rugged design and temperature compensation, it ensures consistent readings for quality control and process monitoring. The load cell features stainless steel construction for corrosion resistance and long-term reliability in harsh industrial environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"BL Inox 40 – Stainless Steel Load Cell - load cell with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"load cell\",\"force sensor\",\"weight sensor\",\"bl inox\",\"strain gauge\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:20.942Z"
+    },
+    "10213464047953": {
+      "product_id": "10213464047953",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFG-5-120-D17 – 10mm 120Ω Strain Gauges (10 pcs) - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Kyowa KFG-5-120-D17 – 10mm 120Ω Strain Gauges (10 pcs) strain gauge offers superior sensitivity and stability for force measurement applications. With its robust construction and precise calibration, it provides accurate readings for quality control and process monitoring. This strain gauge is compatible with standard measurement amplifiers and data acquisition systems for easy integration into existing measurement setups. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFG-5-120-D17 – 10mm 120Ω Strain Gauges (10 pcs) - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:21.452Z"
+    },
+    "10213475778897": {
+      "product_id": "10213475778897",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFG-5-120-C1 – 5mm 120Ω Strain Gauges (10 pcs) - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KFG-5-120-C1 – 5mm 120Ω Strain Gauges (10 pcs) is an industrial-grade strain gauge that delivers precise force and stress measurements. Designed for long-term reliability, it features temperature compensation and excellent repeatability for critical measurement applications. This strain gauge is compatible with standard measurement amplifiers and data acquisition systems for easy integration into existing measurement setups. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFG-5-120-C1 – 5mm 120Ω Strain Gauges (10 pcs) - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:21.961Z"
+    },
+    "10225269473617": {
+      "product_id": "10225269473617",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"MCC USB-2527 - data acquisition for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The MCC USB-2527 data acquisition system provides precise measurement capabilities for industrial monitoring. With its USB connectivity and high-speed sampling, it delivers reliable data collection for process control and analysis. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"MCC USB-2527 - data acquisition with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"data acquisition\",\"daq\",\"mcc\",\"usb\",\"data logger\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:22.476Z"
+    },
+    "10259445547345": {
+      "product_id": "10259445547345",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFG-10-120-C1-16L5M2R - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Kyowa KFG-10-120-C1-16L5M2R strain gauge offers superior sensitivity and stability for force measurement applications. With its robust construction and precise calibration, it provides accurate readings for quality control and process monitoring. This strain gauge is compatible with standard measurement amplifiers and data acquisition systems for easy integration into existing measurement setups. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFG-10-120-C1-16L5M2R - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:22.989Z"
+    },
+    "10259454591313": {
+      "product_id": "10259454591313",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFG-5-120-D17-16L5M3S - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Kyowa KFG-5-120-D17-16L5M3S strain gauge offers superior sensitivity and stability for force measurement applications. With its robust construction and precise calibration, it provides accurate readings for quality control and process monitoring. This strain gauge is compatible with standard measurement amplifiers and data acquisition systems for easy integration into existing measurement setups. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFG-5-120-D17-16L5M3S - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:23.501Z"
+    },
+    "10259459801425": {
+      "product_id": "10259459801425",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFG-5-120-C1-27L5M3R - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KFG-5-120-C1-27L5M3R is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. This strain gauge is compatible with standard measurement amplifiers and data acquisition systems for easy integration into existing measurement setups. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFG-5-120-C1-27L5M3R - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:24.011Z"
+    },
+    "10259479593297": {
+      "product_id": "10259479593297",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa PGM-100KH - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa PGM-100KH is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa PGM-100KH - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:24.520Z"
+    },
+    "10264905023825": {
+      "product_id": "10264905023825",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa LCN-A-5KN - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Kyowa LCN-A-5KN strain gauge offers superior sensitivity and stability for force measurement applications. With its robust construction and precise calibration, it provides accurate readings for quality control and process monitoring. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa LCN-A-5KN - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:25.035Z"
+    },
+    "10265000706385": {
+      "product_id": "10265000706385",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFRP-5-350-C1-1F3M3 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KFRP-5-350-C1-1F3M3 is an industrial-grade strain gauge that delivers precise force and stress measurements. Designed for long-term reliability, it features temperature compensation and excellent repeatability for critical measurement applications. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFRP-5-350-C1-1F3M3 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:25.546Z"
+    },
+    "10265062834513": {
+      "product_id": "10265062834513",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Sensocar Weight-Tare Indicator LED - weight indicator for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Sensocar Weight-Tare Indicator LED is a digital weight indicator designed for industrial scales and weighing applications. This precision display features multiple functions and user-friendly interface for accurate weight measurement and process control. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Sensocar Weight-Tare Indicator LED - weight indicator with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"weight indicator\",\"sensocar\",\"digital indicator\",\"scale display\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:26.059Z"
+    },
+    "10265097634129": {
+      "product_id": "10265097634129",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFG-5-120-C1-23L5M3R - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KFG-5-120-C1-23L5M3R is an industrial-grade strain gauge that delivers precise force and stress measurements. Designed for long-term reliability, it features temperature compensation and excellent repeatability for critical measurement applications. This strain gauge is compatible with standard measurement amplifiers and data acquisition systems for easy integration into existing measurement setups. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFG-5-120-C1-23L5M3R - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:26.572Z"
+    },
+    "10265138626897": {
+      "product_id": "10265138626897",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"MCC USB-501-TC Data Logger - data acquisition for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"MCC USB-501-TC Data Logger is a high-speed data acquisition system designed for industrial measurement and control applications. This professional DAQ module features multi-channel input and real-time data processing for accurate signal acquisition and measurement. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"MCC USB-501-TC Data Logger - data acquisition with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"data acquisition\",\"daq\",\"mcc\",\"usb\",\"data logger\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:27.087Z"
+    },
+    "10276146708817": {
+      "product_id": "10276146708817",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFRP-5-350-C1-6 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KFRP-5-350-C1-6 is an industrial-grade strain gauge that delivers precise force and stress measurements. Designed for long-term reliability, it features temperature compensation and excellent repeatability for critical measurement applications. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFRP-5-350-C1-6 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:27.599Z"
+    },
+    "10276176953681": {
+      "product_id": "10276176953681",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFRP-5-350-C1-3 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Kyowa KFRP-5-350-C1-3 strain gauge offers superior sensitivity and stability for force measurement applications. With its robust construction and precise calibration, it provides accurate readings for quality control and process monitoring. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFRP-5-350-C1-3 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:28.109Z"
+    },
+    "10276190978385": {
+      "product_id": "10276190978385",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KSP-2-120-E3 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KSP-2-120-E3 is an industrial-grade strain gauge that delivers precise force and stress measurements. Designed for long-term reliability, it features temperature compensation and excellent repeatability for critical measurement applications. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KSP-2-120-E3 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:28.619Z"
+    },
+    "10276210737489": {
+      "product_id": "10276210737489",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KSPB-1-350-E4 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KSPB-1-350-E4 is an industrial-grade strain gauge that delivers precise force and stress measurements. Designed for long-term reliability, it features temperature compensation and excellent repeatability for critical measurement applications. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KSPB-1-350-E4 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:29.134Z"
+    },
+    "10276218044753": {
+      "product_id": "10276218044753",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KSN-2-120-F3-16 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KSN-2-120-F3-16 is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KSN-2-120-F3-16 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:29.642Z"
+    },
+    "10276229349713": {
+      "product_id": "10276229349713",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KSN-2-120-E3-11 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Kyowa KSN-2-120-E3-11 strain gauge offers superior sensitivity and stability for force measurement applications. With its robust construction and precise calibration, it provides accurate readings for quality control and process monitoring. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KSN-2-120-E3-11 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:30.156Z"
+    },
+    "10282915758417": {
+      "product_id": "10282915758417",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa T-F3B - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa T-F3B is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa T-F3B - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:30.669Z"
+    },
+    "10282919756113": {
+      "product_id": "10282919756113",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa T-F25 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa T-F25 is an industrial-grade strain gauge that delivers precise force and stress measurements. Designed for long-term reliability, it features temperature compensation and excellent repeatability for critical measurement applications. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa T-F25 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:31.178Z"
+    },
+    "10282921787729": {
+      "product_id": "10282921787729",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa T-P6 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa T-P6 is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa T-P6 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:31.687Z"
+    },
+    "10282926047569": {
+      "product_id": "10282926047569",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KVA-1A - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KVA-1A is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KVA-1A - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:32.204Z"
+    },
+    "10282929094993": {
+      "product_id": "10282929094993",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa SKF-27804 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Kyowa SKF-27804 strain gauge offers superior sensitivity and stability for force measurement applications. With its robust construction and precise calibration, it provides accurate readings for quality control and process monitoring. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa SKF-27804 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:32.711Z"
+    },
+    "10282933256529": {
+      "product_id": "10282933256529",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFU-5-350-C1-23H1M3 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KFU-5-350-C1-23H1M3 is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFU-5-350-C1-23H1M3 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:33.224Z"
+    },
+    "10282935746897": {
+      "product_id": "10282935746897",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFW-5-120-C1-11L1M3R - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KFW-5-120-C1-11L1M3R is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFW-5-120-C1-11L1M3R - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:33.738Z"
+    },
+    "10282944397649": {
+      "product_id": "10282944397649",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFW-5-120-D17-11L5M2S - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KFW-5-120-D17-11L5M2S is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFW-5-120-D17-11L5M2S - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:34.245Z"
+    },
+    "10282948198737": {
+      "product_id": "10282948198737",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFG-3-120-C20-11 - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Kyowa KFG-3-120-C20-11 is a precision strain gauge designed for accurate stress and strain measurement in industrial applications. This high-quality sensor features excellent linearity and temperature compensation for reliable performance in demanding environments. This strain gauge is compatible with standard measurement amplifiers and data acquisition systems for easy integration into existing measurement setups. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFG-3-120-C20-11 - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:34.757Z"
+    },
+    "10282955571537": {
+      "product_id": "10282955571537",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KC-70-120-A1-11L1M3R - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Kyowa KC-70-120-A1-11L1M3R strain gauge offers superior sensitivity and stability for force measurement applications. With its robust construction and precise calibration, it provides accurate readings for quality control and process monitoring. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KC-70-120-A1-11L1M3R - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:35.268Z"
+    },
+    "10282960781649": {
+      "product_id": "10282960781649",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Kyowa KFWB-5-350-C1-11L3M3R - strain gauge for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Kyowa KFWB-5-350-C1-11L3M3R strain gauge offers superior sensitivity and stability for force measurement applications. With its robust construction and precise calibration, it provides accurate readings for quality control and process monitoring. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Kyowa KFWB-5-350-C1-11L3M3R - strain gauge with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"strain gauge\",\"kyowa\",\"kfg\",\"force sensor\",\"stress measurement\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:35.779Z"
+    },
+    "10289460871505": {
+      "product_id": "10289460871505",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Telac TD2 21.5” - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Telac TD2 21.5” panel PC offers superior computing power and touch screen functionality for industrial applications. With its robust construction and Android operating system, it provides reliable operation for automation and control systems. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Telac TD2 21.5” - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:36.289Z"
+    },
+    "10289472602449": {
+      "product_id": "10289472602449",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Telac APM 10” - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Telac APM 10” is a professional industrial computer that combines computing power with touch screen technology. Designed for demanding environments, it features rugged construction and reliable performance for HMI and automation applications. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Telac APM 10” - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:36.802Z"
+    },
+    "10289478500689": {
+      "product_id": "10289478500689",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Telac 15.6 HD - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Telac 15.6 HD is an industrial panel PC designed for factory automation and HMI applications. This rugged touch screen computer features wide temperature operation and IP65 protection for reliable performance in harsh industrial environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Telac 15.6 HD - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:37.314Z"
+    },
+    "10289491247441": {
+      "product_id": "10289491247441",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Telac APM 12.1” - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Telac APM 12.1” is an industrial panel PC designed for factory automation and HMI applications. This rugged touch screen computer features wide temperature operation and IP65 protection for reliable performance in harsh industrial environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Telac APM 12.1” - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:37.824Z"
+    },
+    "10289499603281": {
+      "product_id": "10289499603281",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Telac TD 15.6” - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Telac TD 15.6” is an industrial panel PC designed for factory automation and HMI applications. This rugged touch screen computer features wide temperature operation and IP65 protection for reliable performance in harsh industrial environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Telac TD 15.6” - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:38.336Z"
+    },
+    "10289582997841": {
+      "product_id": "10289582997841",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Telac PPC 15.6” - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Telac PPC 15.6” is a professional industrial computer that combines computing power with touch screen technology. Designed for demanding environments, it features rugged construction and reliable performance for HMI and automation applications. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Telac PPC 15.6” - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:38.846Z"
+    },
+    "10289638179153": {
+      "product_id": "10289638179153",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Panel PC Android 21.5” - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Panel PC Android 21.5” is an industrial panel PC designed for factory automation and HMI applications. This rugged touch screen computer features wide temperature operation and IP65 protection for reliable performance in harsh industrial environments. The Android operating system provides familiar user interface and extensive app compatibility for easy system integration and operation. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Panel PC Android 21.5” - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:39.359Z"
+    },
+    "10289642471761": {
+      "product_id": "10289642471761",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"PCT Touch Demo 21.5” - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The PCT Touch Demo 21.5” panel PC offers superior computing power and touch screen functionality for industrial applications. With its robust construction and Android operating system, it provides reliable operation for automation and control systems. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"PCT Touch Demo 21.5” - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:39.871Z"
+    },
+    "10289658954065": {
+      "product_id": "10289658954065",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Telac PPC 15.6” - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Telac PPC 15.6” is a professional industrial computer that combines computing power with touch screen technology. Designed for demanding environments, it features rugged construction and reliable performance for HMI and automation applications. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Telac PPC 15.6” - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:40.382Z"
+    },
+    "10293763047761": {
+      "product_id": "10293763047761",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Telac IEC-10 - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"The Telac IEC-10 panel PC offers superior computing power and touch screen functionality for industrial applications. With its robust construction and Android operating system, it provides reliable operation for automation and control systems. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Telac IEC-10 - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:40.898Z"
+    },
+    "10293766062417": {
+      "product_id": "10293766062417",
+      "category": "web_enhanced",
+      "keywords": "[]",
+      "tags": "[]",
+      "analysis_json": "{\"seoDescription\":\"Telac Display 11.7” Engineering Sample - panel pc for industrial applications. Features professional grade construction and reliable performance. Available from Outlecta.com.\",\"detailedDescription\":\"Telac Display 11.7” Engineering Sample is an industrial panel PC designed for factory automation and HMI applications. This rugged touch screen computer features wide temperature operation and IP65 protection for reliable performance in harsh industrial environments. Available from Outlecta.com for professional industrial applications.\",\"metaDescription\":\"Telac Display 11.7” Engineering Sample - panel pc with professional grade construction for industrial applications. Available from Outlecta.com.\",\"analysis\":{\"volume\":\"high\",\"competition\":\"medium\",\"bestKeywords\":[\"panel pc\",\"industrial computer\",\"touch screen\",\"hmi\",\"android\"],\"usp\":[\"professional grade\",\"industrial reliability\",\"outlecta quality\"],\"complexity\":\"web_enhanced\"}}",
+      "updated_at": "2025-08-20T12:44:41.411Z"
+    }
+  },
+  "metrics": {},
+  "articles": []
+}

@@ -293,22 +293,94 @@ class BlogAnalyzer {
   }
 
   // Get best blog idea for this week
-  getBestBlogIdea() {
+  getBestBlogIdea(blogHistory = []) {
     // Prefer neutral, educational content types
     const preferenceOrder = ["trend", "explainer", "technical", "how-to", "beginner"]; 
+    
+    // Filter out ideas that have already been written about
+    const availableIdeas = this.blogIdeas.filter(idea => {
+      // Check if we've already written about this topic
+      return !blogHistory.some(published => {
+        // Check if keywords overlap significantly
+        const keywordOverlap = idea.keywords.filter(keyword => 
+          published.keywords && published.keywords.includes(keyword)
+        ).length;
+        
+        // Check if same category and similar title
+        const sameCategory = published.category === idea.category;
+        const similarTitle = published.title && 
+          (published.title.includes(idea.keywords[0]) || 
+           idea.title.includes(published.keywords?.[0] || ''));
+        
+        return keywordOverlap >= 2 || (sameCategory && similarTitle);
+      });
+    });
+    
+    // If no available ideas, generate some fallback ideas
+    if (availableIdeas.length === 0) {
+      console.log("⚠️ All blog ideas have been used, generating fallback ideas...");
+      return this.generateFallbackIdea(blogHistory);
+    }
+    
+    // Try to find the best available idea
     for (const type of preferenceOrder) {
-      const candidates = this.blogIdeas.filter(idea => idea.type === type)
+      const candidates = availableIdeas.filter(idea => idea.type === type)
         .sort((a, b) => (a.priority === 'high' ? -1 : 1));
       if (candidates.length > 0) return candidates[0];
     }
-    // Fallback
-    return {
-      type: "general",
-      title: "Industrial Technology: Fundamentals and Applications",
-      keywords: ["industrial", "technology", "applications", "fundamentals"],
-      category: "general",
-      priority: "medium"
-    };
+    
+    // Fallback to first available idea
+    return availableIdeas[0];
+  }
+
+  // Generate fallback idea when all regular ideas are used
+  generateFallbackIdea(blogHistory) {
+    const currentYear = new Date().getFullYear();
+    const month = new Date().toLocaleString('en-US', { month: 'long' });
+    
+    // Generate ideas based on what hasn't been covered
+    const fallbackIdeas = [
+      {
+        type: "trend",
+        title: `${month} ${currentYear} Industrial Technology Update: Latest Developments and Insights`,
+        keywords: ['industrial', 'technology', 'developments', month.toLowerCase(), currentYear.toString()],
+        category: "monthly-update",
+        priority: "high"
+      },
+      {
+        type: "explainer",
+        title: `Essential Industrial Measurement Tools: A Comprehensive Overview for ${currentYear}`,
+        keywords: ['industrial', 'measurement', 'tools', 'overview', currentYear.toString()],
+        category: "tools-overview",
+        priority: "high"
+      },
+      {
+        type: "technical",
+        title: `Advanced Industrial Automation Solutions: Technical Deep Dive for ${currentYear}`,
+        keywords: ['industrial', 'automation', 'solutions', 'technical', currentYear.toString()],
+        category: "automation",
+        priority: "medium"
+      },
+      {
+        type: "how-to",
+        title: `Optimizing Industrial Processes: Best Practices and Implementation Guide for ${currentYear}`,
+        keywords: ['industrial', 'processes', 'optimization', 'best practices', currentYear.toString()],
+        category: "optimization",
+        priority: "medium"
+      }
+    ];
+    
+    // Filter out fallback ideas that have already been used
+    const availableFallbacks = fallbackIdeas.filter(idea => {
+      return !blogHistory.some(published => {
+        const keywordOverlap = idea.keywords.filter(keyword => 
+          published.keywords && published.keywords.includes(keyword)
+        ).length;
+        return keywordOverlap >= 2;
+      });
+    });
+    
+    return availableFallbacks.length > 0 ? availableFallbacks[0] : fallbackIdeas[0];
   }
 }
 

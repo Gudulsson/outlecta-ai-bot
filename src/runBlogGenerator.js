@@ -29,7 +29,8 @@ class BlogRunner {
       
       // Step 2: Get best blog idea
       console.log("\n💡 Step 2: Selecting best blog idea...");
-      const bestIdea = this.analyzer.getBestBlogIdea();
+      await this.scheduler.initialize(); // Initialize to load blog history
+      const bestIdea = this.analyzer.getBestBlogIdea(this.scheduler.blogHistory);
       console.log(`✅ Selected: ${bestIdea.title}`);
       console.log(`📝 Type: ${bestIdea.type}, Category: ${bestIdea.category}`);
       
