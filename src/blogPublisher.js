@@ -500,6 +500,58 @@ class BlogPublisher {
     }
   }
 
+  // Fetch all articles from Shopify for analysis
+  async fetchAllArticles() {
+    console.log("🔍 Fetching all articles from Shopify...");
+    
+    try {
+      const url = `https://${process.env.SHOP_DOMAIN}/admin/api/2024-01/blogs/117478555985/articles.json?limit=250&status=any`;
+      console.log(`🔗 Request URL: ${url}`);
+      const response = await requestWithRetry('get', url);
+      
+      console.log(`📊 Response:`, response ? 'Got response' : 'No response');
+      
+      // Extract data from axios response
+      const data = response?.data || response;
+      
+      if (data && data.articles) {
+        console.log(`✅ Found ${data.articles.length} articles`);
+        return data.articles;
+      } else if (data) {
+        console.log(`⚠️ Data structure:`, Object.keys(data));
+      }
+      
+      return [];
+    } catch (error) {
+      console.error("❌ Error fetching articles:", error.message);
+      console.error("❌ Error details:", error);
+      return [];
+    }
+  }
+
+  // Update an existing article on Shopify
+  async updateExistingArticle(articleId, updateData) {
+    console.log(`🔄 Updating article ID: ${articleId}`);
+    
+    try {
+      const url = `https://${process.env.SHOP_DOMAIN}/admin/api/2024-01/blogs/117478555985/articles/${articleId}.json`;
+      const response = await requestWithRetry('put', url, updateData);
+      
+      // Extract data from axios response  
+      const data = response?.data || response;
+      
+      if (data && data.article) {
+        console.log(`✅ Successfully updated article: ${data.article.title}`);
+        return true;
+      }
+      
+      return false;
+    } catch (error) {
+      console.error(`❌ Error updating article ${articleId}:`, error.message);
+      return false;
+    }
+  }
+
   // Generate unique handle for article
   generateHandle(title) {
     let baseHandle = title

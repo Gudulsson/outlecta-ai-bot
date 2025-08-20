@@ -12,6 +12,8 @@
     "blog:scheduled": "node src/runBlogGenerator.js weekly",
     "blog:queue": "node src/runBlogGenerator.js queue",
     "blog:cleanup": "node src/runBlogGenerator.js cleanup",
+    "blog:scan": "node src/articleUpdater.js scan",
+    "blog:fix": "node src/articleUpdater.js fix",
     "schedule:local": "node schedule-local.js",
     "schedule:continuous": "node schedule-local.js --continuous",
     "start": "node src/runBlogGenerator.js complete"
