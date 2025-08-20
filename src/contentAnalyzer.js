@@ -21,25 +21,33 @@ class ContentAnalyzer {
       issues: []
     };
 
-      // Check if content needs rewriting (only for obvious problems)
+      // Check if content needs rewriting (catches problems like the bad Outlecta article)
   const exactRepetitions = analysis.repetitions.filter(r => r.type === 'exact_phrase');
+  const criticalIssues = analysis.qualityIssues.filter(issue => issue.severity === 'critical');
+  const highIssues = analysis.qualityIssues.filter(issue => issue.severity === 'high');
   
-  // Only rewrite if there are actual exact repetitions
+  // Rewrite if there are actual exact repetitions
   if (exactRepetitions.length > 0) {
     analysis.needsRewrite = true;
     analysis.issues.push(`Found ${exactRepetitions.length} exact repetitions`);
   }
 
-  // Only rewrite for very obvious quality issues
-  if (analysis.qualityIssues.length > 15) {
+  // Rewrite for critical issues (like "undefined" variables)
+  if (criticalIssues.length > 0) {
     analysis.needsRewrite = true;
-    analysis.issues.push(`Found ${analysis.qualityIssues.length} quality issues`);
+    analysis.issues.push(`Found ${criticalIssues.length} critical technical errors`);
   }
 
-  // Only rewrite for extremely low uniqueness
-  if (analysis.uniqueness < 0.05) {
+  // Rewrite for multiple high-severity issues (meaningless patterns, etc.)
+  if (highIssues.length > 1) {
     analysis.needsRewrite = true;
-    analysis.issues.push(`Content uniqueness extremely low: ${(analysis.uniqueness * 100).toFixed(1)}%`);
+    analysis.issues.push(`Found ${highIssues.length} high-severity quality issues`);
+  }
+
+  // Rewrite for extremely low uniqueness
+  if (analysis.uniqueness < 0.3) {
+    analysis.needsRewrite = true;
+    analysis.issues.push(`Content uniqueness too low: ${(analysis.uniqueness * 100).toFixed(1)}%`);
   }
 
     console.log(`📊 Content Analysis Results:`);
@@ -77,22 +85,52 @@ class ContentAnalyzer {
     return repetitions;
   }
 
-  // Find exact phrase repetitions (extremely strict - only exact sentence matches)
+  // Find exact phrase repetitions (catches real problems like the Outlecta article)
   findExactRepetitions(content) {
     const repetitions = [];
     const text = content.replace(/<[^>]*>/g, '');
-    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 150); // Extremely long sentences only
     
-    for (let i = 0; i < sentences.length; i++) {
-      for (let j = i + 1; j < sentences.length; j++) {
-        const sentence1 = sentences[i].trim().toLowerCase();
-        const sentence2 = sentences[j].trim().toLowerCase();
+    // Check for repeated paragraphs (like in the bad Outlecta article)
+    const paragraphs = content.split(/<\/p>\s*<p[^>]*>/gi).map(p => 
+      p.replace(/<[^>]*>/g, '').trim()
+    ).filter(p => p.length > 50);
+    
+    for (let i = 0; i < paragraphs.length; i++) {
+      for (let j = i + 1; j < paragraphs.length; j++) {
+        const para1 = paragraphs[i].toLowerCase();
+        const para2 = paragraphs[j].toLowerCase();
         
-        // Only check for exact sentence matches (extremely strict)
-        if (sentence1 === sentence2 && sentence1.length > 150) {
+        // Check for exact paragraph matches
+        if (para1 === para2 && para1.length > 50) {
           repetitions.push({
-            paragraph1: { index: i, text: sentences[i], similarity: 1.0 },
-            paragraph2: { index: j, text: sentences[j], similarity: 1.0 },
+            paragraph1: { index: i, text: paragraphs[i], similarity: 1.0 },
+            paragraph2: { index: j, text: paragraphs[j], similarity: 1.0 },
+            similarity: 1.0,
+            type: 'exact_phrase'
+          });
+        }
+        
+        // Check for very similar long phrases (90%+ similarity)
+        const similarity = this.calculateSimilarity(para1, para2);
+        if (similarity > 0.9 && para1.length > 100) {
+          repetitions.push({
+            paragraph1: { index: i, text: paragraphs[i], similarity },
+            paragraph2: { index: j, text: paragraphs[j], similarity },
+            similarity,
+            type: 'exact_phrase'
+          });
+        }
+      }
+    }
+    
+    // Also check for repeated phrases within the content
+    const phrases = this.extractLongPhrases(text);
+    for (let i = 0; i < phrases.length; i++) {
+      for (let j = i + 1; j < phrases.length; j++) {
+        if (phrases[i] === phrases[j] && phrases[i].length > 80) {
+          repetitions.push({
+            paragraph1: { index: i, text: phrases[i], similarity: 1.0 },
+            paragraph2: { index: j, text: phrases[j], similarity: 1.0 },
             similarity: 1.0,
             type: 'exact_phrase'
           });
@@ -103,10 +141,38 @@ class ContentAnalyzer {
     return repetitions;
   }
 
+  // Extract long phrases for repetition detection
+  extractLongPhrases(text) {
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 50);
+    const phrases = [];
+    
+    sentences.forEach(sentence => {
+      const words = sentence.trim().split(/\s+/);
+      for (let i = 0; i <= words.length - 10; i++) { // 10-word phrases
+        const phrase = words.slice(i, i + 10).join(' ').toLowerCase();
+        if (phrase.length > 80) {
+          phrases.push(phrase);
+        }
+      }
+    });
+    
+    return phrases;
+  }
+
   // Detect quality issues in content
   detectQualityIssues(content) {
     const issues = [];
     
+    // Check for technical errors (like "undefined" in the bad Outlecta article)
+    const technicalErrors = this.findTechnicalErrors(content);
+    if (technicalErrors.length > 0) {
+      issues.push({
+        type: 'technical_errors',
+        details: technicalErrors,
+        severity: 'critical'
+      });
+    }
+
     // Check for repeated phrases
     const repeatedPhrases = this.findRepeatedPhrases(content);
     if (repeatedPhrases.length > 0) {
@@ -137,7 +203,80 @@ class ContentAnalyzer {
       });
     }
 
+    // Check for meaningless content patterns
+    const meaninglessPatterns = this.findMeaninglessPatterns(content);
+    if (meaninglessPatterns.length > 0) {
+      issues.push({
+        type: 'meaningless_patterns',
+        details: meaninglessPatterns,
+        severity: 'high'
+      });
+    }
+
     return issues;
+  }
+
+  // Find technical errors like "undefined", broken variables, etc.
+  findTechnicalErrors(content) {
+    const errors = [];
+    const text = content.replace(/<[^>]*>/g, '');
+    
+    // Check for "undefined" 
+    if (text.includes('undefined')) {
+      errors.push({ type: 'undefined_variable', count: (text.match(/undefined/g) || []).length });
+    }
+    
+    // Check for empty variable placeholders
+    const emptyPlaceholders = text.match(/\$\{[^}]*\}/g) || [];
+    if (emptyPlaceholders.length > 0) {
+      errors.push({ type: 'empty_placeholders', count: emptyPlaceholders.length });
+    }
+    
+    // Check for broken references
+    if (text.includes('[object Object]') || text.includes('NaN') || text.includes('null')) {
+      errors.push({ type: 'broken_references', count: 1 });
+    }
+    
+    return errors;
+  }
+
+  // Find meaningless content patterns (like the repetitive sections in bad Outlecta article)
+  findMeaninglessPatterns(content) {
+    const patterns = [];
+    const text = content.replace(/<[^>]*>/g, '');
+    
+    // Check for generic filler phrases that appear too often
+    const fillerPhrases = [
+      'represents a fundamental shift in how organizations approach',
+      'the integration of advanced technologies and proven methodologies',
+      'creates a robust foundation for operational excellence',
+      'industry experts recommend conducting thorough assessments',
+      'this ensures optimal performance and maximum return on investment'
+    ];
+    
+    fillerPhrases.forEach(phrase => {
+      const occurrences = (text.toLowerCase().match(new RegExp(phrase.toLowerCase(), 'g')) || []).length;
+      if (occurrences > 2) {
+        patterns.push({ 
+          type: 'repetitive_filler', 
+          phrase: phrase, 
+          count: occurrences 
+        });
+      }
+    });
+    
+    // Check for lists that are repeated verbatim
+    const listPattern = /\* [^*\n]+\n\* [^*\n]+\n\* [^*\n]+\n\* [^*\n]+\n\* [^*\n]+/g;
+    const lists = text.match(listPattern) || [];
+    const uniqueLists = [...new Set(lists)];
+    if (lists.length > uniqueLists.length) {
+      patterns.push({ 
+        type: 'repeated_lists', 
+        count: lists.length - uniqueLists.length 
+      });
+    }
+    
+    return patterns;
   }
 
   // Extract paragraphs from HTML content
@@ -308,45 +447,117 @@ class ContentAnalyzer {
   generateAlternativeContent(originalText, blogIdea, variationIndex) {
     const keywords = blogIdea.keywords || ['industrial automation'];
     const primaryKeyword = keywords[0] || 'industrial automation';
+    const topic = blogIdea.title || 'Industrial Technology';
     
-    const alternatives = [
-      `The implementation of ${primaryKeyword} requires careful consideration of multiple factors. Organizations must evaluate their specific requirements and operational constraints to ensure optimal performance and long-term success.`,
+    // Generate completely different content based on the topic and variation
+    const topicSpecificAlternatives = [
+      `${topic} involves several critical considerations that organizations must address. Key factors include technical specifications, compatibility requirements, and integration challenges. Understanding these elements is essential for successful implementation and long-term operational success.`,
       
-      `When deploying ${primaryKeyword} solutions, it's essential to consider the broader organizational context. This includes understanding current infrastructure limitations, future scalability needs, and integration requirements with existing systems.`,
+      `When evaluating ${primaryKeyword} solutions, companies should focus on practical benefits and measurable outcomes. This approach ensures that investments align with business objectives and deliver tangible value. Performance metrics and ROI analysis play crucial roles in decision-making processes.`,
       
-      `Successful ${primaryKeyword} adoption depends on a comprehensive approach that addresses both technical and operational aspects. Companies need to establish clear objectives, define performance metrics, and implement robust monitoring systems.`,
+      `Modern ${primaryKeyword} technologies offer significant advantages over traditional approaches. These benefits include improved efficiency, enhanced accuracy, and reduced operational costs. Organizations that adopt these solutions often experience substantial improvements in productivity and quality.`,
       
-      `The strategic deployment of ${primaryKeyword} technologies involves balancing immediate operational needs with long-term business objectives. This requires careful planning, stakeholder alignment, and continuous evaluation of performance outcomes.`,
+      `Implementation strategies for ${primaryKeyword} should be tailored to specific organizational needs and constraints. Factors such as existing infrastructure, budget limitations, and timeline requirements all influence the optimal approach. Careful planning and phased deployment often yield the best results.`,
       
-      `Organizations implementing ${primaryKeyword} must consider the full lifecycle of the solution. This includes initial planning, deployment strategies, ongoing maintenance, and future upgrade considerations.`
+      `The future of ${primaryKeyword} continues to evolve with emerging technologies and changing market demands. Staying informed about industry trends and technological developments helps organizations make strategic decisions about their technology investments and operational improvements.`
     ];
     
-    return alternatives[variationIndex % alternatives.length];
+    // Add some randomness to avoid predictable patterns
+    const randomVariations = [
+      `Effective ${primaryKeyword} deployment requires understanding both technical and business requirements. Success depends on proper planning, adequate resources, and ongoing support throughout the implementation process.`,
+      
+      `Organizations benefit from ${primaryKeyword} through improved operational efficiency and enhanced performance capabilities. These advantages translate into competitive benefits and sustainable business growth.`,
+      
+      `Technical considerations for ${primaryKeyword} include system compatibility, scalability requirements, and maintenance needs. Addressing these factors early in the planning process helps ensure successful project outcomes.`
+    ];
+    
+    const allAlternatives = [...topicSpecificAlternatives, ...randomVariations];
+    return allAlternatives[variationIndex % allAlternatives.length];
   }
 
   // Apply rewrite suggestions to content
   applyRewriteSuggestions(content, suggestions) {
     let modifiedContent = content;
-    const paragraphs = this.extractParagraphs(content);
     
+    // Apply fixes for different types of repetitions
     suggestions.forEach(suggestion => {
       if (suggestion.type === 'rewrite_paragraph') {
-        const paragraphRegex = /<p[^>]*>(.*?)<\/p>/gs;
-        let match;
-        let paragraphIndex = 0;
+        // Replace specific repeated paragraphs
+        const originalText = suggestion.targetParagraph < 0 ? '' : 
+          suggestion.reason.includes('Similar to paragraph') ? 
+          suggestion.newContent : suggestion.newContent;
         
-        modifiedContent = modifiedContent.replace(paragraphRegex, (match, paragraphContent) => {
-          if (paragraphIndex === suggestion.targetParagraph) {
-            paragraphIndex++;
-            return `<p>${suggestion.newContent}</p>`;
-          }
-          paragraphIndex++;
-          return match;
-        });
+        // Find and replace the first occurrence of the repetitive content
+        const targetText = suggestion.reason.includes('paragraph') ? 
+          modifiedContent.split(/<\/p>\s*<p[^>]*>/gi)[suggestion.targetParagraph] : '';
+        
+        if (targetText) {
+          const cleanTarget = targetText.replace(/<[^>]*>/g, '').trim();
+          const regex = new RegExp(this.escapeRegex(cleanTarget), 'gi');
+          let replacementCount = 0;
+          
+          modifiedContent = modifiedContent.replace(regex, (match) => {
+            if (replacementCount === 0) {
+              replacementCount++;
+              return suggestion.newContent;
+            }
+            return match;
+          });
+        }
       }
     });
     
+    // Additional cleanup for remaining repetitions
+    modifiedContent = this.removeObviousRepetitions(modifiedContent);
+    
     return modifiedContent;
+  }
+
+  // Remove obvious repetitive patterns
+  removeObviousRepetitions(content) {
+    let cleanedContent = content;
+    
+    // Remove repeated filler phrases
+    const fillerPhrases = [
+      'represents a fundamental shift in how organizations approach',
+      'the integration of advanced technologies and proven methodologies',
+      'creates a robust foundation for operational excellence',
+      'industry experts recommend conducting thorough assessments',
+      'this ensures optimal performance and maximum return on investment'
+    ];
+    
+    fillerPhrases.forEach(phrase => {
+      const regex = new RegExp(this.escapeRegex(phrase), 'gi');
+      let count = 0;
+      cleanedContent = cleanedContent.replace(regex, (match) => {
+        count++;
+        return count <= 1 ? match : ''; // Keep only the first occurrence
+      });
+    });
+    
+    // Remove repeated bullet point lists
+    const listItems = cleanedContent.match(/<li[^>]*>.*?<\/li>/gi) || [];
+    const uniqueItems = [...new Set(listItems.map(item => item.toLowerCase()))];
+    
+    if (listItems.length > uniqueItems.length) {
+      // Replace duplicated list items
+      const seenItems = new Set();
+      cleanedContent = cleanedContent.replace(/<li[^>]*>.*?<\/li>/gi, (match) => {
+        const normalized = match.toLowerCase();
+        if (seenItems.has(normalized)) {
+          return ''; // Remove duplicate
+        }
+        seenItems.add(normalized);
+        return match;
+      });
+    }
+    
+    return cleanedContent;
+  }
+
+  // Escape special regex characters
+  escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   // Intelligent content rewriting with multiple attempts
