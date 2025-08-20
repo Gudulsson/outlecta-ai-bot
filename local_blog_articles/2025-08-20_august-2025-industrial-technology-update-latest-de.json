@@ -30,10 +30,35 @@
     "seoScore": 100,
     "overallScore": 67
   },
-  "generatedAt": "2025-08-20T13:01:14.764Z",
+  "generatedAt": "2025-08-20T13:01:15.098Z",
   "seoOptimized": true,
   "schemaMarkup": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Article\",\n  \"headline\": \"August 2025 Industrial Technology Update: Latest Developments and Insights\",\n  \"description\": \"Complete industrial automation solutions guide with expert insights and best practices.\",\n  \"author\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Outlecta\",\n    \"url\": \"https://outlecta.com\"\n  },\n  \"publisher\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Outlecta\",\n    \"logo\": {\n      \"@type\": \"ImageObject\",\n      \"url\": \"https://outlecta.com/logo.png\"\n    }\n  },\n  \"datePublished\": \"2025-08-20T13:01:14.579Z\",\n  \"dateModified\": \"2025-08-20T13:01:14.579Z\",\n  \"mainEntityOfPage\": {\n    \"@type\": \"WebPage\",\n    \"@id\": \"https://outlecta.com/blogs/news/industrial-automation-solutions-guide-2025\"\n  },\n  \"keywords\": \"industrial automation solutions, measurement systems, HMI technology\",\n  \"articleSection\": \"Industrial Technology\"\n}",
-  "filename": "2025-08-20_august-2025-industrial-technology-update-latest-de.json",
-  "filepath": "generated_blogs\\2025-08-20_august-2025-industrial-technology-update-latest-de.json",
-  "status": "generated"
+  "filename": "2025-08-20_august-2025-industrial-technology-update-latest-de.html",
+  "filepath": "local_blog_articles\\2025-08-20_august-2025-industrial-technology-update-latest-de.html",
+  "status": "local",
+  "jsonFilepath": "local_blog_articles\\2025-08-20_august-2025-industrial-technology-update-latest-de.json",
+  "publishingInstructions": {
+    "steps": [
+      "Copy the HTML content from the generated file",
+      "Create a new blog post on your website",
+      "Paste the content and format as needed",
+      "Add the SEO title and meta description",
+      "Publish the article",
+      "Share on social media"
+    ],
+    "platforms": [
+      "WordPress",
+      "Shopify Blog",
+      "Medium",
+      "LinkedIn Articles",
+      "Company website"
+    ],
+    "tips": [
+      "Optimize images for web",
+      "Add internal links to your products",
+      "Include call-to-action buttons",
+      "Share on social media platforms",
+      "Monitor engagement metrics"
+    ]
+  }
 }

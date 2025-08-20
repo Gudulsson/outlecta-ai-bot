@@ -1,0 +1,44 @@
+name: Automatic Blog Generation
+
+on:
+  schedule:
+    # Kör måndag och torsdag 09:00 UTC (10:00 CET)
+    - cron: '0 9 * * 1,4'
+  workflow_dispatch: # Tillåt manuell körning
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run scheduled blog generation
+      env:
+        SHOP_DOMAIN: ${{ secrets.SHOP_DOMAIN }}
+        SHOP_ACCESS_TOKEN: ${{ secrets.SHOP_ACCESS_TOKEN }}
+        GOOGLE_AI_API_KEY: ${{ secrets.GOOGLE_AI_API_KEY }}
+        PUBLISH_TO_SHOPIFY: 'true'
+      run: node src/runBlogGenerator.js weekly
+      
+    - name: Commit and push if changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Auto-generated blog article $(date +'%Y-%m-%d')"
+          git push
+        fi

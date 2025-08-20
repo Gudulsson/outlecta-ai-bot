@@ -11,6 +11,7 @@ class BlogScheduler {
     this.blogHistoryFile = ".blog_history.json";
     this.lastRunFile = ".last_blog_run.json";
     this.blogOutputDir = "generated_blogs";
+    this.blogHistory = []; // Initialize empty array
   }
 
   // Initialize blog scheduler
@@ -141,19 +142,27 @@ class BlogScheduler {
     // Blog publishing days: Monday (1) and Thursday (4)
     const blogDays = [1, 4];
     
-    if (!blogDays.includes(today)) {
-      return false; // Not a blog day
-    }
-    
     if (!lastRun) {
+      console.log("🆕 First time running - will generate article");
       return true; // First time running
     }
     
     const lastRunDate = new Date(lastRun.lastRun);
-    const daysSinceLastRun = (now - lastRunDate) / (1000 * 60 * 60 * 24);
+    const daysSinceLastRun = Math.floor((now - lastRunDate) / (1000 * 60 * 60 * 24));
     
-    // Run if it's been at least 3 days since last run (to prevent duplicate runs on same day)
-    return daysSinceLastRun >= 3;
+    // If it's a scheduled blog day and it's been at least 3 days since last run
+    if (blogDays.includes(today) && daysSinceLastRun >= 3) {
+      console.log(`📅 Scheduled blog day (${daysSinceLastRun} days since last run)`);
+      return true;
+    }
+    
+    // If more than 5 days since last run, generate regardless of day
+    if (daysSinceLastRun > 5) {
+      console.log(`⚠️ Missed scheduled runs (${daysSinceLastRun} days since last run) - generating now`);
+      return true;
+    }
+    
+    return false;
   }
 
   // Check if we've already written about this topic

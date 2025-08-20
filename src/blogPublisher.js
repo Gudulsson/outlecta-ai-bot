@@ -28,7 +28,7 @@ class BlogPublisher {
       throw new Error(`Article failed quality check: ${qualityCheck.issues.join(', ')}`);
     }
     
-    console.log(`✅ Quality check passed! Quality score: ${articleData.qualityScore}/100`);
+    console.log(`✅ Quality check passed! Quality score: ${articleData.qualityMetrics?.overallScore || articleData.qualityScore || 'N/A'}/100`);
     
     // Show preview option
     await this.showPreview(articleData);
@@ -186,7 +186,7 @@ class BlogPublisher {
     console.log(`\n📖 ARTICLE PREVIEW:`);
     console.log(`📄 Title: ${articleData.title}`);
     console.log(`📊 Word Count: ${articleData.wordCount} words`);
-    console.log(`🎯 Quality Score: ${articleData.qualityScore}/100`);
+    console.log(`🎯 Quality Score: ${articleData.qualityMetrics?.overallScore || articleData.qualityScore || 'N/A'}/100`);
     console.log(`📝 Excerpt: ${articleData.excerpt.substring(0, 150)}...`);
     console.log(`🏷️ Tags: ${articleData.tags.join(', ')}`);
     
@@ -500,21 +500,17 @@ class BlogPublisher {
     }
   }
 
-  // Generate clean, short handle from title
+  // Generate unique handle for article
   generateHandle(title) {
-    // Clean and shorten title significantly
-    const cleanTitle = title
+    let baseHandle = title
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
-      .replace(/^(the|a|an)-/, '') // Remove common article prefixes
-      .replace(/-?(guide|tips|how-to|complete)-?/g, '') // Remove common blog words
-      .replace(/-?(in|for|with|and|or|to|of)-/g, '-') // Remove common small words
-      .replace(/-+/g, '-') // Remove multiple dashes
-      .replace(/^-|-$/g, '') // Remove leading/trailing dashes
-      .substring(0, 40); // Much shorter limit
-      
-    return cleanTitle || 'blog-post'; // Fallback if title becomes empty
+      .substring(0, 40);
+    
+    // Add timestamp to ensure uniqueness
+    const timestamp = Date.now().toString().slice(-6);
+    return `${baseHandle}-${timestamp}`;
   }
 
   // Sanitize filename

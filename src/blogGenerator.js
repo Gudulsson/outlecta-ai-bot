@@ -1,568 +1,1007 @@
-import { generateAllContent } from "./webSearchAI.js";
-import { generateThumbnail as buildThumbnail } from "./thumbnail.js";
+import { generateThumbnail } from "./thumbnail.js";
+import fs from "fs";
+import path from "path";
 
-// Enhanced Blog Generator - Creates human-like, engaging content
+// Outlecta's Supreme Blog Publishing AI
+// A fusion of world-class SEO strategist, technical content engineer, and growth marketer
 class BlogGenerator {
   constructor() {
     this.currentYear = new Date().getFullYear();
-    this.writingStyles = {
-      conversational: this.getConversationalStyle(),
-      technical: this.getTechnicalStyle(),
-      storytelling: this.getStorytellingStyle(),
-      analytical: this.getAnalyticalStyle()
-    };
+    this.outlectaCategories = ['HMI', 'IoT', 'Measurement', 'Embedded'];
+    this.trustedAuthorities = [
+      'ieee.org', 'nist.gov', 'iso.org', 'astm.org', 'asme.org',
+      'automationworld.com', 'controleng.com', 'isa.org'
+    ];
   }
 
-  // Generate a complete blog article with human-like quality
+  // Generate a supreme SEO-optimized blog article
   async generateBlogArticle(blogIdea) {
-    console.log(`📝 Generating human-like blog article: ${blogIdea.title}`);
+    console.log(`📝 Generating supreme SEO blog article: ${blogIdea.title}`);
     
-    // Choose writing style based on article type
-    const style = this.selectWritingStyle(blogIdea.type);
-    const article = await this.createHumanLikeContent(blogIdea, style);
-    const thumbnail = await buildThumbnail(blogIdea).catch(() => this.generateThumbnail(blogIdea));
-    
-    // Create article with enhanced metadata
-    const enhancedArticle = {
-      title: blogIdea.title,
-      content: article.content,
-      excerpt: article.excerpt,
-      keywords: blogIdea.keywords,
-      category: blogIdea.category,
-      type: blogIdea.type,
-      seoTitle: this.generateSEOTitle(blogIdea.title),
-      metaDescription: this.generateMetaDescription(article.excerpt, blogIdea.keywords),
-      tags: this.generateTags(blogIdea.keywords, blogIdea.category),
-      publishDate: new Date().toISOString(),
-      wordCount: this.countWords(article.content),
-      thumbnail,
-      writingStyle: style.name,
-      readabilityScore: this.calculateReadability(article.content),
-      engagementScore: this.calculateEngagement(article.content)
-    };
-
-    console.log(`✅ Human-like article generated!`);
-    console.log(`📊 Word count: ${enhancedArticle.wordCount} words`);
-    console.log(`📖 Readability score: ${enhancedArticle.readabilityScore}/100`);
-    console.log(`🎯 Engagement score: ${enhancedArticle.engagementScore}/100`);
-    
-    return enhancedArticle;
+    try {
+      // Step 1: SEO Analysis & Strategy
+      const seoStrategy = this.analyzeSEOStrategy(blogIdea);
+      
+      // Step 2: Content Architecture
+      const contentStructure = this.architectContent(blogIdea, seoStrategy);
+      
+      // Step 3: Generate Supreme Content
+      const article = await this.generateSupremeContent(blogIdea, contentStructure);
+      
+      // Step 4: SEO Optimization
+      const optimizedArticle = this.optimizeForSEO(article, seoStrategy);
+      
+      // Step 5: Generate Thumbnail
+      const thumbnail = await generateThumbnail(blogIdea);
+      
+      // Step 6: Calculate Quality Metrics
+      const qualityMetrics = this.calculateQualityMetrics(optimizedArticle);
+      
+      return {
+        title: blogIdea.title,
+        content: optimizedArticle.content,
+        excerpt: this.generateExcerpt(optimizedArticle.content),
+        keywords: seoStrategy.primaryKeywords,
+        category: blogIdea.category,
+        type: blogIdea.type,
+        seoTitle: seoStrategy.seoTitle,
+        metaDescription: seoStrategy.metaDescription,
+        tags: [...seoStrategy.primaryKeywords, ...seoStrategy.secondaryKeywords.slice(0, 3), 'outlecta'],
+        wordCount: optimizedArticle.wordCount,
+        thumbnail,
+        qualityMetrics,
+        generatedAt: new Date().toISOString(),
+        seoOptimized: true,
+        schemaMarkup: seoStrategy.schemaMarkup
+      };
+      
+    } catch (error) {
+      console.error("❌ Error generating supreme blog article:", error.message);
+      throw error;
+    }
   }
 
-  // Select appropriate writing style
-  selectWritingStyle(articleType) {
-    const styleMap = {
-      'how-to': this.writingStyles.conversational,
-      'trend': this.writingStyles.analytical,
-      'technical': this.writingStyles.technical,
-      'comparison': this.writingStyles.analytical,
-      'spotlight': this.writingStyles.storytelling,
-      'explainer': this.writingStyles.conversational,
-      'beginner': this.writingStyles.conversational,
-      'general': this.writingStyles.conversational
-    };
-    
-    return styleMap[articleType] || this.writingStyles.conversational;
-  }
-
-  // Create human-like content with natural flow
-  async createHumanLikeContent(blogIdea, style) {
-    const { title, keywords, products, category, type } = blogIdea;
-    
-    // Generate content with natural storytelling
-    const content = await this.generateNaturalContent(title, keywords, products, category, type, style);
-    
-    // Generate engaging excerpt
-    const excerpt = this.generateEngagingExcerpt(content);
+  // Analyze SEO strategy for the blog idea
+  analyzeSEOStrategy(blogIdea) {
+    const primaryKeywords = this.extractPrimaryKeywords(blogIdea);
+    const secondaryKeywords = this.generateSecondaryKeywords(primaryKeywords);
+    const semanticKeywords = this.generateSemanticKeywords(primaryKeywords);
     
     return {
-      content,
-      excerpt
+      primaryKeywords,
+      secondaryKeywords,
+      semanticKeywords,
+      targetWordCount: this.calculateOptimalWordCount(blogIdea.type),
+      seoTitle: this.generateSEOTitle(blogIdea, primaryKeywords),
+      metaDescription: this.generateMetaDescription(blogIdea, primaryKeywords),
+      slug: this.generateSlug(blogIdea.title, primaryKeywords),
+      internalLinks: this.mapInternalLinks(primaryKeywords),
+      externalReferences: this.mapExternalReferences(primaryKeywords),
+      schemaMarkup: this.generateSchemaMarkup(blogIdea, primaryKeywords)
     };
   }
 
-  // Generate natural, flowing content
-  async generateNaturalContent(title, keywords, products, category, type, style) {
-    const sections = [];
+  // Extract primary keywords with commercial intent
+  extractPrimaryKeywords(blogIdea) {
+    const baseKeywords = blogIdea.keywords || [];
+    const commercialKeywords = [
+      'industrial automation solutions',
+      'measurement systems',
+      'HMI technology',
+      'IoT sensors',
+      'embedded systems',
+      'industrial hardware',
+      'automation equipment',
+      'measurement tools',
+      'industrial technology'
+    ];
     
-    // Hook introduction
-    sections.push(await this.generateHook(title, category, style));
+    // Combine and prioritize commercial keywords
+    return [...new Set([...commercialKeywords, ...baseKeywords])].slice(0, 3);
+  }
+
+  // Generate secondary semantic keywords
+  generateSecondaryKeywords(primaryKeywords) {
+    const semanticMap = {
+      'industrial': ['manufacturing', 'factory', 'production', 'automation'],
+      'automation': ['control', 'monitoring', 'optimization', 'efficiency'],
+      'measurement': ['sensors', 'calibration', 'accuracy', 'precision'],
+      'HMI': ['human machine interface', 'touchscreen', 'control panel', 'operator interface'],
+      'IoT': ['internet of things', 'connected devices', 'smart sensors', 'wireless'],
+      'embedded': ['microcontrollers', 'real-time', 'industrial computing', 'edge devices']
+    };
     
-    // Main content based on type
-    switch (type) {
-      case "trend":
-        sections.push(await this.generateTrendContent(title, keywords, category, style));
-        break;
-      case "how-to":
-        sections.push(await this.generateHowToContent(title, keywords, category, style));
-        break;
-      case "technical":
-        sections.push(await this.generateTechnicalContent(title, keywords, category, style));
-        break;
-      case "comparison":
-        sections.push(await this.generateComparisonContent(title, keywords, products, category, style));
-        break;
-      case "spotlight":
-        sections.push(await this.generateSpotlightContent(title, keywords, products, category, style));
-        break;
-      default:
-        sections.push(await this.generateGeneralContent(title, keywords, category, style));
+    const secondary = [];
+    primaryKeywords.forEach(keyword => {
+      const semantic = semanticMap[keyword.toLowerCase()] || [];
+      secondary.push(...semantic);
+    });
+    
+    return [...new Set(secondary)].slice(0, 8);
+  }
+
+  // Generate semantic LSI keywords
+  generateSemanticKeywords(primaryKeywords) {
+    const lsiKeywords = [
+      'industrial applications', 'best practices', 'implementation guide',
+      'technical specifications', 'industry standards', 'performance metrics',
+      'cost optimization', 'ROI analysis', 'maintenance procedures',
+      'safety compliance', 'quality assurance', 'system integration'
+    ];
+    
+    return lsiKeywords.slice(0, 6);
+  }
+
+  // Calculate optimal word count based on content type
+  calculateOptimalWordCount(type) {
+    const wordCountMap = {
+      'trend': 2200,
+      'technical': 2500,
+      'how-to': 2000,
+      'explainer': 1800,
+      'beginner': 1600,
+      'monthly-update': 1900
+    };
+    
+    return wordCountMap[type] || 2000;
+  }
+
+  // Generate SEO-optimized title (≤60 chars)
+  generateSEOTitle(blogIdea, primaryKeywords) {
+    const baseTitle = blogIdea.title;
+    const primaryKeyword = primaryKeywords[0];
+    
+    // Create click-triggering title with keyword + benefit
+    const benefitPhrases = [
+      'Complete Guide',
+      'Best Practices',
+      'Expert Tips',
+      'Ultimate Guide',
+      'Comprehensive Analysis',
+      'Industry Insights'
+    ];
+    
+    const benefit = benefitPhrases[Math.floor(Math.random() * benefitPhrases.length)];
+    let seoTitle = `${primaryKeyword} ${benefit} ${this.currentYear}`;
+    
+    // Ensure ≤60 characters
+    if (seoTitle.length > 60) {
+      seoTitle = `${primaryKeyword} Guide ${this.currentYear}`;
     }
     
-    // Engaging conclusion
-    sections.push(await this.generateConclusion(title, keywords, category, style));
-    
-    return sections.join('\n\n');
+    return seoTitle;
   }
 
-  // Generate compelling hook
-  async generateHook(title, category, style) {
-    const hooks = {
-      conversational: [
-        `<p>Ever found yourself staring at a ${category} spec sheet, wondering if you're making the right choice? You're not alone. In today's fast-paced industrial world, the decisions we make about ${category} can make or break our projects.</p>`,
-        `<p>Picture this: It's 3 AM, your production line is down, and you're desperately trying to figure out why your ${category} isn't performing as expected. Sound familiar? Let's dive into what's really happening in the world of ${category} technology.</p>`,
-        `<p>${category} technology has evolved dramatically over the past decade. What used to be simple, straightforward decisions have become complex puzzles that require deep understanding and careful consideration.</p>`
-      ],
-      technical: [
-        `<p>The ${category} landscape is undergoing a fundamental transformation, driven by advances in precision engineering and digital integration. Understanding these changes is crucial for maintaining competitive advantage in modern industrial applications.</p>`,
-        `<p>As industrial systems become increasingly sophisticated, the role of ${category} technology has expanded beyond basic functionality to become a critical component in overall system performance and reliability.</p>`
-      ],
-      storytelling: [
-        `<p>Last month, I visited a manufacturing facility that was struggling with ${category} reliability issues. The engineers there were facing the same challenges many of us encounter daily. Their story perfectly illustrates why understanding ${category} technology matters more than ever.</p>`,
-        `<p>There's a quiet revolution happening in ${category} technology, and most people don't even realize it. The changes are subtle but profound, and they're reshaping how we think about industrial automation.</p>`
-      ],
-      analytical: [
-        `<p>Recent market analysis reveals significant shifts in ${category} adoption patterns across industrial sectors. These changes reflect broader technological trends and evolving business requirements that demand our attention.</p>`,
-        `<p>The data is clear: ${category} technology is at a critical inflection point. Industry reports show unprecedented growth in adoption rates, but also reveal concerning gaps in implementation strategies.</p>`
-      ]
-    };
+  // Generate meta description (≤150 chars)
+  generateMetaDescription(blogIdea, primaryKeywords) {
+    const primaryKeyword = primaryKeywords[0];
+    const secondaryKeyword = primaryKeywords[1] || 'industrial technology';
     
-    const availableHooks = hooks[style.name] || hooks.conversational;
-    return availableHooks[Math.floor(Math.random() * availableHooks.length)];
+    let metaDesc = `Discover expert insights on ${primaryKeyword} and ${secondaryKeyword}. Learn best practices, implementation strategies, and industry trends for ${this.currentYear}.`;
+    
+    // Ensure ≤150 characters
+    if (metaDesc.length > 150) {
+      metaDesc = `Expert guide to ${primaryKeyword} and ${secondaryKeyword}. Best practices and trends for ${this.currentYear}.`;
+    }
+    
+    if (metaDesc.length > 150) {
+      metaDesc = `Complete ${primaryKeyword} guide with expert insights and best practices.`;
+    }
+    
+    return metaDesc;
   }
 
-  // Generate trend content with real insights
-  async generateTrendContent(title, keywords, category, style) {
-    const content = [];
+  // Generate SEO-optimized slug (≤60 chars)
+  generateSlug(title, primaryKeywords) {
+    const primaryKeyword = primaryKeywords[0];
+    const cleanKeyword = primaryKeyword.toLowerCase().replace(/\s+/g, '-');
+    const year = this.currentYear;
     
-    // Current state analysis
-    content.push(`<h2>The Current State of ${category} Technology</h2>`);
-    content.push(`<p>Right now, we're seeing a perfect storm of technological advancement in ${category}. Traditional approaches are being challenged by new methodologies, and companies that adapt quickly are gaining significant advantages.</p>`);
+    let slug = `${cleanKeyword}-guide-${year}`;
     
-    // Key trends with real examples
-    content.push(`<h2>Three Game-Changing Trends You Can't Ignore</h2>`);
+    // Ensure ≤60 characters
+    if (slug.length > 60) {
+      slug = `${cleanKeyword}-${year}`;
+    }
     
-    const trends = [
+    return slug;
+  }
+
+  // Map internal links to Outlecta categories
+  mapInternalLinks(primaryKeywords) {
+    const internalLinks = [
       {
-        title: "Smart Integration and IoT Connectivity",
-        description: "The days of standalone ${category} systems are numbered. Modern solutions are increasingly connected, providing real-time data that transforms how we monitor and control industrial processes.",
-        impact: "This connectivity enables predictive maintenance, reduces downtime, and provides insights that were previously impossible to obtain."
+        anchor: 'HMI Solutions',
+        url: '/collections/hmi-solutions',
+        category: 'HMI'
       },
       {
-        title: "Precision and Accuracy at New Levels",
-        description: "We're seeing accuracy improvements that would have seemed impossible just five years ago. New calibration techniques and advanced materials are pushing the boundaries of what's achievable.",
-        impact: "These improvements are particularly crucial in applications where even minor deviations can have significant consequences."
+        anchor: 'IoT Sensors',
+        url: '/collections/iot-sensors',
+        category: 'IoT'
       },
       {
-        title: "Sustainability and Energy Efficiency",
-        description: "Environmental concerns are driving innovation in ${category} design. Manufacturers are developing solutions that not only perform better but also consume less energy and have longer lifespans.",
-        impact: "This shift isn't just about environmental responsibility—it's about operational efficiency and long-term cost savings."
+        anchor: 'Measurement Systems',
+        url: '/collections/measurement-systems',
+        category: 'Measurement'
+      },
+      {
+        anchor: 'Embedded Hardware',
+        url: '/collections/embedded-hardware',
+        category: 'Embedded'
+      },
+      {
+        anchor: 'Industrial Automation',
+        url: '/collections/industrial-automation',
+        category: 'HMI'
       }
     ];
     
-    trends.forEach((trend, index) => {
-      content.push(`<h3>${index + 1}. ${trend.title}</h3>`);
-      content.push(`<p>${trend.description}</p>`);
-      content.push(`<p><strong>Why this matters:</strong> ${trend.impact}</p>`);
-    });
-    
-    // Practical implications
-    content.push(`<h2>What This Means for Your Operations</h2>`);
-    content.push(`<p>Understanding these trends isn't just about staying current—it's about making informed decisions that will impact your operations for years to come. Here's what you need to consider:</p>`);
-    
-        content.push(`<ul>`);
-    content.push(`<li><strong>Integration Planning:</strong> How will your new ${category} solutions integrate with existing systems?</li>`);
-    content.push(`<li><strong>Training Requirements:</strong> What skills will your team need to effectively utilize these new capabilities?</li>`);
-    content.push(`<li><strong>ROI Calculation:</strong> How do you measure the true value of these improvements?</li>`);
-    content.push(`<li><strong>Future-Proofing:</strong> Which solutions will remain relevant as technology continues to evolve?</li>`);
-        content.push(`</ul>`);
-        
-    return content.join('\n');
+    return internalLinks.slice(0, 5);
   }
 
-  // Generate how-to content with practical steps
-  async generateHowToContent(title, keywords, category, style) {
-    const content = [];
-    
-    content.push(`<h2>Understanding Your ${category} Requirements</h2>`);
-    content.push(`<p>Before diving into the technical details, let's take a step back and understand what you're really trying to achieve. The most common mistake I see is jumping straight to specifications without clearly defining the problem you're solving.</p>`);
-    
-    content.push(`<h2>A Practical Approach to ${category} Selection</h2>`);
-    
-    const steps = [
+  // Map external references to trusted authorities
+  mapExternalReferences(primaryKeywords) {
+    const externalRefs = [
       {
-        title: "Define Your Real Requirements",
-        content: "Start by asking the right questions: What are you actually trying to measure or control? What are the environmental conditions? What's your budget range? These answers will guide your entire selection process."
+        anchor: 'IEEE Standards',
+        url: 'https://standards.ieee.org/',
+        authority: 'ieee.org'
       },
       {
-        title: "Research Current Solutions",
-        content: "Don't just look at what's available—understand why certain solutions exist. What problems do they solve? What are their limitations? This context will help you make better decisions."
+        anchor: 'NIST Guidelines',
+        url: 'https://www.nist.gov/',
+        authority: 'nist.gov'
       },
       {
-        title: "Evaluate Total Cost of Ownership",
-        content: "The initial purchase price is just the beginning. Consider installation costs, maintenance requirements, calibration needs, and potential upgrade paths. The cheapest option often becomes the most expensive in the long run."
+        anchor: 'ISO Standards',
+        url: 'https://www.iso.org/',
+        authority: 'iso.org'
       },
       {
-        title: "Plan for Integration",
-        content: "How will your new ${category} fit into your existing systems? Consider compatibility, communication protocols, and the learning curve for your team."
+        anchor: 'ISA Automation',
+        url: 'https://www.isa.org/',
+        authority: 'isa.org'
       }
     ];
     
-    steps.forEach((step, index) => {
-      content.push(`<h3>Step ${index + 1}: ${step.title}</h3>`);
-      content.push(`<p>${step.content}</p>`);
-    });
-    
-    content.push(`<h2>Common Pitfalls to Avoid</h2>`);
-    content.push(`<p>Based on years of experience working with ${category} systems, here are the mistakes I see most often:</p>`);
-    
-    content.push(`<ul>`);
-    content.push(`<li><strong>Over-engineering:</strong> Don't buy more capability than you need. It adds complexity and cost without providing value.</li>`);
-    content.push(`<li><strong>Ignoring environmental factors:</strong> Temperature, humidity, vibration, and other conditions can dramatically affect performance.</li>`);
-    content.push(`<li><strong>Forgetting about maintenance:</strong> Even the best ${category} needs proper care to maintain accuracy and reliability.</li>`);
-    content.push(`<li><strong>Not planning for growth:</strong> Choose solutions that can scale with your needs.</li>`);
-    content.push(`</ul>`);
-    
-    return content.join('\n');
+    return externalRefs.slice(0, 4);
   }
 
-  // Generate technical content with depth
-  async generateTechnicalContent(title, keywords, category, style) {
-    const content = [];
-    
-    content.push(`<h2>The Technical Foundation of ${category} Technology</h2>`);
-    content.push(`<p>To truly understand ${category} systems, we need to dive deep into the underlying principles. This isn't just about specifications—it's about understanding how and why these systems work the way they do.</p>`);
-    
-    content.push(`<h2>Core Principles and Operation</h2>`);
-    content.push(`<p>At their heart, ${category} systems operate on well-established physical principles. Understanding these fundamentals is crucial for proper selection, installation, and troubleshooting.</p>`);
-    
-    content.push(`<h3>Measurement Principles</h3>`);
-    content.push(`<p>The accuracy and reliability of ${category} systems depend on several key factors:</p>`);
-    content.push(`<ul>`);
-    content.push(`<li><strong>Signal Conditioning:</strong> Raw sensor outputs must be properly conditioned for accurate measurement</li>`);
-    content.push(`<li><strong>Calibration:</strong> Regular calibration ensures measurement accuracy over time</li>`);
-    content.push(`<li><strong>Environmental Compensation:</strong> Temperature and other environmental factors must be accounted for</li>`);
-    content.push(`<li><strong>Digital Processing:</strong> Modern systems use sophisticated algorithms for signal processing</li>`);
-    content.push(`</ul>`);
-    
-    content.push(`<h2>Advanced Applications and Considerations</h2>`);
-    content.push(`<p>Modern ${category} technology finds applications across diverse industrial sectors, each with unique requirements and challenges:</p>`);
-    
-    const applications = [
-      {
-        sector: "Manufacturing",
-        use: "Quality control and process optimization",
-        challenges: "High-speed production environments, strict accuracy requirements"
+  // Generate JSON-LD schema markup
+  generateSchemaMarkup(blogIdea, primaryKeywords) {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": blogIdea.title,
+      "description": this.generateMetaDescription(blogIdea, primaryKeywords),
+      "author": {
+        "@type": "Organization",
+        "name": "Outlecta",
+        "url": "https://outlecta.com"
       },
-      {
-        sector: "Automotive",
-        use: "Testing and validation systems",
-        challenges: "Rapid testing cycles, diverse measurement requirements"
-      },
-      {
-        sector: "Aerospace",
-        use: "Structural monitoring and safety systems",
-        challenges: "Extreme environmental conditions, critical safety requirements"
-      },
-      {
-        sector: "Energy",
-        use: "Power generation and distribution monitoring",
-        challenges: "Continuous operation, remote monitoring needs"
-      }
-    ];
-    
-    applications.forEach(app => {
-      content.push(`<h3>${app.sector} Applications</h3>`);
-      content.push(`<p><strong>Primary Use:</strong> ${app.use}</p>`);
-      content.push(`<p><strong>Key Challenges:</strong> ${app.challenges}</p>`);
-    });
-    
-    return content.join('\n');
-  }
-
-  // Generate comparison content with balanced analysis
-  async generateComparisonContent(title, keywords, products, category, style) {
-    const content = [];
-    
-    content.push(`<h2>Navigating the ${category} Landscape</h2>`);
-    content.push(`<p>With so many ${category} options available, making the right choice can feel overwhelming. Let's break down the key differences and help you understand what really matters for your specific application.</p>`);
-    
-    if (products && products.length > 0) {
-      content.push(`<h2>Detailed Product Analysis</h2>`);
-      
-      for (let i = 0; i < Math.min(products.length, 3); i++) {
-        const product = products[i];
-        const productAnalysis = await generateAllContent(product, "");
-        
-        content.push(`<h3>${product}</h3>`);
-        content.push(`<p>Let's examine what makes this ${category} solution stand out:</p>`);
-        
-        if (productAnalysis?.detailedDescription) {
-          content.push(`<p>${productAnalysis.detailedDescription}</p>`);
+      "publisher": {
+        "@type": "Organization",
+        "name": "Outlecta",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://outlecta.com/logo.png"
         }
-        
-        content.push(`<h4>Key Strengths:</h4>`);
-    content.push(`<ul>`);
-        content.push(`<li>High precision measurement capabilities</li>`);
-        content.push(`<li>Robust industrial construction</li>`);
-        content.push(`<li>Wide operating temperature range</li>`);
-        content.push(`<li>Easy system integration</li>`);
-    content.push(`</ul>`);
+      },
+      "datePublished": new Date().toISOString(),
+      "dateModified": new Date().toISOString(),
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://outlecta.com/blogs/news/${this.generateSlug(blogIdea.title, primaryKeywords)}`
+      },
+      "keywords": primaryKeywords.join(', '),
+      "articleSection": "Industrial Technology"
+    };
+    
+    return JSON.stringify(schema, null, 2);
+  }
+
+  // Architect content structure
+  architectContent(blogIdea, seoStrategy) {
+    const outline = this.generateContentOutline(blogIdea, seoStrategy);
+    const sections = this.defineContentSections(outline);
+    
+    return {
+      outline,
+      sections,
+      targetWordCount: seoStrategy.targetWordCount,
+      conversionPoints: this.defineConversionPoints(blogIdea)
+    };
+  }
+
+  // Generate content outline with H2/H3 hierarchy
+  generateContentOutline(blogIdea, seoStrategy) {
+    const primaryKeyword = seoStrategy.primaryKeywords[0];
+    
+    const outline = [
+      {
+        level: 'H2',
+        title: `Understanding ${primaryKeyword} in ${this.currentYear}`,
+        keywords: seoStrategy.primaryKeywords
+      },
+      {
+        level: 'H3',
+        title: 'Key Components and Technologies',
+        keywords: seoStrategy.secondaryKeywords.slice(0, 3)
+      },
+      {
+        level: 'H2',
+        title: 'Industry Trends and Market Analysis',
+        keywords: ['trends', 'market', 'analysis', this.currentYear.toString()]
+      },
+      {
+        level: 'H3',
+        title: 'Emerging Technologies and Innovations',
+        keywords: ['innovation', 'technology', 'future']
+      },
+      {
+        level: 'H2',
+        title: 'Implementation Strategies and Best Practices',
+        keywords: ['implementation', 'best practices', 'strategies']
+      },
+      {
+        level: 'H3',
+        title: 'Technical Specifications and Requirements',
+        keywords: ['technical', 'specifications', 'requirements']
+      },
+      {
+        level: 'H2',
+        title: 'ROI Analysis and Business Impact',
+        keywords: ['ROI', 'business impact', 'cost analysis']
+      },
+      {
+        level: 'H3',
+        title: 'Performance Metrics and KPIs',
+        keywords: ['performance', 'metrics', 'KPIs']
+      },
+      {
+        level: 'H2',
+        title: 'Future Outlook and Recommendations',
+        keywords: ['future', 'recommendations', 'outlook']
       }
-    }
+    ];
     
-    content.push(`<h2>Making an Informed Decision</h2>`);
-    content.push(`<p>When comparing ${category} solutions, focus on these critical factors:</p>`);
-    
-    content.push(`<ul>`);
-    content.push(`<li><strong>Accuracy Requirements:</strong> What level of precision do you actually need?</li>`);
-    content.push(`<li><strong>Environmental Conditions:</strong> Will the system operate in harsh conditions?</li>`);
-    content.push(`<li><strong>Integration Complexity:</strong> How easily will it fit into your existing systems?</li>`);
-    content.push(`<li><strong>Long-term Reliability:</strong> What's the expected lifespan and maintenance requirements?</li>`);
-    content.push(`</ul>`);
-    
-    return content.join('\n');
+    return outline;
   }
 
-  // Generate spotlight content with engaging narrative
-  async generateSpotlightContent(title, keywords, products, category, style) {
-    const content = [];
-    const product = products?.[0];
-    
-    content.push(`<h2>Spotlight: ${product || category} Innovation</h2>`);
-    content.push(`<p>Sometimes a particular ${category} solution deserves special attention. Whether it's breakthrough technology, innovative design, or exceptional performance, these solutions represent the cutting edge of what's possible.</p>`);
-    
-    if (product) {
-      const productAnalysis = await generateAllContent(product, "");
-      
-      content.push(`<h2>What Makes This Solution Special</h2>`);
-      content.push(`<p>The ${product} isn't just another ${category}—it represents a fundamental shift in how we think about ${category} technology. Here's what sets it apart:</p>`);
-      
-      if (productAnalysis?.detailedDescription) {
-        content.push(`<p>${productAnalysis.detailedDescription}</p>`);
-      }
-      
-      content.push(`<h3>Innovation Highlights</h3>`);
-      content.push(`<ul>`);
-      content.push(`<li>Advanced measurement algorithms that improve accuracy</li>`);
-      content.push(`<li>Modular design for easy customization</li>`);
-      content.push(`<li>Enhanced connectivity options for modern industrial networks</li>`);
-      content.push(`<li>Extended calibration intervals for reduced maintenance</li>`);
-      content.push(`</ul>`);
-    }
-    
-    content.push(`<h2>Real-World Impact</h2>`);
-    content.push(`<p>The true value of any ${category} solution lies in its real-world performance. When properly implemented, these systems can transform industrial operations, improving efficiency, reducing costs, and enhancing product quality.</p>`);
-    
-    return content.join('\n');
+  // Define content sections
+  defineContentSections(outline) {
+    return outline.map(section => ({
+      ...section,
+      targetWords: this.calculateSectionWordCount(section.level),
+      keyPoints: this.generateKeyPoints(section),
+      conversionElements: this.defineConversionElements(section)
+    }));
   }
 
-  // Generate general content with broad appeal
-  async generateGeneralContent(title, keywords, category, style) {
-    const content = [];
+  // Calculate word count per section
+  calculateSectionWordCount(level) {
+    const baseWordCount = 2000; // Total target
+    const h2Sections = 4;
+    const h3Sections = 5;
     
-    content.push(`<h2>The Bigger Picture: ${category} in Modern Industry</h2>`);
-    content.push(`<p>${category} technology doesn't exist in isolation—it's part of a larger ecosystem of industrial automation and control. Understanding this broader context helps us make better decisions about individual components.</p>`);
-    
-    content.push(`<h2>Key Components of Successful ${category} Implementation</h2>`);
-    content.push(`<p>Success in ${category} applications requires more than just choosing the right hardware. It's about creating a complete system that works together seamlessly:</p>`);
-    
-    content.push(`<ul>`);
-    content.push(`<li><strong>Proper Selection:</strong> Matching specifications to actual requirements</li>`);
-    content.push(`<li><strong>Correct Installation:</strong> Following manufacturer guidelines and best practices</li>`);
-    content.push(`<li><strong>Regular Maintenance:</strong> Scheduled calibration and preventive maintenance</li>`);
-    content.push(`<li><strong>Operator Training:</strong> Ensuring your team knows how to use the system effectively</li>`);
-    content.push(`<li><strong>Continuous Monitoring:</strong> Tracking performance and identifying issues early</li>`);
-    content.push(`</ul>`);
-    
-    content.push(`<h2>Looking Ahead: The Future of ${category}</h2>`);
-    content.push(`<p>As industrial technology continues to evolve, ${category} systems will become even more sophisticated and integrated. Staying informed about these developments helps ensure your operations remain competitive and efficient.</p>`);
-    
-    return content.join('\n');
-  }
-
-  // Generate engaging conclusion
-  async generateConclusion(title, keywords, category, style) {
-    const conclusions = {
-      conversational: [
-        `<h2>Wrapping Up: Your Next Steps</h2><p>The world of ${category} technology is complex, but it doesn't have to be overwhelming. Start with what you know, ask the right questions, and don't be afraid to seek expert advice when you need it. The decisions you make today will impact your operations for years to come.</p>`,
-        `<h2>Final Thoughts</h2><p>Remember, the best ${category} solution isn't always the most expensive or the most feature-rich—it's the one that solves your specific problem effectively and reliably. Take your time, do your research, and choose wisely.</p>`
-      ],
-      technical: [
-        `<h2>Conclusion: Technical Excellence in Practice</h2><p>Understanding ${category} technology requires both theoretical knowledge and practical experience. The principles we've discussed provide a foundation for making informed decisions that will serve your operations well into the future.</p>`,
-        `<h2>Moving Forward</h2><p>As you implement ${category} solutions in your operations, remember that technology is a tool—its value comes from how effectively you use it to achieve your goals.</p>`
-      ],
-      storytelling: [
-        `<h2>The Story Continues</h2><p>Every ${category} installation tells a story—of challenges overcome, problems solved, and efficiency gained. Your story is just beginning, and the choices you make now will shape how it unfolds.</p>`,
-        `<h2>Your Journey Ahead</h2><p>The path to optimal ${category} performance is unique for every organization. Use the insights from this guide as a starting point, but don't be afraid to adapt and innovate based on your specific needs.</p>`
-      ],
-      analytical: [
-        `<h2>Data-Driven Decisions</h2><p>The analysis presented here provides a framework for evaluating ${category} options systematically. Use this approach to ensure your decisions are based on facts rather than assumptions.</p>`,
-        `<h2>Strategic Implementation</h2><p>Successful ${category} implementation requires both strategic planning and tactical execution. The insights provided here should guide your planning process and help you avoid common pitfalls.</p>`
-      ]
-    };
-    
-    const availableConclusions = conclusions[style.name] || conclusions.conversational;
-    return availableConclusions[Math.floor(Math.random() * availableConclusions.length)];
-  }
-
-  // Generate engaging excerpt
-  generateEngagingExcerpt(content) {
-    const cleanContent = content.replace(/<[^>]*>/g, '');
-    const sentences = cleanContent.split(/[.!?]+/).filter(s => s.trim().length > 20);
-    
-    if (sentences.length >= 2) {
-      return sentences.slice(0, 2).join('. ') + '.';
-    } else if (sentences.length >= 1) {
-      return sentences[0].substring(0, 200) + (sentences[0].length > 200 ? '...' : '');
-    }
-    
-    return cleanContent.substring(0, 200) + (cleanContent.length > 200 ? '...' : '');
-  }
-
-  // Writing style definitions
-  getConversationalStyle() {
-    return {
-      name: 'conversational',
-      characteristics: ['personal pronouns', 'questions', 'real examples', 'casual tone']
-    };
-  }
-
-  getTechnicalStyle() {
-    return {
-      name: 'technical',
-      characteristics: ['precise language', 'detailed explanations', 'professional tone', 'data-driven']
-    };
-  }
-
-  getStorytellingStyle() {
-    return {
-      name: 'storytelling',
-      characteristics: ['narrative flow', 'real scenarios', 'emotional connection', 'progressive revelation']
-    };
-  }
-
-  getAnalyticalStyle() {
-    return {
-      name: 'analytical',
-      characteristics: ['data-focused', 'comparative analysis', 'logical structure', 'evidence-based']
-    };
-  }
-
-  // Utility methods
-  generateSEOTitle(title) {
-    return title.length > 60 ? title.substring(0, 57) + '...' : title;
-  }
-
-  generateMetaDescription(excerpt, keywords) {
-    // Create clean, compelling meta description (150 chars optimal)
-    const cleanExcerpt = excerpt.replace(/[^\w\s.,!?-]/g, '').trim();
-    
-    // Use excerpt as base, add main keyword naturally
-    const mainKeyword = keywords[0];
-    let metaDesc;
-    
-    if (cleanExcerpt.length < 120) {
-      // Short excerpt - add context
-      metaDesc = `${cleanExcerpt} Expert insights on ${mainKeyword} solutions for industrial applications. Read more at Outlecta.`;
+    if (level === 'H2') {
+      return Math.floor(baseWordCount / (h2Sections + h3Sections * 0.6));
     } else {
-      // Long excerpt - trim and add keyword if missing
-      const trimmedExcerpt = cleanExcerpt.substring(0, 140);
-      if (!trimmedExcerpt.toLowerCase().includes(mainKeyword.toLowerCase())) {
-        metaDesc = `${trimmedExcerpt.substring(0, 120)} Learn about ${mainKeyword} solutions.`;
-      } else {
-        metaDesc = trimmedExcerpt + '...';
+      return Math.floor(baseWordCount / (h2Sections + h3Sections * 0.6) * 0.6);
+    }
+  }
+
+  // Generate key points for each section
+  generateKeyPoints(section) {
+    const keyPointsMap = {
+      'Understanding': ['Definition and scope', 'Industry applications', 'Technical requirements'],
+      'Key Components': ['Core technologies', 'Integration methods', 'Performance factors'],
+      'Industry Trends': ['Market drivers', 'Technology evolution', 'Competitive landscape'],
+      'Implementation': ['Planning phase', 'Execution strategy', 'Quality assurance'],
+      'ROI Analysis': ['Cost considerations', 'Benefit calculation', 'Payback period'],
+      'Future Outlook': ['Technology roadmap', 'Market predictions', 'Strategic recommendations']
+    };
+    
+    const sectionType = Object.keys(keyPointsMap).find(key => 
+      section.title.includes(key)
+    );
+    
+    return keyPointsMap[sectionType] || ['Key point 1', 'Key point 2', 'Key point 3'];
+  }
+
+  // Define conversion elements
+  defineConversionElements(section) {
+    return {
+      ctaType: this.determineCTAType(section),
+      productLinks: this.mapProductLinks(section),
+      trustSignals: this.generateTrustSignals(section)
+    };
+  }
+
+  // Determine CTA type based on section
+  determineCTAType(section) {
+    if (section.title.includes('Implementation') || section.title.includes('Best Practices')) {
+      return 'product_recommendation';
+    } else if (section.title.includes('ROI') || section.title.includes('Business Impact')) {
+      return 'consultation_request';
+    } else {
+      return 'learn_more';
+    }
+  }
+
+  // Map product links to sections
+  mapProductLinks(section) {
+    const productMap = {
+      'HMI': '/collections/hmi-solutions',
+      'IoT': '/collections/iot-sensors', 
+      'Measurement': '/collections/measurement-systems',
+      'Embedded': '/collections/embedded-hardware'
+    };
+    
+    const category = this.outlectaCategories.find(cat => 
+      section.title.includes(cat) || section.keywords.some(k => k.includes(cat))
+    );
+    
+    return category ? productMap[category] : '/collections/industrial-automation';
+  }
+
+  // Generate trust signals
+  generateTrustSignals(trustSignals) {
+    // Ensure trustSignals is an array
+    const signals = Array.isArray(trustSignals) ? trustSignals : [
+      'ISO 9001 Certified',
+      'Industry Leading Quality',
+      'Expert Technical Support',
+      'Proven Track Record'
+    ];
+    
+    return `
+<div class="trust-signals">
+<p><strong>Why Choose Outlecta:</strong></p>
+<ul>
+${signals.map(signal => `<li>${signal}</li>`).join('\n')}
+</ul>
+</div>
+`;
+  }
+
+  // Define conversion points
+  defineConversionPoints(blogIdea) {
+    return [
+      {
+        position: 'intro',
+        type: 'value_proposition',
+        content: 'Expert insights and proven solutions'
+      },
+      {
+        position: 'mid_content',
+        type: 'product_showcase',
+        content: 'Related industrial solutions'
+      },
+      {
+        position: 'conclusion',
+        type: 'strong_cta',
+        content: 'Get expert consultation and solutions'
+      }
+    ];
+  }
+
+  // Generate supreme content
+  async generateSupremeContent(blogIdea, contentStructure) {
+    const { outline, sections, targetWordCount, conversionPoints } = contentStructure;
+    
+    // Generate introduction with hook
+    const introduction = this.generateIntroduction(blogIdea, conversionPoints[0]);
+    
+    // Generate main content sections
+    const mainContent = await this.generateMainContent(sections, conversionPoints[1]);
+    
+    // Generate conclusion with strong CTA
+    const conclusion = this.generateConclusion(blogIdea, conversionPoints[2]);
+    
+    // Combine all content
+    const fullContent = introduction + mainContent + conclusion;
+    
+    // Ensure target word count
+    const finalContent = this.adjustWordCount(fullContent, targetWordCount);
+    
+    return {
+      content: finalContent,
+      wordCount: this.countWords(finalContent),
+      sections: sections,
+      outline: outline
+    };
+  }
+
+  // Generate compelling introduction (100-150 words)
+  generateIntroduction(blogIdea, conversionPoint) {
+    const primaryKeyword = blogIdea.keywords[0];
+    const painPoint = this.identifyPainPoint(blogIdea.type);
+    const roiPromise = this.generateROIPromise(blogIdea.type);
+    
+    const intro = `
+<h2>${blogIdea.title}</h2>
+
+<p>In today's rapidly evolving industrial landscape, ${painPoint}. As ${this.currentYear} unfolds, organizations face unprecedented challenges in optimizing their ${primaryKeyword} strategies while maintaining competitive advantage and operational excellence.</p>
+
+<p>This comprehensive guide delivers expert insights, proven methodologies, and actionable strategies that will transform your approach to ${primaryKeyword}. Whether you're implementing new systems or optimizing existing infrastructure, the insights shared here will help you achieve measurable improvements in efficiency, accuracy, and ROI.</p>
+
+<p>${roiPromise} By understanding the latest trends, technologies, and best practices, you'll be equipped to make informed decisions that drive sustainable growth and operational excellence.</p>
+`;
+    
+    return intro;
+  }
+
+  // Identify pain point based on content type
+  identifyPainPoint(type) {
+    const painPoints = {
+      'trend': 'staying ahead of technological advancements requires strategic foresight and expert knowledge',
+      'technical': 'complex technical requirements demand specialized expertise and proven solutions',
+      'how-to': 'implementation challenges often lead to costly delays and suboptimal performance',
+      'explainer': 'lack of understanding can result in poor decision-making and missed opportunities',
+      'beginner': 'getting started without proper guidance can lead to costly mistakes and inefficiencies',
+      'monthly-update': 'keeping pace with industry changes requires continuous learning and adaptation'
+    };
+    
+    return painPoints[type] || 'achieving optimal performance requires expert knowledge and proven strategies';
+  }
+
+  // Generate ROI promise
+  generateROIPromise(type) {
+    const promises = {
+      'trend': 'You can expect 20-40% improvements in operational efficiency and 15-25% reduction in implementation costs',
+      'technical': 'Proper implementation can deliver 30-50% performance improvements and 25-35% cost savings',
+      'how-to': 'Following these best practices can reduce implementation time by 40-60% and improve success rates by 80%',
+      'explainer': 'Understanding these principles can prevent costly mistakes and accelerate decision-making by 50-70%',
+      'beginner': 'Starting with the right foundation can save 60-80% in rework costs and accelerate time-to-value by 3-6 months',
+      'monthly-update': 'Staying current with trends can provide 25-45% competitive advantage and 20-30% faster market response'
+    };
+    
+    return promises[type] || 'You can achieve significant improvements in efficiency, accuracy, and cost-effectiveness';
+  }
+
+  // Generate main content sections
+  async generateMainContent(sections, conversionPoint) {
+    let mainContent = '';
+    
+    for (const section of sections) {
+      const sectionContent = await this.generateSectionContent(section, conversionPoint);
+      mainContent += sectionContent;
+    }
+    
+    return mainContent;
+  }
+
+  // Generate individual section content
+  async generateSectionContent(section, conversionPoint) {
+    const { level, title, keywords, targetWords, keyPoints, conversionElements } = section;
+    
+    let content = `\n<${level.toLowerCase()}>${title}</${level.toLowerCase()}>\n\n`;
+    
+    // Generate content for each key point
+    for (const point of keyPoints) {
+      const pointContent = await this.generateKeyPointContent(point, keywords, targetWords / keyPoints.length);
+      content += pointContent;
+    }
+    
+    // Add conversion elements
+    if (conversionElements.ctaType === 'product_recommendation') {
+      content += this.generateProductCTA(conversionElements);
+    }
+    
+    // Add trust signals
+    content += this.generateTrustSignals(conversionElements.trustSignals);
+    
+    return content;
+  }
+
+  // Generate content for individual key points
+  async generateKeyPointContent(point, keywords, targetWords) {
+    const primaryKeyword = keywords[0];
+    const secondaryKeyword = keywords[1] || 'industrial technology';
+    
+    const content = `
+<p><strong>${point}:</strong> ${primaryKeyword} represents a fundamental shift in how organizations approach ${secondaryKeyword}. The integration of advanced technologies and proven methodologies creates a robust foundation for operational excellence.</p>
+
+<p>Key considerations include:</p>
+<ul>
+<li>Technical specifications and compatibility requirements</li>
+<li>Integration with existing infrastructure and systems</li>
+<li>Performance metrics and quality assurance protocols</li>
+<li>Maintenance procedures and lifecycle management</li>
+<li>Cost optimization and ROI analysis</li>
+</ul>
+
+<p>Industry experts recommend conducting thorough assessments of current capabilities and future requirements before implementation. This ensures optimal performance and maximum return on investment.</p>
+`;
+    
+    return content;
+  }
+
+  // Generate product CTA
+  generateProductCTA(conversionElements) {
+    return `
+<div class="product-recommendation">
+<p><strong>Recommended Solution:</strong> Explore our comprehensive range of ${conversionElements.productLinks.includes('hmi') ? 'HMI solutions' : 'industrial automation products'} designed to meet your specific requirements. Our expert team can provide customized recommendations based on your unique needs.</p>
+<p><a href="${conversionElements.productLinks}" class="cta-button">View Solutions</a></p>
+</div>
+`;
+  }
+
+  // Generate trust signals
+  generateTrustSignals(trustSignals) {
+    // Ensure trustSignals is an array
+    const signals = Array.isArray(trustSignals) ? trustSignals : [
+      'ISO 9001 Certified',
+      'Industry Leading Quality',
+      'Expert Technical Support',
+      'Proven Track Record'
+    ];
+    
+    return `
+<div class="trust-signals">
+<p><strong>Why Choose Outlecta:</strong></p>
+<ul>
+${signals.map(signal => `<li>${signal}</li>`).join('\n')}
+</ul>
+</div>
+`;
+  }
+
+  // Generate conclusion with strong CTA
+  generateConclusion(blogIdea, conversionPoint) {
+    const primaryKeyword = blogIdea.keywords[0];
+    
+    const conclusion = `
+<h2>Conclusion and Next Steps</h2>
+
+<p>${primaryKeyword} continues to evolve rapidly, presenting both challenges and opportunities for industrial organizations. By implementing the strategies and best practices outlined in this guide, you can position your organization for success in an increasingly competitive landscape.</p>
+
+<p>The key to success lies in choosing the right solutions and working with experienced partners who understand your unique requirements. Outlecta's comprehensive range of industrial automation solutions, backed by expert technical support and proven track record, can help you achieve your goals.</p>
+
+<div class="strong-cta">
+<p><strong>Ready to transform your ${primaryKeyword} strategy?</strong></p>
+<p>Contact our expert team today for personalized consultation and customized solutions that drive measurable results.</p>
+<p><a href="/pages/contact" class="cta-button-primary">Get Expert Consultation</a> | <a href="/collections/industrial-automation" class="cta-button-secondary">Explore Solutions</a></p>
+</div>
+`;
+    
+    return conclusion;
+  }
+
+  // Adjust word count to target
+  adjustWordCount(content, targetWordCount) {
+    const currentWords = this.countWords(content);
+    
+    if (currentWords >= targetWordCount * 0.9 && currentWords <= targetWordCount * 1.1) {
+      return content; // Within acceptable range
+    }
+    
+    if (currentWords < targetWordCount) {
+      // Add more content
+      const additionalContent = this.generateAdditionalContent(targetWordCount - currentWords);
+      return content + additionalContent;
+    } else {
+      // Trim content
+      return this.trimContent(content, targetWordCount);
+    }
+  }
+
+  // Generate additional content
+  generateAdditionalContent(neededWords) {
+    const additionalSections = [
+      {
+        title: 'Additional Considerations',
+        content: `
+<h3>Additional Considerations</h3>
+<p>When implementing industrial automation solutions, several additional factors should be considered to ensure optimal performance and long-term success. These include regulatory compliance, safety requirements, and scalability considerations.</p>
+<p>Organizations must also evaluate their internal capabilities and determine whether additional training or external support is required. This comprehensive approach ensures successful implementation and maximum return on investment.</p>
+`
+      },
+      {
+        title: 'Performance Optimization',
+        content: `
+<h3>Performance Optimization Strategies</h3>
+<p>Optimizing performance requires continuous monitoring and adjustment of system parameters. Regular maintenance and calibration ensure consistent operation and prevent costly downtime.</p>
+<p>Advanced analytics and predictive maintenance technologies can further enhance performance and reduce operational costs. These tools provide valuable insights into system behavior and enable proactive maintenance strategies.</p>
+`
+      }
+    ];
+    
+    let additionalContent = '';
+    for (const section of additionalSections) {
+      if (this.countWords(additionalContent) < neededWords) {
+        additionalContent += section.content;
       }
     }
     
-    // Ensure optimal length (150-155 characters)
-    return metaDesc.length > 155 ? metaDesc.substring(0, 152) + '...' : metaDesc;
+    return additionalContent;
   }
 
-  generateTags(keywords, category) {
-    const tags = [...keywords.slice(0, 5), category, 'industrial', 'outlecta'];
-    return [...new Set(tags)];
+  // Trim content to target word count
+  trimContent(content, targetWordCount) {
+    const paragraphs = content.split('</p>');
+    let trimmedContent = '';
+    let wordCount = 0;
+    
+    for (const paragraph of paragraphs) {
+      const paragraphWords = this.countWords(paragraph);
+      if (wordCount + paragraphWords <= targetWordCount) {
+        trimmedContent += paragraph + '</p>';
+        wordCount += paragraphWords;
+      } else {
+        break;
+      }
+    }
+    
+    return trimmedContent;
   }
 
-  countWords(content) {
-    const cleanContent = content.replace(/<[^>]*>/g, '');
-    return cleanContent.split(/\s+/).length;
+  // Count words in text
+  countWords(text) {
+    return text.replace(/<[^>]*>/g, '').split(/\s+/).filter(word => word.length > 0).length;
   }
 
+  // Optimize content for SEO
+  optimizeForSEO(article, seoStrategy) {
+    const { primaryKeywords, secondaryKeywords, semanticKeywords } = seoStrategy;
+    
+    // Optimize keyword density
+    let optimizedContent = this.optimizeKeywordDensity(article.content, primaryKeywords, secondaryKeywords);
+    
+    // Add semantic keywords naturally
+    optimizedContent = this.integrateSemanticKeywords(optimizedContent, semanticKeywords);
+    
+    // Optimize internal linking
+    optimizedContent = this.optimizeInternalLinking(optimizedContent, seoStrategy.internalLinks);
+    
+    // Add external references
+    optimizedContent = this.addExternalReferences(optimizedContent, seoStrategy.externalReferences);
+    
+    return {
+      ...article,
+      content: optimizedContent,
+      seoOptimized: true
+    };
+  }
+
+  // Optimize keyword density
+  optimizeKeywordDensity(content, primaryKeywords, secondaryKeywords) {
+    let optimizedContent = content;
+    
+    // Ensure primary keywords appear naturally
+    primaryKeywords.forEach(keyword => {
+      const keywordRegex = new RegExp(keyword, 'gi');
+      const matches = optimizedContent.match(keywordRegex);
+      const targetDensity = 0.02; // 2% density
+      const currentDensity = matches ? matches.length / this.countWords(optimizedContent) : 0;
+      
+      if (currentDensity < targetDensity) {
+        // Add keyword naturally in context
+        optimizedContent = this.addKeywordNaturally(optimizedContent, keyword);
+      }
+    });
+    
+    return optimizedContent;
+  }
+
+  // Add keyword naturally
+  addKeywordNaturally(content, keyword) {
+    const sentences = content.split('.');
+    const keywordVariations = [
+      keyword,
+      keyword.replace(/\s+/g, ' '),
+      keyword.toLowerCase(),
+      keyword.replace(/\b\w/g, l => l.toUpperCase())
+    ];
+    
+    for (let i = 0; i < sentences.length; i++) {
+      const sentence = sentences[i];
+      const hasKeyword = keywordVariations.some(variation => 
+        sentence.toLowerCase().includes(variation.toLowerCase())
+      );
+      
+      if (!hasKeyword && sentence.length > 50) {
+        // Add keyword naturally to sentence
+        const words = sentence.split(' ');
+        const insertIndex = Math.floor(words.length / 2);
+        words.splice(insertIndex, 0, keyword);
+        sentences[i] = words.join(' ');
+        break;
+      }
+    }
+    
+    return sentences.join('.');
+  }
+
+  // Integrate semantic keywords
+  integrateSemanticKeywords(content, semanticKeywords) {
+    let optimizedContent = content;
+    
+    semanticKeywords.forEach(keyword => {
+      if (!optimizedContent.toLowerCase().includes(keyword.toLowerCase())) {
+        // Add semantic keyword in context
+        optimizedContent = this.addSemanticKeyword(optimizedContent, keyword);
+      }
+    });
+    
+    return optimizedContent;
+  }
+
+  // Add semantic keyword
+  addSemanticKeyword(content, keyword) {
+    const contextMap = {
+      'best practices': 'following industry best practices ensures optimal performance',
+      'implementation': 'proper implementation requires careful planning and execution',
+      'technical specifications': 'understanding technical specifications is crucial for success',
+      'industry standards': 'compliance with industry standards ensures quality and reliability',
+      'performance metrics': 'monitoring performance metrics provides valuable insights',
+      'cost optimization': 'cost optimization strategies help maximize return on investment'
+    };
+    
+    const context = contextMap[keyword] || `considering ${keyword} is essential for success`;
+    
+    // Add context sentence
+    const paragraphs = content.split('</p>');
+    const insertIndex = Math.floor(paragraphs.length / 2);
+    paragraphs.splice(insertIndex, 0, `<p>${context}.</p>`);
+    
+    return paragraphs.join('</p>');
+  }
+
+  // Optimize internal linking
+  optimizeInternalLinking(content, internalLinks) {
+    let optimizedContent = content;
+    
+    internalLinks.forEach(link => {
+      const linkRegex = new RegExp(link.anchor, 'gi');
+      if (optimizedContent.match(linkRegex)) {
+        optimizedContent = optimizedContent.replace(
+          linkRegex,
+          `<a href="${link.url}">${link.anchor}</a>`
+        );
+      }
+    });
+    
+    return optimizedContent;
+  }
+
+  // Add external references
+  addExternalReferences(content, externalReferences) {
+    let optimizedContent = content;
+    
+    // Add reference section
+    const referenceSection = `
+<h3>References and Further Reading</h3>
+<p>For more information on industrial automation and technology standards, consult these authoritative sources:</p>
+<ul>
+${externalReferences.map(ref => `<li><a href="${ref.url}" target="_blank" rel="noopener">${ref.anchor}</a></li>`).join('\n')}
+</ul>
+`;
+    
+    // Insert before conclusion
+    const conclusionIndex = optimizedContent.lastIndexOf('<h2>Conclusion');
+    if (conclusionIndex !== -1) {
+      optimizedContent = optimizedContent.slice(0, conclusionIndex) + 
+                        referenceSection + 
+                        optimizedContent.slice(conclusionIndex);
+    } else {
+      optimizedContent += referenceSection;
+    }
+    
+    return optimizedContent;
+  }
+
+  // Calculate quality metrics
+  calculateQualityMetrics(article) {
+    const wordCount = this.countWords(article.content);
+    const readabilityScore = this.calculateReadability(article.content);
+    const engagementScore = this.calculateEngagement(article.content);
+    const seoScore = this.calculateSEOScore(article);
+    
+    return {
+      wordCount,
+      readabilityScore,
+      engagementScore,
+      seoScore,
+      overallScore: Math.round((readabilityScore + engagementScore + seoScore) / 3)
+    };
+  }
+
+  // Calculate readability score
   calculateReadability(content) {
-    const cleanContent = content.replace(/<[^>]*>/g, '');
-    const sentences = cleanContent.split(/[.!?]+/).length;
-    const words = cleanContent.split(/\s+/).length;
-    const avgWordsPerSentence = words / sentences;
+    const sentences = content.split(/[.!?]+/).filter(s => s.trim().length > 0);
+    const words = content.split(/\s+/).filter(w => w.length > 0);
+    const syllables = this.countSyllables(content);
     
-    // Flesch Reading Ease approximation
-    let score = 100;
-    if (avgWordsPerSentence > 20) score -= 20;
-    if (avgWordsPerSentence > 25) score -= 20;
-    if (avgWordsPerSentence < 10) score += 10;
+    if (sentences.length === 0 || words.length === 0) {
+      return 50; // Default score
+    }
     
-    return Math.max(0, Math.min(100, score));
+    const avgSentenceLength = words.length / sentences.length;
+    const avgSyllablesPerWord = syllables / words.length;
+    
+    // Flesch Reading Ease formula
+    const fleschScore = 206.835 - (1.015 * avgSentenceLength) - (84.6 * avgSyllablesPerWord);
+    
+    // Convert to 0-100 scale
+    return Math.max(0, Math.min(100, Math.round(fleschScore)));
   }
 
+  // Count syllables
+  countSyllables(text) {
+    const words = text.toLowerCase().split(/\s+/);
+    let syllableCount = 0;
+    
+    words.forEach(word => {
+      word = word.replace(/[^a-z]/g, '');
+      if (word.length <= 3) {
+        syllableCount += 1;
+      } else {
+        const matches = word.match(/[aeiouy]+/g);
+        syllableCount += matches ? matches.length : 1;
+      }
+    });
+    
+    return syllableCount;
+  }
+
+  // Calculate engagement score
   calculateEngagement(content) {
-    let score = 70; // Base score
+    let score = 50; // Base score
     
-    // Engagement factors
-    if (content.includes('?')) score += 10; // Questions
-    if (content.includes('!')) score += 5;  // Exclamations
-    if (content.includes('you')) score += 10; // Direct address
-    if (content.includes('we')) score += 5;   // Inclusive language
-    if (content.includes('story') || content.includes('example')) score += 10; // Stories/examples
+    // Check for engaging elements
+    if (content.includes('<strong>')) score += 10;
+    if (content.includes('<ul>')) score += 10;
+    if (content.includes('<h2>')) score += 10;
+    if (content.includes('<h3>')) score += 10;
+    if (content.includes('cta-button')) score += 10;
+    if (content.includes('trust-signals')) score += 10;
+    if (content.includes('product-recommendation')) score += 10;
     
-    return Math.max(0, Math.min(100, score));
+    return Math.min(100, score);
   }
 
-  // Lightweight SVG thumbnail generator
-  generateThumbnail(blogIdea) {
-    const title = blogIdea.title.length > 48 ? blogIdea.title.slice(0, 45) + '...' : blogIdea.title;
-    const subtitle = (blogIdea.category || blogIdea.type || 'Industrial').toUpperCase();
-    const bg = '#0b1f3a';
-    const accent = '#2bb673';
-    const svg = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs>
-    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="${bg}"/>
-      <stop offset="100%" stop-color="#10264a"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="url(#g)"/>
-  <circle cx="1100" cy="-50" r="300" fill="${accent}" opacity="0.12"/>
-  <circle cx="-50" cy="580" r="220" fill="${accent}" opacity="0.1"/>
-  <text x="60" y="130" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#9fb3c8" letter-spacing="2">OUTLECTA • INDUSTRIAL INSIGHTS</text>
-  <text x="60" y="230" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="56" fill="#ffffff">${this.escapeXml(title)}</text>
-  <rect x="60" y="270" width="480" height="6" rx="3" fill="${accent}"/>
-  <text x="60" y="330" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#cfe6da">${this.escapeXml(subtitle)}</text>
-  <g opacity="0.2">
-    <rect x="800" y="340" width="320" height="180" rx="12" fill="#2c3e50"/>
-    <rect x="820" y="360" width="120" height="12" rx="6" fill="#6aa896"/>
-    <rect x="820" y="390" width="260" height="8" rx="4" fill="#6aa896"/>
-    <rect x="820" y="410" width="240" height="8" rx="4" fill="#6aa896"/>
-    <rect x="820" y="430" width="200" height="8" rx="4" fill="#6aa896"/>
-  </g>
-</svg>`;
-    const base64 = Buffer.from(svg, 'utf8').toString('base64');
-    const alt = `${blogIdea.title} – Outlecta Industrial Insights thumbnail`;
-    return { imageBase64: base64, alt };
+  // Calculate SEO score
+  calculateSEOScore(article) {
+    let score = 50; // Base score
+    
+    // Check SEO elements
+    if (article.wordCount >= 1800) score += 10;
+    if (article.content.includes('<h2>')) score += 10;
+    if (article.content.includes('<h3>')) score += 10;
+    if (article.content.includes('<a href=')) score += 10;
+    if (article.content.includes('<strong>')) score += 10;
+    if (article.seoTitle && article.seoTitle.length <= 60) score += 10;
+    if (article.metaDescription && article.metaDescription.length <= 150) score += 10;
+    
+    return Math.min(100, score);
   }
 
-  escapeXml(str) {
-    return String(str).replace(/[<>&"']/g, (c) => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;','\'':'&apos;'}[c]));
+  // Generate excerpt from content
+  generateExcerpt(content) {
+    // Remove HTML tags and get first 200 characters
+    const plainText = content.replace(/<[^>]*>/g, '');
+    const excerpt = plainText.substring(0, 200).trim();
+    
+    // Add ellipsis if truncated
+    return excerpt.length === 200 ? excerpt + '...' : excerpt;
+  }
+
+  // Generate meta description
+  generateMetaDescription(blogIdea, primaryKeywords) {
+    const primaryKeyword = primaryKeywords[0];
+    const secondaryKeyword = primaryKeywords[1] || 'industrial technology';
+    
+    let metaDesc = `Expert guide to ${primaryKeyword} and ${secondaryKeyword}. Learn best practices, implementation strategies, and industry trends for ${this.currentYear}.`;
+    
+    // Ensure ≤150 characters
+    if (metaDesc.length > 150) {
+      metaDesc = `Complete ${primaryKeyword} guide with expert insights and best practices.`;
+    }
+    
+    return metaDesc;
   }
 }
 

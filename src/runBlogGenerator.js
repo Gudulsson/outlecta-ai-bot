@@ -37,9 +37,12 @@ class BlogRunner {
       // Step 3: Generate article
       console.log("\n📝 Step 3: Generating blog article...");
       const article = await this.generator.generateBlogArticle(bestIdea);
-      console.log(`✅ Generated article: ${article.title}`);
-      console.log(`📊 Word count: ${article.wordCount} words`);
-      console.log(`🏷️ Tags: ${article.tags.join(', ')}`);
+      console.log(`✅ Generated article: ${article.title || 'Supreme SEO Article'}`);
+      console.log(`📊 Word count: ${article.wordCount || article.qualityMetrics?.wordCount || 0} words`);
+      console.log(`🏷️ Tags: ${(article.tags || []).join(', ')}`);
+      console.log(`🎯 Quality Score: ${article.qualityMetrics?.overallScore || 'Calculating...'}/100`);
+      console.log(`📖 Readability: ${article.qualityMetrics?.readabilityScore || 'N/A'}/100`);
+      console.log(`🔗 SEO Score: ${article.qualityMetrics?.seoScore || 'N/A'}/100`);
       
       // Step 4: Save article
       console.log("\n💾 Step 4: Saving article...");
@@ -134,7 +137,7 @@ class BlogRunner {
     
     try {
       await this.scheduler.initialize();
-      const result = await this.scheduler.runWeeklyBlogGeneration();
+      const result = await this.scheduler.runBiWeeklyBlogGeneration();
       
       if (result) {
         console.log(`✅ Weekly blog generated: ${result.title}`);

@@ -9,7 +9,9 @@
     "blog:force": "node src/runBlogGenerator.js force",
     "blog:stats": "node src/runBlogGenerator.js stats",
     "blog:publish": "node src/runBlogGenerator.js publish",
-    "blog:scheduled": "node src/runBlogGenerator.js scheduled",
+    "blog:scheduled": "node src/runBlogGenerator.js weekly",
+    "schedule:local": "node schedule-local.js",
+    "schedule:continuous": "node schedule-local.js --continuous",
     "start": "node src/runBlogGenerator.js complete"
   },
   "dependencies": {

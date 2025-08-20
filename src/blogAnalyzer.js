@@ -308,79 +308,74 @@ class BlogAnalyzer {
         
         // Check if same category and similar title
         const sameCategory = published.category === idea.category;
-        const similarTitle = published.title && 
-          (published.title.includes(idea.keywords[0]) || 
-           idea.title.includes(published.keywords?.[0] || ''));
+        const similarTitle = published.title && (
+          published.title.includes(idea.title.split(' ')[0]) || 
+          idea.title.includes(published.title.split(' ')[0])
+        );
         
+        // More strict duplicate detection
         return keywordOverlap >= 2 || (sameCategory && similarTitle);
       });
     });
     
-    // If no available ideas, generate some fallback ideas
     if (availableIdeas.length === 0) {
+      // Generate fallback ideas if all are used
       console.log("⚠️ All blog ideas have been used, generating fallback ideas...");
-      return this.generateFallbackIdea(blogHistory);
+      return this.generateFallbackIdea();
     }
     
-    // Try to find the best available idea
-    for (const type of preferenceOrder) {
-      const candidates = availableIdeas.filter(idea => idea.type === type)
-        .sort((a, b) => (a.priority === 'high' ? -1 : 1));
-      if (candidates.length > 0) return candidates[0];
-    }
+    // Sort by preference order and priority
+    const sortedIdeas = availableIdeas.sort((a, b) => {
+      const aPreference = preferenceOrder.indexOf(a.type);
+      const bPreference = preferenceOrder.indexOf(b.type);
+      
+      if (aPreference !== bPreference) {
+        return aPreference - bPreference;
+      }
+      
+      // If same type, prefer higher priority
+      const priorityOrder = { "high": 3, "medium": 2, "low": 1 };
+      return (priorityOrder[b.priority] || 1) - (priorityOrder[a.priority] || 1);
+    });
     
-    // Fallback to first available idea
-    return availableIdeas[0];
+    return sortedIdeas[0];
   }
 
   // Generate fallback idea when all regular ideas are used
-  generateFallbackIdea(blogHistory) {
-    const currentYear = new Date().getFullYear();
-    const month = new Date().toLocaleString('en-US', { month: 'long' });
-    
-    // Generate ideas based on what hasn't been covered
+  generateFallbackIdea() {
     const fallbackIdeas = [
       {
         type: "trend",
-        title: `${month} ${currentYear} Industrial Technology Update: Latest Developments and Insights`,
-        keywords: ['industrial', 'technology', 'developments', month.toLowerCase(), currentYear.toString()],
-        category: "monthly-update",
-        priority: "high"
+        title: `Latest Industrial Technology Developments: ${this.currentYear} Update`,
+        keywords: ["industrial", "technology", "developments", this.currentYear.toString(), "update"],
+        category: "update",
+        priority: "medium"
       },
       {
         type: "explainer",
-        title: `Essential Industrial Measurement Tools: A Comprehensive Overview for ${currentYear}`,
-        keywords: ['industrial', 'measurement', 'tools', 'overview', currentYear.toString()],
-        category: "tools-overview",
-        priority: "high"
+        title: `Industrial Automation Solutions: Complete Overview for ${this.currentYear}`,
+        keywords: ["industrial", "automation", "solutions", "overview", this.currentYear.toString()],
+        category: "overview",
+        priority: "medium"
       },
       {
         type: "technical",
-        title: `Advanced Industrial Automation Solutions: Technical Deep Dive for ${currentYear}`,
-        keywords: ['industrial', 'automation', 'solutions', 'technical', currentYear.toString()],
-        category: "automation",
+        title: `Advanced Measurement Techniques in Modern Industry: ${this.currentYear} Guide`,
+        keywords: ["measurement", "techniques", "industry", "advanced", this.currentYear.toString()],
+        category: "technical",
         priority: "medium"
       },
       {
         type: "how-to",
-        title: `Optimizing Industrial Processes: Best Practices and Implementation Guide for ${currentYear}`,
-        keywords: ['industrial', 'processes', 'optimization', 'best practices', currentYear.toString()],
-        category: "optimization",
+        title: `Industrial System Integration: Best Practices for ${this.currentYear}`,
+        keywords: ["industrial", "system", "integration", "best practices", this.currentYear.toString()],
+        category: "integration",
         priority: "medium"
       }
     ];
     
-    // Filter out fallback ideas that have already been used
-    const availableFallbacks = fallbackIdeas.filter(idea => {
-      return !blogHistory.some(published => {
-        const keywordOverlap = idea.keywords.filter(keyword => 
-          published.keywords && published.keywords.includes(keyword)
-        ).length;
-        return keywordOverlap >= 2;
-      });
-    });
-    
-    return availableFallbacks.length > 0 ? availableFallbacks[0] : fallbackIdeas[0];
+    // Return a random fallback idea
+    return fallbackIdeas[Math.floor(Math.random() * fallbackIdeas.length)];
   }
 }
 
