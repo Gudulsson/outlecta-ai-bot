@@ -1,4 +1,5 @@
 import { generateThumbnail } from "./thumbnail.js";
+import LinkValidator from "./linkValidator.js";
 import fs from "fs";
 import path from "path";
 
@@ -12,6 +13,7 @@ class BlogGenerator {
       'ieee.org', 'nist.gov', 'iso.org', 'astm.org', 'asme.org',
       'automationworld.com', 'controleng.com', 'isa.org'
     ];
+    this.linkValidator = new LinkValidator();
   }
 
   // Generate a supreme SEO-optimized blog article
@@ -28,13 +30,16 @@ class BlogGenerator {
       // Step 3: Generate Supreme Content
       const article = await this.generateSupremeContent(blogIdea, contentStructure);
       
-      // Step 4: SEO Optimization
-      const optimizedArticle = this.optimizeForSEO(article, seoStrategy);
+      // Step 4: Validate and fix internal links
+      const linkValidatedArticle = await this.validateInternalLinks(article, seoStrategy.primaryKeywords);
       
-      // Step 5: Generate Thumbnail
+      // Step 5: SEO Optimization
+      const optimizedArticle = this.optimizeForSEO(linkValidatedArticle, seoStrategy);
+      
+      // Step 6: Generate Thumbnail
       const thumbnail = await generateThumbnail(blogIdea);
       
-      // Step 6: Calculate Quality Metrics
+      // Step 7: Calculate Quality Metrics
       const qualityMetrics = this.calculateQualityMetrics(optimizedArticle);
       
       return {
@@ -97,7 +102,14 @@ class BlogGenerator {
     ];
     
     // Combine and prioritize commercial keywords
-    return [...new Set([...commercialKeywords, ...baseKeywords])].slice(0, 3);
+    const combinedKeywords = [...new Set([...commercialKeywords, ...baseKeywords])];
+    
+    // Ensure we always have at least one keyword
+    if (combinedKeywords.length === 0) {
+      return ['industrial automation'];
+    }
+    
+    return combinedKeywords.slice(0, 3);
   }
 
   // Generate secondary semantic keywords
@@ -149,7 +161,7 @@ class BlogGenerator {
   // Generate SEO-optimized title (≤60 chars)
   generateSEOTitle(blogIdea, primaryKeywords) {
     const baseTitle = blogIdea.title;
-    const primaryKeyword = primaryKeywords[0];
+    const primaryKeyword = primaryKeywords && primaryKeywords.length > 0 ? primaryKeywords[0] : 'industrial automation';
     
     // Create click-triggering title with keyword + benefit
     const benefitPhrases = [
@@ -174,8 +186,8 @@ class BlogGenerator {
 
   // Generate meta description (≤150 chars)
   generateMetaDescription(blogIdea, primaryKeywords) {
-    const primaryKeyword = primaryKeywords[0];
-    const secondaryKeyword = primaryKeywords[1] || 'industrial technology';
+    const primaryKeyword = primaryKeywords && primaryKeywords.length > 0 ? primaryKeywords[0] : 'industrial automation';
+    const secondaryKeyword = primaryKeywords && primaryKeywords.length > 1 ? primaryKeywords[1] : 'industrial technology';
     
     let metaDesc = `Discover expert insights on ${primaryKeyword} and ${secondaryKeyword}. Learn best practices, implementation strategies, and industry trends for ${this.currentYear}.`;
     
@@ -193,7 +205,7 @@ class BlogGenerator {
 
   // Generate SEO-optimized slug (≤60 chars)
   generateSlug(title, primaryKeywords) {
-    const primaryKeyword = primaryKeywords[0];
+    const primaryKeyword = primaryKeywords && primaryKeywords.length > 0 ? primaryKeywords[0] : 'industrial-automation';
     const cleanKeyword = primaryKeyword.toLowerCase().replace(/\s+/g, '-');
     const year = this.currentYear;
     
@@ -516,7 +528,7 @@ ${signals.map(signal => `<li>${signal}</li>`).join('\n')}
 
   // Generate compelling introduction (100-150 words)
   generateIntroduction(blogIdea, conversionPoint) {
-    const primaryKeyword = blogIdea.keywords[0];
+    const primaryKeyword = blogIdea.keywords && blogIdea.keywords.length > 0 ? blogIdea.keywords[0] : 'industrial automation';
     const painPoint = this.identifyPainPoint(blogIdea.type);
     const roiPromise = this.generateROIPromise(blogIdea.type);
     
@@ -598,22 +610,62 @@ ${signals.map(signal => `<li>${signal}</li>`).join('\n')}
 
   // Generate content for individual key points
   async generateKeyPointContent(point, keywords, targetWords) {
-    const primaryKeyword = keywords[0];
-    const secondaryKeyword = keywords[1] || 'industrial technology';
+    const primaryKeyword = keywords && keywords.length > 0 ? keywords[0] : 'industrial automation';
+    const secondaryKeyword = keywords && keywords.length > 1 ? keywords[1] : 'industrial technology';
+    
+    // Create varied content templates to prevent repetition
+    const contentTemplates = [
+      {
+        intro: `${primaryKeyword} has emerged as a critical component in modern ${secondaryKeyword} strategies.`,
+        body: `Organizations implementing this technology must consider several key factors to ensure successful deployment and optimal performance.`,
+        considerations: [
+          'System compatibility and integration requirements',
+          'Performance benchmarks and quality standards',
+          'Operational efficiency and workflow optimization',
+          'Long-term maintenance and support protocols',
+          'Investment analysis and return on investment metrics'
+        ],
+        conclusion: `Successful implementation requires careful planning and expert guidance to maximize benefits and minimize risks.`
+      },
+      {
+        intro: `The adoption of ${primaryKeyword} represents a significant advancement in ${secondaryKeyword} capabilities.`,
+        body: `This technology enables organizations to achieve higher levels of precision, efficiency, and reliability in their operations.`,
+        considerations: [
+          'Technical specifications and system requirements',
+          'Integration with existing operational infrastructure',
+          'Performance monitoring and quality control measures',
+          'Preventive maintenance and lifecycle management',
+          'Cost-benefit analysis and strategic planning'
+        ],
+        conclusion: `Proper implementation and ongoing optimization are essential for realizing the full potential of this technology.`
+      },
+      {
+        intro: `${primaryKeyword} continues to evolve, offering new opportunities for ${secondaryKeyword} enhancement.`,
+        body: `Modern implementations focus on creating scalable, sustainable solutions that adapt to changing business needs.`,
+        considerations: [
+          'Scalability and future-proofing considerations',
+          'Compliance with industry standards and regulations',
+          'Data management and security protocols',
+          'Training requirements and skill development',
+          'Performance optimization and continuous improvement'
+        ],
+        conclusion: `Strategic planning and expert consultation ensure successful technology adoption and long-term value creation.`
+      }
+    ];
+    
+    // Select template based on point and keywords to ensure variety
+    const templateIndex = (point.length + primaryKeyword.length) % contentTemplates.length;
+    const template = contentTemplates[templateIndex];
     
     const content = `
-<p><strong>${point}:</strong> ${primaryKeyword} represents a fundamental shift in how organizations approach ${secondaryKeyword}. The integration of advanced technologies and proven methodologies creates a robust foundation for operational excellence.</p>
+<p><strong>${point}:</strong> ${template.intro} ${template.body}</p>
 
-<p>Key considerations include:</p>
+<p>Essential factors to consider include:</p>
 <ul>
-<li>Technical specifications and compatibility requirements</li>
-<li>Integration with existing infrastructure and systems</li>
-<li>Performance metrics and quality assurance protocols</li>
-<li>Maintenance procedures and lifecycle management</li>
-<li>Cost optimization and ROI analysis</li>
+${template.considerations.map(consideration => `<li>${consideration}</li>`).join('\n')}
 </ul>
 
-<p>Industry experts recommend conducting thorough assessments of current capabilities and future requirements before implementation. This ensures optimal performance and maximum return on investment.</p>
+<p>${template.conclusion}</p>
 `;
     
     return content;
@@ -685,6 +737,30 @@ ${signals.map(signal => `<li>${signal}</li>`).join('\n')}
     } else {
       // Trim content
       return this.trimContent(content, targetWordCount);
+    }
+  }
+
+  // Validate and fix internal links in content
+  async validateInternalLinks(article, keywords) {
+    console.log("🔗 Validating internal links in article...");
+    
+    try {
+      // Validate and fix internal links
+      const validatedContent = await this.linkValidator.validateAndFixInternalLinks(article.content, keywords);
+      
+      return {
+        ...article,
+        content: validatedContent
+      };
+      
+    } catch (error) {
+      console.warn("⚠️ Could not validate internal links:", error.message);
+      // Remove any internal link placeholders if validation fails
+      const cleanedContent = article.content.replace(/\[internal-link:[^\]]+\]/gi, '');
+      return {
+        ...article,
+        content: cleanedContent
+      };
     }
   }
 
@@ -989,20 +1065,6 @@ ${externalReferences.map(ref => `<li><a href="${ref.url}" target="_blank" rel="n
     return excerpt.length === 200 ? excerpt + '...' : excerpt;
   }
 
-  // Generate meta description
-  generateMetaDescription(blogIdea, primaryKeywords) {
-    const primaryKeyword = primaryKeywords[0];
-    const secondaryKeyword = primaryKeywords[1] || 'industrial technology';
-    
-    let metaDesc = `Expert guide to ${primaryKeyword} and ${secondaryKeyword}. Learn best practices, implementation strategies, and industry trends for ${this.currentYear}.`;
-    
-    // Ensure ≤150 characters
-    if (metaDesc.length > 150) {
-      metaDesc = `Complete ${primaryKeyword} guide with expert insights and best practices.`;
-    }
-    
-    return metaDesc;
-  }
 }
 
 export default BlogGenerator;

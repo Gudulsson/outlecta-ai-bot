@@ -10,6 +10,7 @@
     "blog:stats": "node src/runBlogGenerator.js stats",
     "blog:publish": "node src/runBlogGenerator.js publish",
     "blog:scheduled": "node src/runBlogGenerator.js weekly",
+    "blog:queue": "node src/runBlogGenerator.js queue",
     "blog:cleanup": "node src/runBlogGenerator.js cleanup",
     "schedule:local": "node schedule-local.js",
     "schedule:continuous": "node schedule-local.js --continuous",

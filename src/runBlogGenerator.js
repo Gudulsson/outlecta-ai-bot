@@ -170,14 +170,33 @@ class BlogRunner {
       // Force generate
       const article = await this.scheduler.forceGenerateArticle();
       
-      // Publish
-      const shouldPublish = process.env.PUBLISH_TO_SHOPIFY === 'true';
-      if (shouldPublish) {
-        const publishedArticle = await this.publisher.publishArticle(article);
-        console.log(`✅ Article published to Shopify: ${publishedArticle.shopifyId}`);
-        return publishedArticle;
+      // Check if we can publish immediately (24-hour interval)
+      const canPublish = this.scheduler.canPublishArticle();
+      
+      if (canPublish) {
+        // Publish immediately
+        const shouldPublish = process.env.PUBLISH_TO_SHOPIFY === 'true';
+        if (shouldPublish) {
+          const publishedArticle = await this.publisher.publishArticle(article);
+          console.log(`✅ Article published to Shopify: ${publishedArticle.shopifyId}`);
+          return publishedArticle;
+        } else {
+          console.log("⏭️ Skipping publication (PUBLISH_TO_SHOPIFY not set to 'true')");
+          return article;
+        }
       } else {
-        console.log("⏭️ Skipping publication (PUBLISH_TO_SHOPIFY not set to 'true')");
+        // Add to publish queue
+        console.log("⏰ Cannot publish immediately - adding to publish queue");
+        this.scheduler.addToPublishQueue(article);
+        
+        const lastRun = this.scheduler.loadLastRun();
+        const lastRunDate = new Date(lastRun.lastRun);
+        const hoursSinceLastRun = Math.floor((Date.now() - lastRunDate.getTime()) / (1000 * 60 * 60));
+        const hoursToWait = 24 - hoursSinceLastRun;
+        
+        console.log(`📋 Article added to queue. Will be published in ${hoursToWait} hours`);
+        console.log(`📊 Queue length: ${this.scheduler.publishQueue.length}`);
+        
         return article;
       }
       
@@ -221,6 +240,38 @@ class BlogRunner {
       
     } catch (error) {
       console.error("❌ Error getting stats:", error.message);
+      throw error;
+    }
+  }
+
+  // Process publish queue
+  async processPublishQueue() {
+    console.log("📋 Processing publish queue...");
+    
+    try {
+      await this.scheduler.initialize();
+      const article = await this.scheduler.processPublishQueue();
+      
+      if (article) {
+        console.log(`📤 Publishing queued article: ${article.title}`);
+        
+        // Publish to Shopify
+        const shouldPublish = process.env.PUBLISH_TO_SHOPIFY === 'true';
+        if (shouldPublish) {
+          const publishedArticle = await this.publisher.publishArticle(article);
+          console.log(`✅ Article published to Shopify: ${publishedArticle.shopifyId}`);
+          return publishedArticle;
+        } else {
+          console.log("⏭️ Skipping Shopify publication (PUBLISH_TO_SHOPIFY not set to 'true')");
+          return article;
+        }
+      } else {
+        console.log("⏭️ No articles to publish from queue");
+        return null;
+      }
+      
+    } catch (error) {
+      console.error("❌ Error processing publish queue:", error.message);
       throw error;
     }
   }
@@ -292,6 +343,10 @@ async function main() {
         await runner.forceGenerateAndPublish();
         break;
         
+      case 'queue':
+        await runner.processPublishQueue();
+        break;
+        
       case 'stats':
         await runner.getStats();
         break;
@@ -312,6 +367,7 @@ async function main() {
         console.log("  generate [index] - Generate article from specific idea");
         console.log("  weekly    - Run weekly scheduling");
         console.log("  force     - Force generate and publish");
+        console.log("  queue     - Process publish queue");
         console.log("  stats     - Get blog statistics");
         console.log("  publish   - Publish all unpublished articles");
         console.log("  cleanup   - Clean duplicate articles");

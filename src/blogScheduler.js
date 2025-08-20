@@ -12,6 +12,8 @@ class BlogScheduler {
     this.lastRunFile = ".last_blog_run.json";
     this.blogOutputDir = "generated_blogs";
     this.blogHistory = []; // Initialize empty array
+    this.publishQueue = []; // Queue for articles waiting to be published
+    this.minPublishInterval = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
   }
 
   // Initialize blog scheduler
@@ -27,12 +29,17 @@ class BlogScheduler {
     // Load blog history
     this.blogHistory = this.loadBlogHistory();
     
+    // Load publish queue
+    this.loadPublishQueue();
+    
     // Initialize history from existing articles if empty
     if (this.blogHistory.length === 0) {
       this.initializeHistoryFromExistingArticles();
     }
     
     console.log("✅ Blog Scheduler initialized");
+    console.log(`📊 Blog history: ${this.blogHistory.length} articles`);
+    console.log(`📋 Publish queue: ${this.publishQueue.length} articles`);
   }
 
   // Initialize blog history from existing generated articles
@@ -133,7 +140,7 @@ class BlogScheduler {
     }
   }
 
-  // Check if we should run today (Monday and Thursday)
+  // Check if we should run today (Monday and Thursday) with MINIMUM 24-hour interval
   shouldRunToday() {
     const lastRun = this.loadLastRun();
     const now = new Date();
@@ -148,7 +155,15 @@ class BlogScheduler {
     }
     
     const lastRunDate = new Date(lastRun.lastRun);
+    const hoursSinceLastRun = Math.floor((now - lastRunDate) / (1000 * 60 * 60));
     const daysSinceLastRun = Math.floor((now - lastRunDate) / (1000 * 60 * 60 * 24));
+    
+    // CRITICAL: Minimum 24 hours between publications (Google SEO requirement)
+    if (hoursSinceLastRun < 24) {
+      console.log(`⏰ Too soon to publish! Only ${hoursSinceLastRun} hours since last article`);
+      console.log(`📅 Must wait at least 24 hours between publications for SEO`);
+      return false;
+    }
     
     // If it's a scheduled blog day and it's been at least 3 days since last run
     if (blogDays.includes(today) && daysSinceLastRun >= 3) {
@@ -162,6 +177,7 @@ class BlogScheduler {
       return true;
     }
     
+    console.log(`⏭️ Not a scheduled day and not enough time has passed (${daysSinceLastRun} days)`);
     return false;
   }
 
@@ -221,7 +237,90 @@ class BlogScheduler {
     
     fs.writeFileSync(filepath, JSON.stringify(articleData, null, 2));
     
+    // Update history
+    this.updateBlogHistory(articleData);
+    
+    console.log(`📄 Article saved: ${filename}`);
     return articleData;
+  }
+
+  // Check if article can be published (24-hour interval)
+  canPublishArticle() {
+    const lastRun = this.loadLastRun();
+    if (!lastRun) {
+      return true; // First time publishing
+    }
+    
+    const lastRunDate = new Date(lastRun.lastRun);
+    const hoursSinceLastRun = Math.floor((Date.now() - lastRunDate.getTime()) / (1000 * 60 * 60));
+    
+    return hoursSinceLastRun >= 24;
+  }
+
+  // Add article to publish queue
+  addToPublishQueue(article) {
+    const queueEntry = {
+      article,
+      addedAt: new Date().toISOString(),
+      priority: 'normal'
+    };
+    
+    this.publishQueue.push(queueEntry);
+    console.log(`📋 Added article to publish queue: ${article.title}`);
+    console.log(`📊 Queue length: ${this.publishQueue.length}`);
+    
+    // Save queue to file
+    this.savePublishQueue();
+  }
+
+  // Save publish queue to file
+  savePublishQueue() {
+    const queueFile = '.publish_queue.json';
+    fs.writeFileSync(queueFile, JSON.stringify(this.publishQueue, null, 2));
+  }
+
+  // Load publish queue from file
+  loadPublishQueue() {
+    const queueFile = '.publish_queue.json';
+    if (fs.existsSync(queueFile)) {
+      try {
+        this.publishQueue = JSON.parse(fs.readFileSync(queueFile, 'utf8'));
+        console.log(`📋 Loaded ${this.publishQueue.length} articles from publish queue`);
+      } catch (error) {
+        console.warn("Could not load publish queue:", error.message);
+        this.publishQueue = [];
+      }
+    }
+  }
+
+  // Process publish queue
+  async processPublishQueue() {
+    if (this.publishQueue.length === 0) {
+      console.log("📋 Publish queue is empty");
+      return;
+    }
+    
+    console.log(`📋 Processing publish queue (${this.publishQueue.length} articles)`);
+    
+    // Check if we can publish
+    if (!this.canPublishArticle()) {
+      const lastRun = this.loadLastRun();
+      const lastRunDate = new Date(lastRun.lastRun);
+      const hoursSinceLastRun = Math.floor((Date.now() - lastRunDate.getTime()) / (1000 * 60 * 60));
+      const hoursToWait = 24 - hoursSinceLastRun;
+      
+      console.log(`⏰ Cannot publish yet. Must wait ${hoursToWait} more hours (24-hour minimum interval)`);
+      return;
+    }
+    
+    // Publish the first article in queue
+    const queueEntry = this.publishQueue.shift();
+    console.log(`📤 Publishing queued article: ${queueEntry.article.title}`);
+    
+    // Save updated queue
+    this.savePublishQueue();
+    
+    return queueEntry.article;
   }
 
   // Sanitize filename
