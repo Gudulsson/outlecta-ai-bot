@@ -9,7 +9,7 @@
     "blog:force": "node src/runBlogGenerator.js force",
     "blog:stats": "node src/runBlogGenerator.js stats",
     "blog:publish": "node src/runBlogGenerator.js publish",
-    "blog:weekly": "node src/runBlogGenerator.js weekly",
+    "blog:scheduled": "node src/runBlogGenerator.js scheduled",
     "start": "node src/runBlogGenerator.js complete"
   },
   "dependencies": {

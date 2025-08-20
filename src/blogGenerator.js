@@ -180,13 +180,13 @@ class BlogGenerator {
     content.push(`<h2>What This Means for Your Operations</h2>`);
     content.push(`<p>Understanding these trends isn't just about staying current—it's about making informed decisions that will impact your operations for years to come. Here's what you need to consider:</p>`);
     
-    content.push(`<ul>`);
+        content.push(`<ul>`);
     content.push(`<li><strong>Integration Planning:</strong> How will your new ${category} solutions integrate with existing systems?</li>`);
     content.push(`<li><strong>Training Requirements:</strong> What skills will your team need to effectively utilize these new capabilities?</li>`);
     content.push(`<li><strong>ROI Calculation:</strong> How do you measure the true value of these improvements?</li>`);
     content.push(`<li><strong>Future-Proofing:</strong> Which solutions will remain relevant as technology continues to evolve?</li>`);
-    content.push(`</ul>`);
-    
+        content.push(`</ul>`);
+        
     return content.join('\n');
   }
 
@@ -312,12 +312,12 @@ class BlogGenerator {
         }
         
         content.push(`<h4>Key Strengths:</h4>`);
-        content.push(`<ul>`);
+    content.push(`<ul>`);
         content.push(`<li>High precision measurement capabilities</li>`);
         content.push(`<li>Robust industrial construction</li>`);
         content.push(`<li>Wide operating temperature range</li>`);
         content.push(`<li>Easy system integration</li>`);
-        content.push(`</ul>`);
+    content.push(`</ul>`);
       }
     }
     
@@ -465,9 +465,28 @@ class BlogGenerator {
   }
 
   generateMetaDescription(excerpt, keywords) {
-    const mainKeywords = keywords.slice(0, 3).join(', ');
-    const metaDesc = `${excerpt} Learn about ${mainKeywords} and find the best solutions for your industrial needs at Outlecta.com.`;
-    return metaDesc.length > 160 ? metaDesc.substring(0, 157) + '...' : metaDesc;
+    // Create clean, compelling meta description (150 chars optimal)
+    const cleanExcerpt = excerpt.replace(/[^\w\s.,!?-]/g, '').trim();
+    
+    // Use excerpt as base, add main keyword naturally
+    const mainKeyword = keywords[0];
+    let metaDesc;
+    
+    if (cleanExcerpt.length < 120) {
+      // Short excerpt - add context
+      metaDesc = `${cleanExcerpt} Expert insights on ${mainKeyword} solutions for industrial applications. Read more at Outlecta.`;
+    } else {
+      // Long excerpt - trim and add keyword if missing
+      const trimmedExcerpt = cleanExcerpt.substring(0, 140);
+      if (!trimmedExcerpt.toLowerCase().includes(mainKeyword.toLowerCase())) {
+        metaDesc = `${trimmedExcerpt.substring(0, 120)} Learn about ${mainKeyword} solutions.`;
+      } else {
+        metaDesc = trimmedExcerpt + '...';
+      }
+    }
+    
+    // Ensure optimal length (150-155 characters)
+    return metaDesc.length > 155 ? metaDesc.substring(0, 152) + '...' : metaDesc;
   }
 
   generateTags(keywords, category) {

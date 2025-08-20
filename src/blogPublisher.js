@@ -369,21 +369,55 @@ class BlogPublisher {
     const response = await requestWithRetry('post', `/blogs/${blog.id}/articles.json`, shopifyArticleData);
     const article = response.data.article;
 
-    // Save thumbnail locally and provide upload instructions
+    // Set thumbnail as featured image for blog listing (simple approach)
     if (thumbnail?.imageBase64) {
       try {
-        const thumbnailInfo = await this.saveThumbnailLocally(thumbnail, title);
-        console.log(`📸 Thumbnail saved locally: ${thumbnailInfo.filepath}`);
-        console.log(`📝 To add thumbnail to article:`);
-        console.log(`   1. Go to Shopify Admin > Content > Blog posts`);
-        console.log(`   2. Find article: "${title}"`);
-        console.log(`   3. Click "Edit" and add image from: ${thumbnailInfo.filepath}`);
-        console.log(`   4. Set ALT text: "${thumbnail.alt}"`);
+        console.log(`📸 Setting thumbnail as featured image...`);
         
-        // Add thumbnail info to article metadata
-        article.thumbnailInfo = thumbnailInfo;
+        const featuredImageData = {
+          article: {
+            id: article.id,
+            image: {
+              attachment: thumbnail.imageBase64,
+              alt: thumbnail.alt,
+              filename: thumbnail.filename || `${handle}-thumbnail.png`
+            }
+          }
+        };
+        
+        const featuredResponse = await requestWithRetry('put', `/blogs/${blog.id}/articles/${article.id}.json`, featuredImageData);
+        
+        if (featuredResponse.data.article.image) {
+          article.image = featuredResponse.data.article.image;
+          console.log(`✅ Featured image set for blog listing!`);
+          console.log(`🔗 Featured Image URL: ${article.image.src}`);
+        }
+        
+        // Also save thumbnail locally as backup
+        const thumbnailInfo = await this.saveThumbnailLocally(thumbnail, title);
+        console.log(`📸 Thumbnail also saved locally: ${thumbnailInfo.filepath}`);
+        
       } catch (e) {
-        console.log(`⚠️ Could not save thumbnail: ${e.message}`);
+        console.log(`⚠️ Could not upload thumbnail to Shopify: ${e.message}`);
+        if (e.message.includes('SSL') || e.message.includes('timeout')) {
+          console.log(`📸 SSL/Network issue detected - saving thumbnail locally as fallback...`);
+        } else {
+          console.log(`📸 Saving thumbnail locally as fallback...`);
+        }
+        
+        try {
+          const thumbnailInfo = await this.saveThumbnailLocally(thumbnail, title);
+          console.log(`📸 Thumbnail saved locally: ${thumbnailInfo.filepath}`);
+          console.log(`📝 To manually add thumbnail to article:`);
+          console.log(`   1. Go to Shopify Admin > Content > Blog posts`);
+          console.log(`   2. Find article: "${title}"`);
+          console.log(`   3. Click "Edit" and add image from: ${thumbnailInfo.filepath}`);
+          console.log(`   4. Set ALT text: "${thumbnail.alt}"`);
+          
+          article.thumbnailInfo = thumbnailInfo;
+        } catch (fallbackError) {
+          console.log(`⚠️ Could not save thumbnail locally either: ${fallbackError.message}`);
+        }
       }
     }
     
@@ -466,14 +500,21 @@ class BlogPublisher {
     }
   }
 
-  // Generate handle from title
+  // Generate clean, short handle from title
   generateHandle(title) {
-    return title
+    // Clean and shorten title significantly
+    const cleanTitle = title
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
-      .substring(0, 100)
-      + '-' + Date.now().toString().slice(-6);
+      .replace(/^(the|a|an)-/, '') // Remove common article prefixes
+      .replace(/-?(guide|tips|how-to|complete)-?/g, '') // Remove common blog words
+      .replace(/-?(in|for|with|and|or|to|of)-/g, '-') // Remove common small words
+      .replace(/-+/g, '-') // Remove multiple dashes
+      .replace(/^-|-$/g, '') // Remove leading/trailing dashes
+      .substring(0, 40); // Much shorter limit
+      
+    return cleanTitle || 'blog-post'; // Fallback if title becomes empty
   }
 
   // Sanitize filename

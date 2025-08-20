@@ -77,8 +77,8 @@ npm run blog:stats
 # Publish all unpublished articles
 npm run blog:publish
 
-# Run weekly scheduling
-npm run blog:weekly
+# Run bi-weekly scheduling (Monday & Thursday)
+npm run blog:scheduled
 ```
 
 ## 📊 Content Quality Metrics
@@ -179,7 +179,7 @@ npm run blog:generate
 ```bash
 # Set environment variables
 # Run scheduled generation
-npm run blog:weekly
+npm run blog:scheduled
 ```
 
 ## 🔍 Monitoring

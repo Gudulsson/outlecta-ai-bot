@@ -29,14 +29,14 @@ class BlogScheduler {
     console.log("✅ Blog Scheduler initialized");
   }
 
-  // Main scheduling function - runs weekly
-  async runWeeklyBlogGeneration() {
-    console.log("📅 Running weekly blog generation...");
+  // Main scheduling function - runs twice per week
+  async runBiWeeklyBlogGeneration() {
+    console.log("📅 Running bi-weekly blog generation...");
     
     try {
-      // Check if we should run this week
-      if (!this.shouldRunThisWeek()) {
-        console.log("⏭️ Blog generation not due this week");
+      // Check if we should run today
+      if (!this.shouldRunToday()) {
+        console.log("⏭️ Blog generation not due today");
         return;
       }
       
@@ -67,35 +67,43 @@ class BlogScheduler {
       // Update history
       this.updateBlogHistory(savedArticle);
       
-      // Mark as run this week
-      this.markAsRunThisWeek();
+      // Mark as run today
+      this.markAsRunToday();
       
-      console.log("🎉 Weekly blog generation completed successfully!");
+      console.log("🎉 Bi-weekly blog generation completed successfully!");
       console.log(`📄 Article saved: ${savedArticle.filename}`);
       console.log(`📊 Word count: ${article.wordCount} words`);
       
       return savedArticle;
       
     } catch (error) {
-      console.error("❌ Error in weekly blog generation:", error.message);
+      console.error("❌ Error in bi-weekly blog generation:", error.message);
       throw error;
     }
   }
 
-  // Check if we should run this week
-  shouldRunThisWeek() {
+  // Check if we should run today (Monday and Thursday)
+  shouldRunToday() {
     const lastRun = this.loadLastRun();
+    const now = new Date();
+    const today = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    
+    // Blog publishing days: Monday (1) and Thursday (4)
+    const blogDays = [1, 4];
+    
+    if (!blogDays.includes(today)) {
+      return false; // Not a blog day
+    }
     
     if (!lastRun) {
       return true; // First time running
     }
     
     const lastRunDate = new Date(lastRun.lastRun);
-    const now = new Date();
     const daysSinceLastRun = (now - lastRunDate) / (1000 * 60 * 60 * 24);
     
-    // Run if it's been 7+ days since last run
-    return daysSinceLastRun >= 7;
+    // Run if it's been at least 3 days since last run (to prevent duplicate runs on same day)
+    return daysSinceLastRun >= 3;
   }
 
   // Check if we've already written about this topic
@@ -190,9 +198,9 @@ class BlogScheduler {
       wordCount: article.wordCount
     });
     
-    // Keep only last 52 articles (1 year)
-    if (this.blogHistory.length > 52) {
-      this.blogHistory = this.blogHistory.slice(-52);
+    // Keep only last 104 articles (1 year with 2 posts per week)
+    if (this.blogHistory.length > 104) {
+      this.blogHistory = this.blogHistory.slice(-104);
     }
     
     fs.writeFileSync(this.blogHistoryFile, JSON.stringify(this.blogHistory, null, 2));
@@ -210,11 +218,28 @@ class BlogScheduler {
     return null;
   }
 
-  // Mark as run this week
-  markAsRunThisWeek() {
+  // Mark as run today
+  markAsRunToday() {
+    const now = new Date();
+    const today = now.getDay();
+    
+    // Calculate next blog day
+    let nextBlogDay;
+    if (today === 1) { // Monday
+      nextBlogDay = 4; // Thursday
+    } else if (today === 4) { // Thursday
+      nextBlogDay = 8; // Next Monday (4 + 4 days)
+    } else {
+      // Fallback - next Monday
+      nextBlogDay = 7 - today + 1;
+    }
+    
+    const nextRun = new Date(Date.now() + nextBlogDay * 24 * 60 * 60 * 1000);
+    
     const runInfo = {
-      lastRun: new Date().toISOString(),
-      nextRun: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+      lastRun: now.toISOString(),
+      nextRun: nextRun.toISOString(),
+      schedule: "Twice per week (Monday & Thursday)"
     };
     
     fs.writeFileSync(this.lastRunFile, JSON.stringify(runInfo, null, 2));
@@ -282,12 +307,12 @@ class BlogScheduler {
     await this.initialize();
     
     // Run immediately if needed
-    await this.runWeeklyBlogGeneration();
+    await this.runBiWeeklyBlogGeneration();
     
     // Set up daily check
     setInterval(async () => {
       try {
-        await this.runWeeklyBlogGeneration();
+        await this.runBiWeeklyBlogGeneration();
       } catch (error) {
         console.error("❌ Error in scheduled blog generation:", error.message);
       }
